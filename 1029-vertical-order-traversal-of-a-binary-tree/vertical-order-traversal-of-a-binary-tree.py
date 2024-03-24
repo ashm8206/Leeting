@@ -41,4 +41,8 @@ class Solution:
             # sort first by 'row', then by 'value', in ascending order
             res.append([val for row, val in sorted(column_map[col])])
         return res
-        #return [sorted(column_map[col_idx], key = lambda x: x[0]) for col_idx in range(min_col, max_col+1)]
+    
+        #  TRY TEST CASE
+        # [3,2,3,4,2,2,7] --> (COL,ROW,VAL) SUB ORDER
+
+        # PROBLEM 314 --> COL, ROW (In same row the ordering is Left to Right)

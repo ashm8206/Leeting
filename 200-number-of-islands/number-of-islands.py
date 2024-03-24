@@ -9,38 +9,38 @@ class Solution:
         count = 0
 
         # DFS : O(M * N), O min(M,N)
-        # def dfs(i,j):
+        def dfs(i,j):
 
-        #     if i<0 or i>=N or j<0 or j>=M or (i,j) in seen:
-        #         return
+            if i<0 or i>=N or j<0 or j>=M or (i,j) in seen:
+                return
 
-        #     if grid[i][j]=="1":
-        #         seen.add((i,j))
-        #         dfs(i-1,j)
-        #         dfs(i+1,j)
-        #         dfs(i,j-1)
-        #         dfs(i,j+1)
+            if grid[i][j]=="1":
+                seen.add((i,j))
+                dfs(i-1,j)
+                dfs(i+1,j)
+                dfs(i,j-1)
+                dfs(i,j+1)
 
-        queue = deque()
-        def bfs(r,c):
+        # queue = deque()
+        # def bfs(r,c):
         
-            while queue:
-                r, c = queue.popleft()
+        #     while queue:
+        #         r, c = queue.popleft()
 
-                for nr, nc in [(r+1,c), (r-1,c), (r,c+1), (r,c-1)]:
-                    if 0<= nr < N and 0 <= nc < M and grid[nr][nc] == '1' and (nr,nc) not in seen:
-                        queue.append((nr,nc))
-                        seen.add((nr,nc))
+        #         for nr, nc in [(r+1,c), (r-1,c), (r,c+1), (r,c-1)]:
+        #             if 0<= nr < N and 0 <= nc < M and grid[nr][nc] == '1' and (nr,nc) not in seen:
+        #                 queue.append((nr,nc))
+        #                 seen.add((nr,nc))
 
 
 
         for i in range(N):
             for j in range(M):
                 if grid[i][j]=="1" and (i,j) not in seen:
-                    # dfs(i,j)
-                    seen.add((i,j))
-                    queue.append((i,j))
-                    bfs(i,j)
+                    dfs(i,j)
+                    # seen.add((i,j))
+                    # queue.append((i,j))
+                    # bfs(i,j)
                     count += 1
         return count
 

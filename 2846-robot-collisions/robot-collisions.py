@@ -3,23 +3,13 @@ class Solution:
         if len(set(directions)) == 1:
             return healths
 
-        # maxPos = max(positions)
-        # wt_positions = [0]*(maxPos)
-
-        # ----
-        
 
         res = [0]*len(positions)
         wt_positions = [[healths[i],positions[i]] for i in range(len(positions))]
 
-        # print(wt_positions)
+        # For post -processing initial indexes of positions is stored
         HMAP = { pos: i for i, pos in enumerate(positions)}
 
-        # for i, pos in enumerate(positions):
-            
-        #     wt_positions[pos-1] = healths[i]
-        #     if directions[i] == 'L':
-        #         wt_positions[pos-1] *= -1
 
         for i, wt in enumerate(wt_positions):
             if directions[i] == 'L':
@@ -28,7 +18,7 @@ class Solution:
         
         wt_positions.sort(key= lambda x:x[1])
 
-        # print(wt_positions)
+  
 
         stack = []
         for r, pos in wt_positions:
@@ -38,9 +28,12 @@ class Solution:
                 if diff < 0:
                     # new robot Wins
                     stack.pop()
-                    r = (abs(r)-1)*(-1)
+                    r = (abs(r)-1)*(-1) 
+                    """
+                    intersting piece of "decrement" has to be done on a positive value
+                    """
                 elif diff > 0:
-                    # new robot loses, but there is a collision
+                    # new robot loses, but there is a collision, so we dec stack
                     stack[-1][0] -=1
                     r = 0  
                 else:

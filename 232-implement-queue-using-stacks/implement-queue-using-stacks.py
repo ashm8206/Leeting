@@ -1,25 +1,35 @@
 class MyQueue:
-
+    # using only two stacks.
+    # https://www.youtube.com/watch?v=eanwa3ht3YQ
     def __init__(self):
 
-        self.queue = []
+        self.s1 = []
+        self.s2 = []
         
 
     def push(self, x: int) -> None:
 
-        self.queue.append(x)
+        self.s1.append(x)
         
 
     def pop(self) -> int:
-        return self.queue.pop(0)
+        if not self.s2:
+            # moving reverses them
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2.pop()
 
         
 
     def peek(self) -> int:
-        return self.queue[0]
+        if not self.s2:
+            # moving reverses them
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2[-1]
 
     def empty(self) -> bool:
-        return len(self.queue) == 0
+        return max(len(self.s1),len(self.s2)) == 0
         
 
 

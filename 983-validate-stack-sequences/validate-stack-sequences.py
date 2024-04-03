@@ -12,11 +12,8 @@ class Solution:
             
             stack.append(pushed[i])
 
-            while stack  and stack[-1]==popped[j]:
+            while stack and stack[-1]==popped[j]:
                 j+=1
                 stack.pop()
             
-            
-
-            
-        return  j == m
+        return len(stack)==0

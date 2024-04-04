@@ -38,10 +38,12 @@ class Solution:
                 while stack and stack[-1]!='[':
                     res = stack.pop() + res
                 # Pop '[' 
-                num = ''
+                num = 0
+                k = 0
                 stack.pop()
                 while stack and stack[-1].isdigit():
-                    num = stack.pop() + num
+                    num = int(stack.pop())*10**k + num
+                    k+=1
                 res = res * int(num)
                 stack.append(res)
             else:

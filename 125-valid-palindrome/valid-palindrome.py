@@ -13,10 +13,10 @@ class Solution:
 
             if s[start].lower()!=s[end].lower():
                 return False
-            
+            else:
                 #matched, move both 
-            start+=1
-            end-=1
+                start+=1
+                end-=1
         return True
 
         # Assumption 

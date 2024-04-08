@@ -56,21 +56,20 @@ class Solution:
         maxLeft = height[left]
         maxRight = height[right]
 
-        while left <= right:
-            if maxLeft <= maxRight:
-                
+        while left < right:
+            if maxLeft < maxRight:
+                left+=1 # cant store at edges, so increment first
+
                 maxLeft = max(height[left],maxLeft) 
                 ans+= maxLeft - height[left]
-                # print(ans,maxLeft - height[left])
-                left+=1
+    
+                
                 
 
             else:
-                
+                right-=1
                 maxRight = max(height[right],maxRight) 
                 ans+= maxRight - height[right]
-                # print(ans,maxRight - height[right])
-                right-=1
              
         return ans
 

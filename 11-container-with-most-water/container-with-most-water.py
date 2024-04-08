@@ -23,10 +23,11 @@ class Solution:
         maxHeightR = height[R]
 
         while L < R:
-            maxHeightL = max(height[L], maxHeightL)
-            maxHeightR = max(height[R], maxHeightR)
+            # maxHeightL = max(height[L], maxHeightL)
+            # maxHeightR = max(height[R], maxHeightR)
 
-            area = (R - L) * min(maxHeightL, maxHeightR)
+            # area = (R - L) * min(maxHeightL, maxHeightR)
+            area = (R - L) * min(height[L], height[R])
             max_area = max(area,max_area)
 
             if height[L] <= height[R]:

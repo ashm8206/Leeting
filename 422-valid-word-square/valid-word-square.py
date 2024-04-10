@@ -14,11 +14,11 @@ class Solution:
         for i in range(rows):
             
             for j in range(cols):
-                print(i,j)
+    
                 if j >= rows or i>=cols or row_wise[i][j]!=row_wise[j][i]:
-                    ans &=False
-                else:
-                    ans &=True
+                    return False
+                
+                ans &=True
             
             # if ans==True:
             #     print(row_wise[i])

@@ -19,7 +19,7 @@ class Solution:
     
         # return [ls for _, ls in heap]
 
-        nums = [(-(x**2 + y**2),[x,y]) for x,y in points]
+        nums = [(x**2 + y**2,[x,y]) for x,y in points]
 
         def partition(nums, l, r):
 
@@ -47,7 +47,10 @@ class Solution:
             else:
                 return p
 
-        return [ ele[1] for ele in nums[quickSelect(nums,0, len(nums)-1,len(nums)-k):]]
+        if k == len(points):
+            return points
+
+        return [ ele[1] for ele in nums[:quickSelect(nums,0, len(nums)-1,k)]]
 
         
         

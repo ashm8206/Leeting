@@ -47,9 +47,12 @@ class Solution:
         c = collections.Counter(nums)
         d = [(c[key],key)for key in c]
 
-        def partition(d, l, r):
+        def partition(d, l, r, pivot_index):
+            # move pivot index to the end
+            d[r], d[pivot_index] = d[pivot_index], d[r]
             
             pivot = d[r]
+            
             next_idx = l
 
             for i in range(l,r):
@@ -64,7 +67,9 @@ class Solution:
             if l == r:
                 return l
 
-            p = partition(d, l, r)
+            pivot_index = random.randint(l, r)   
+
+            p = partition(d, l, r, pivot_index)
 
             if p < k:
                 return quickSelect(d, p+1, r, k)

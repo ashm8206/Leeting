@@ -13,7 +13,7 @@ class Solution:
         word_idx = 0
         i = 0
         while i < abrLen and word_idx < wordLen:
-            # print(abbr[i])
+       
             if word[word_idx] == abbr[i]:
                 i+=1
                 word_idx+=1
@@ -29,10 +29,8 @@ class Solution:
                 if len(numberStr) > 0:
                     word_idx += int(numberStr)
                     numberStr = ''
-                
             else:
                 return False
-            
             
         return i==abrLen and word_idx == wordLen
             

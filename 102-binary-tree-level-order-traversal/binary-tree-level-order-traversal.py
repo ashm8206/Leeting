@@ -8,7 +8,7 @@ from collections import deque
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         
-        res = []
+        
         if not root:
             return []
 
@@ -16,15 +16,17 @@ class Solution:
         q.append((root,0))
 
         level = 0
+        res = []
        
         while q:
             level_len = len(q)
-            level_ls = []
+            res.append([])
             
 
             for i in range(level_len):
 
                 curr, curr_level = q.popleft()
+                res[level].append(curr.val)
 
                 if curr.left:
                     q.append((curr.left,curr_level+1))
@@ -32,9 +34,6 @@ class Solution:
                 if curr.right:
                     q.append((curr.right,curr_level+1))
 
-                level_ls.append(curr.val)
-                
-            res.append(level_ls)
             level+=1
             
         return res

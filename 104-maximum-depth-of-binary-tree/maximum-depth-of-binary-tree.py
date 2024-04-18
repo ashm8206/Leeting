@@ -13,4 +13,7 @@ class Solution:
         right = self.maxDepth(root.right)
 
         return 1 + max(left, right)
+
+        # we had to do bottom up here as our Answer depends on L and R subtree
+        #  Therefore we do  LRV
         

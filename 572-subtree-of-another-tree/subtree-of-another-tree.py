@@ -33,7 +33,7 @@ class Solution:
             elif isSameTree(node,subRoot):
                 return True
             
-           
-            return checkEachNode(node.left) or checkEachNode(node.right)
+            else:
+                return checkEachNode(node.left) or checkEachNode(node.right)
         
         return checkEachNode(root)

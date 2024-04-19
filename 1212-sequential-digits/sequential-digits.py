@@ -7,13 +7,12 @@ class Solution:
 
         ls = '123456789'
 
-        # print(len(ls),m)
 
         for step in range(n,m+1):
             for i in range(len(ls)-step+1):
                 candidate = int(ls[i:i+step])
 
-                print(candidate)
+                # print(candidate)
 
                 if candidate < low:
                     continue

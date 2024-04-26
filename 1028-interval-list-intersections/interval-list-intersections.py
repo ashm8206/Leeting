@@ -16,22 +16,26 @@ class Solution:
             return result
 
         while currA < lenA and currB < lenB:
+
+            # Is Overlap ?
+            # max(start), min(end) 
+            # last meeting to start. has not end before the first meeting to end
             
             new_start = max(A[currA][start],B[currB][start])
             new_end = min(A[currA][end],B[currB][end]) 
             if new_start <= new_end:
                 result.append([new_start,new_end])
-
+            # https://www.piratekingdom.com/leetcode/tricks/is-overlap
             
+            # Since intervals are pairwise disjoint
+            # [1,5], [2,6] --> Wrong testcase since they both overlap in B
+            # [1,5], [6,10] --> Good Test case, since values need to be strictly increasing
+
             if A[currA][end] < B[currB][end]:
+                # increment the smaller endpt as it has does its interction if it had to
                 currA+=1
             else:
                 currB+=1
         return result
-
-        # 0  2  5 10  13 23
-        #   1   5
-        # Is Overlap ?
-        # max(start), min(end) 
-        # last meeting to start. has not end before the first meeting to end
+        
         

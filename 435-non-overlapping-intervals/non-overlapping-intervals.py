@@ -9,14 +9,14 @@ class Solution:
                 # Overlap
                 ans+=1
                 e1 = min(e1,e2)
+                # Update to the smaller value
                 # since it will not cause anymore overlaps
+                # Remove the larger end value
             else:
                 # not overlaping
                 e1 = e2
         
         return ans
 
-        # Remove largest Overlap, increasingly
-        # 1 2, 1, 3, 2,3,  3, 4
     
   

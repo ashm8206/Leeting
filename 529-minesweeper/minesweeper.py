@@ -6,11 +6,11 @@ class Solution:
         m, n = len(board), len(board[0])
         def dfs(board,i,j):
             if i < 0 or i >=m or j < 0 or j >=n:
-                return
+                return board
             
             if board[i][j]=='M':
                 board[i][j] = 'X'
-                # return board
+                return board
             
             elif board[i][j]=='E':
                 mine = sum( board[i+x][j+y] == 'M' for x, y in directions if 0 <= i+x < m and  0<=j+y < n)
@@ -21,8 +21,8 @@ class Solution:
                 else:
                     board[i][j]='B'
 
-                for x, y in directions:
-                    dfs(board, i+x, j+y)
+                    for x, y in directions:
+                        dfs(board, i+x, j+y)
             return board
 
 

@@ -20,7 +20,7 @@ class Solution:
                     
                 else:
                     board[i][j]='B'
-
+                    # go Recursively only in case of Blanks.
                     for x, y in directions:
                         dfs(board, i+x, j+y)
             return board

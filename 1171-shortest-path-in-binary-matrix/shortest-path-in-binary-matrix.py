@@ -8,7 +8,7 @@ class Solution:
         n = len(grid) - 1
         # N*N matrix
 
-        if grid[0][0] != 0 or grid[n][n] != 0:
+        if grid[0][0] != 0:
             return -1
         
         #Single Source

@@ -10,3 +10,13 @@ class Solution:
                         if nums[k]-nums[j]==diff:
                             count+=1
         return count
+        
+        #  if there is 1 number nums[i]
+        #  such that nums[i]+diff in map and nums[i]+diff +diff in map
+        # Triplet found, increment count
+
+        # They used substitution to solve
+
+        # nums[j]   == diff + nums[i]
+        # nums[k] ==  diff + diff + nums[i]
+        # https://leetcode.com/problems/number-of-arithmetic-triplets/solutions/4654949/beats-100-of-users-step-by-step-explain-using-hashmap-easy-to-understand/

@@ -3,12 +3,15 @@ class Solution:
         hmap = {}
         ans = 0
         for num in nums:
-            
+
             diff1 = num + k
             diff2 = num - k
 
-            ans += hmap.get(diff1, 0)
-            ans += hmap.get(diff2, 0)
+            if diff1 in hmap:
+                ans += hmap.get(diff1, 0)
+            
+            if diff2 in hmap:
+                ans += hmap.get(diff2, 0)
             # Get the number of times this diff has occured before,
             # If it has occured N times, It will make N pairs with THIS number
         

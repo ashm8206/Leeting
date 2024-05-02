@@ -6,8 +6,8 @@ class Solution:
         minDist = 10**9
         n = len(nums)
         for i in range(n):
-            if i > 0 and nums[i-1]==nums[i]:
-                continue
+            # if i > 0 and nums[i-1]==nums[i]:
+            #     continue
 
             left = i+1
             right = n-1

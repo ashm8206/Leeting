@@ -4,9 +4,11 @@ class Solution:
         key = -nums[idx]
         i = start
         j = end
+
+        n = len(nums)
         res = set()
         while i < j:
-            if (nums[i] + nums[j]) < key:
+            if (nums[i] + nums[j]) < key :
                 i+=1
             elif (nums[i] + nums[j]) > key:
                 j-=1
@@ -14,6 +16,10 @@ class Solution:
                 res.add((nums[idx],nums[i],nums[j]))
                 i+=1
                 j-=1
+                while i < j and nums[i] == nums[i - 1]:
+                    i += 1
+                while j < i and j+1 < n-1 and nums[j] == nums[j + 1]:
+                    j -= 1
         return res
 
     def threeSum(self, nums: List[int]) -> List[List[int]]:

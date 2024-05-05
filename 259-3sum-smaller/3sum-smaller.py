@@ -16,7 +16,7 @@ class Solution:
         while (left < right):
 
             if (nums[left] + nums[right] < target):
-                res += right - left
+                res += right - left  # use Right as the pivot, every number i+1 + j forms a pair
                 left+=1
             else:
                 right-=1

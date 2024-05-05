@@ -55,8 +55,6 @@ class Solution:
             if node.right:
                 helper(node.right, path)
 
-            # path.pop() # remove Left
-            # path.pop() # remove Right
             path.pop()
         
         helper(root,[])

@@ -38,12 +38,14 @@ class Solution:
       if not root:
         return
       if not root.left and not root.right:
-        ans.append(''.join(path) + str(root.val))
+        ans.append(''.join(path)  +str(root.val))
         return
 
-      path.append(str(root.val) + '->')
-      dfs(root.left, path)
-      dfs(root.right, path)
+      path.append(str(root.val)+'->')
+      if root.left:
+        dfs(root.left, path)
+      if root.right:
+        dfs(root.right, path)
       path.pop()
 
     dfs(root, [])

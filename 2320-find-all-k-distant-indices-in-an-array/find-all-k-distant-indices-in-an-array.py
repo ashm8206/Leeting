@@ -4,11 +4,12 @@ class Solution:
         n = len(nums)
         j = 0
         ans = []
+        seen = set()
         for i in range(n):
             if nums[i]==key:
-                for j in range(max(j,i-k), min(i+k+1, n)):
-                    if j not in ans:
+                # print(i-k, i, min(i+k,n))
+                for j in range(max(0,i-k), min(i+k+1, n)):
+                    if j not in seen:
                         ans.append(j)
-            # 0,1,2
-    
+                        seen.add(j)
         return ans

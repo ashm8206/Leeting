@@ -41,19 +41,22 @@ class Solution:
 
         def helper(node,path):
 
-            
+            if not node:
+                return
 
             if node.left is None and node.right is None:
-                res.append("->".join(path[:] + [str(node.val)]))
+                path.append(str(node.val))
+                res.append("->".join(path[:]))
+                path.pop()
                 return
             
             # path+='->'
             path.append(str(node.val))
-            if node.left:
-                helper(node.left, path)
+            # if node.left:
+            helper(node.left, path)
         
-            if node.right:
-                helper(node.right, path)
+            # if node.right:
+            helper(node.right, path)
 
             path.pop()
         

@@ -24,14 +24,14 @@ class Solution:
         count = 0
 
         for num in time:
-            diff = num%60
+            key = num%60
 
-            if diff == 0:
-                count+= hmap.get(diff,0) # both are divisible, so get 0
+            if key == 0:
+                count+= hmap.get(key,0) # both are divisible, so get 0
             else:
-                count+=hmap.get(60-diff,0) # diff = b%60
+                count+=hmap.get(60-key,0) # diff = b%60
 
-            hmap[num%60] = hmap.get(num%60,0) + 1
+            hmap[key] = hmap.get(key,0) + 1
         return count
             
         

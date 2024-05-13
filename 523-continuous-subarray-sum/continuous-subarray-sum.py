@@ -7,6 +7,7 @@ class Solution:
         for i in range(n):
             curr_sum = (curr_sum + nums[i]) % k
 
+            
             if curr_sum in hmap.keys():
                 if i - hmap[curr_sum] > 1:
                     return True

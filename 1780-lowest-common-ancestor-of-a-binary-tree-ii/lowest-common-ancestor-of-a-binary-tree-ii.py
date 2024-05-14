@@ -17,8 +17,10 @@ class Solution:
         
         pleft, qleft = self.dfs(node.left, p, q)
         pright, qright = self.dfs(node.right, p, q)
+
         pseen = pleft or pright or node == p
         qseen = qleft or qright or node == q
+        
         if pseen and qseen:
             if self.ans is None:
                 self.ans = node

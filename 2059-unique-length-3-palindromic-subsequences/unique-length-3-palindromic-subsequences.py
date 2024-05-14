@@ -19,12 +19,13 @@ class Solution:
         ans = 0
         
         for letter in letters:
-            i, j = s.index(letter), s.rindex(letter)
+            i, j = s.index(letter), s.rindex(letter) # O(n)
             between = set()
             
-            for k in range(i + 1, j):
+            for k in range(i + 1, j): #O(n)
                 between.add(s[k])
             
             ans += len(between)
 
-        return ans
+        return ans # O(n**2) but can be seprated in 2 Loops.
+

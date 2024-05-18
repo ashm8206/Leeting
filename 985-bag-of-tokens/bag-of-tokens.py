@@ -17,15 +17,17 @@ class Solution:
                 left+=1
 
             elif score > 0 and left < right:
+                # can't double count
+                score-=1
                 power+= tokens[right]
                 right-=1
-                score-=1
+                
             else:
                 # i==j and no more smaller power or score == 0 
+                print('--')
                 return score
 
-            ans = max(ans, score)
-
-        return ans
+            print(left, right)
+        return score
             
 

@@ -9,7 +9,7 @@ class Solution:
         ans = 0
         while left <= right: 
             # each token can be played either way, 
-            # when they overlap they can be played either way
+            # when i/j overlap they can be played either way but not both
 
             if tokens[left] <= power:
                 power -= tokens[left] 
@@ -21,6 +21,7 @@ class Solution:
                 right-=1
                 score-=1
             else:
+                # i==j and no more smaller power or score == 0 
                 return score
 
             ans = max(ans, score)

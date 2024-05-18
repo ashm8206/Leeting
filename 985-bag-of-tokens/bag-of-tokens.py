@@ -24,10 +24,10 @@ class Solution:
                 
             else:
                 # i==j and no more smaller power or score == 0 
-                print('--')
+                # print('--')
                 return score
 
-            print(left, right)
+            # print(left, right)
         return score
             
 

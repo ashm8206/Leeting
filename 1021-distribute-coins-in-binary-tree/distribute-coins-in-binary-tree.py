@@ -18,6 +18,7 @@ class Solution:
             rightMoves = helper(root.right)
 
             moves += abs(leftMoves) + abs(rightMoves)
+            # Gain or Losing  is the same as 1 move
             
             return root.val + leftMoves + rightMoves - 1
         

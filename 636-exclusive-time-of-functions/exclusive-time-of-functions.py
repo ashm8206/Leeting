@@ -37,22 +37,23 @@ class Solution:
         stack = []
         delta = 0
         for process in logs:
-            processId, status, timestamp = process.split(':')
+            processIdStart, status, timestamp = process.split(':')
 
             # print(status)
 
             if status == 'start':
-                stack.append([processId,timestamp])
+                stack.append([processIdStart,timestamp])
             else:
                 processId , timestamp_start = stack.pop() 
+                print(processIdStart,processId)
                 # any process can end
                 timeSpent = int(timestamp) - int(timestamp_start) + 1
                 result[int(processId)] += timeSpent  # add 1 for inclusive start
-                # delta += timeSpent
                 if len(stack) > 0:
                     nextProcess, _ = stack[-1]
-                    result[int(nextProcess)] -= timeSpent # for this time the above process was running
-
-                    # 0:0 1:2 1:5 2:1 2:
+                    result[int(nextProcess)] -= timeSpent # for this time the above process was running, so we deduct
+        
+        # ["0:start:0","1:start:2","1:end:5","2:start:6","0:end:6","2:end:7"]
+        # This test case is indeed invalid, a function can't terminate if it's not on the top of the stack as it's not the current function being executed.
         return result
 

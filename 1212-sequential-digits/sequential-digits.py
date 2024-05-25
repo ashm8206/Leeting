@@ -24,15 +24,3 @@ class Solution:
 
                 
 
-
-        # len(10, 1000)
-        # for step in range len(2, 4)
-        # for i in range(9-step) ls = 123456789
-        #    candidate = ls[i:i+step]
-        #    if int(candidate) < low:
-        #       continue
-            # elif int(candidate) > high:
-            # break
-            # else: append
-        #   234
-        #    345

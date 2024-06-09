@@ -20,7 +20,7 @@ class Solution:
         n = len(nums)
 
         for i in range(n):
-            while dq and dq[0] <= i-k: # Index - K --> clear out boundary
+            if dq and dq[0] <= i-k: # Index - K --> clear out boundary
                 # 4-3 = 1 
                 # win ending at 2, 3, 4
                 dq.popleft()

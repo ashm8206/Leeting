@@ -1,8 +1,8 @@
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
 
-        l, r = 0, k-1
-        n = len(nums)
+        # l, r = 0, k-1
+        # n = len(nums)
        
         # res = [0] * (n-k+1)
         
@@ -17,22 +17,20 @@ class Solution:
 
         dq = deque()
         res =[]
-        for i in range(k):
-            while dq and nums[i] >= nums[dq[-1]]:
-                # keep queue decreasing indexes
-                dq.pop()
-            dq.append(i)
+        n = len(nums)
 
-        res.append(nums[dq[0]])
-
-        for i in range(k, len(nums)):
-            if dq and dq[0] == i - k:
+        for i in range(n):
+            while dq and dq[0] <= i-k: # Index - K --> clear out boundary
+                # 4-3 = 1 
+                # win ending at 2, 3, 4
                 dq.popleft()
-            while dq and nums[i] >= nums[dq[-1]]:
+            
+            while dq and nums[i] > nums[dq[-1]]:
+                # new number is greater
                 dq.pop()
-
+            
             dq.append(i)
             res.append(nums[dq[0]])
-            # res[i] = nums[dq[0]]
-
-        return res
+        
+        # discard 1st K values.
+        return res[k-1:]

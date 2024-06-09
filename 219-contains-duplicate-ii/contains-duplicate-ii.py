@@ -7,7 +7,7 @@ class Solution:
 
         for R in range(n):
 
-            if R-L > k:
+            if R-L > k:  # abs(i-j) window size = R-L
                 win_set.remove(nums[L])
                 L+=1
                 

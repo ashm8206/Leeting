@@ -6,7 +6,7 @@ class Solution(object):
         :rtype: int
         """
 
-        maxLen = 1
+        maxLen = 0
 
         L = 0
         # R = 0
@@ -28,6 +28,11 @@ class Solution(object):
             #  if they are greater than K, window is Invalid
                 hmap[s[L]] = hmap.get(s[L],0) - 1
                 L+=1
+
+            # if vs while, 
+            #  Here If is sufficint as the window shrink condition depends on
+            #  winLen - maxfreq
+            #  just moving winLen + 1 will adjust the 'if' condition
             
             maxLen = max(maxLen, R-L+1)
         return maxLen

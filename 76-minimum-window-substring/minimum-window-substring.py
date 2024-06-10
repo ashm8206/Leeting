@@ -45,6 +45,7 @@ class Solution:
             # if s[R] in t_count.keys():
             s_count[s[R]]+=1
             if s_count[s[R]] == t_count[s[R]]:
+                # increase only when counts match, not when count is greater.
                 have+=1
             
             while have == need: # O(len(t)) --> Total
@@ -53,12 +54,12 @@ class Solution:
                     minLen = R-L+1 
                     ans = s[L:R+1]
                 
-                if s[L] in t_count.keys():
+                # if s[L] in t_count.keys():
               
-                    s_count[s[L]]-=1
-                
-                    if s_count[s[L]] < t_count[s[L]]:
-                        have-=1
+                s_count[s[L]]-=1
+            
+                if s[L] in t_count and s_count[s[L]] < t_count[s[L]]:
+                    have-=1
   
 
                 L = L+1

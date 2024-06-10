@@ -29,6 +29,9 @@ class Solution:
         #             maxLen = max(maxLen, R-L+1)
         # return maxLen
 
+
+        # Brute Force candidate
+
         # for chars found in string
         # split on char that have freq[char] < k 
         for char, count in Counter(s).items():

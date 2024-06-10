@@ -1,37 +1,43 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         
-        maxLen = -1
+        maxLen = 0
         n = len(s)
-        if n < 1:
-            return 0
-        L  = 0
+        L = 0
+        # if n < 1:
+        #     return maxLen 
+            # return 0
+        
+        # L, R  = 0, 0
 
-        # window = ''
 
-        # for R in range(n):
-        #     if s[R] not in window:
-        #         window += s[R]
-        #         maxLen = max(maxLen, len(window))
-        #     else:
-                
-        #         L = window.index(s[R])
-        #         window = window[L+1:] + s[R]
-                
-        #     # print(L,R)
-        # # print(s[L])
-        # # maxLen = max(maxLen, R - L + 1)
-        # return maxLen
 
         hmap = defaultdict(int)
-
+    
         for R in range(n):
-            if s[R] in hmap:
-                if hmap[s[R]] >= L: #tmmzuxt --> m Start 2 --> 1 as t = 0
-                    L = hmap[s[R]] + 1
-            
+            hmap[s[R]] += 1
 
-            maxLen = max(maxLen, R-L+1)
-            hmap[s[R]] = R
-        return maxLen
+            while hmap[s[R]] > 1: # chars are repeated
+                # shrink window 
+                # print(s[L:R+1], s[R])
+                hmap[s[L]]-=1
+                L = L + 1
+                # print(s[L:R+1], s[R])
+                # print("--")
+                
             
+            maxLen = max(maxLen, R-L+1)
+        
+        return maxLen
+        
+        # Testcase: 
+        # dvdf : Just maintaining set wont work
+        #        we want to get MaxLen, hence remove as less as possible.
+        #        we can set L = hmap[s[R]] + 1  == lastSeenIndx + 1
+
+        # tmmzuxt , problem is the "t"
+        #    1. Since we are not overwriting the hmap
+        #    2. We only consider hmap[s[R]] cases  >= L  greater than current left bound
+        #    3.  hmap[t] == 0 when we ecounter s[R] @ position 6
+        #    We must include pos 6 and not update Left bound L
+        #    as we already discarded 't' @ 0 when we set Left Bound to 2 for 'm' case

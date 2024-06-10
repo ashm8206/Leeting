@@ -42,10 +42,10 @@ class Solution:
 
         for R in range(len_s): #(O(len(s)))
 
-            if s[R] in t_count.keys():
-                s_count[s[R]]+=1
-                if s_count[s[R]] == t_count[s[R]]:
-                    have+=1
+            # if s[R] in t_count.keys():
+            s_count[s[R]]+=1
+            if s_count[s[R]] == t_count[s[R]]:
+                have+=1
             
             while have == need: # O(len(t)) --> Total
                

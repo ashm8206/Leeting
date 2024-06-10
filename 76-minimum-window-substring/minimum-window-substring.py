@@ -40,26 +40,26 @@ class Solution:
 
         s_count = defaultdict(int)
 
-        for R in range(len_s):
+        for R in range(len_s): #(O(len(s)))
 
             if s[R] in t_count.keys():
                 s_count[s[R]]+=1
                 if s_count[s[R]] == t_count[s[R]]:
                     have+=1
             
-            while have == need:
-                # print(s[L:R+1], s_count[s[L]], s[L], have, need)
+            while have == need: # O(len(t)) --> Total
+               
                 if R-L+1 < minLen:
                     minLen = R-L+1 
                     ans = s[L:R+1]
                 
                 if s[L] in t_count.keys():
-                    # print(s[L], s_count[s[L]], t_count[s[L]], have)
+              
                     s_count[s[L]]-=1
                 
                     if s_count[s[L]] < t_count[s[L]]:
                         have-=1
-                    # print(s[L], s_count[s[L]], t_count[s[L]], have)
+  
 
                 L = L+1
 

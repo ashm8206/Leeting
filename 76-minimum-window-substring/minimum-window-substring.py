@@ -55,6 +55,7 @@ class Solution:
                     ans = s[L:R+1]
                 
                 # if s[L] in t_count.keys():
+                # I was only filtering on keys. that saves space complexity O(n) vs O(M)
               
                 s_count[s[L]]-=1
             

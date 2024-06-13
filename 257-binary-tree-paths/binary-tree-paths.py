@@ -47,18 +47,22 @@ class Solution:
             if node.left is None and node.right is None:
                 path.append(str(node.val))
                 res.append("->".join(path[:]))
-                path.pop()
+                # it was popping the 5, when it should have popped 2
+                # we added addiional pop here to pop the left node
+                
                 return
             
             # path+='->'
             path.append(str(node.val))
-            # if node.left:
-            helper(node.left, path)
-        
-            # if node.right:
-            helper(node.right, path)
+            if node.left:
+                helper(node.left, path)
+                path.pop()
 
-            path.pop()
+            if node.right:
+                helper(node.right, path)
+                path.pop()
+
+            
         
         helper(root,[])
         return res

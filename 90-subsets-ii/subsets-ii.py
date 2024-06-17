@@ -8,11 +8,10 @@ class Solution:
         nums.sort()
 
         def dfs(slate, curr_idx):
-            # print(slate)
+      
             res.append(slate[:])
 
             for idx in range(curr_idx, n):
-                # print(curr_idx, n, idx)
 
                 if idx!=curr_idx and nums[idx-1]==nums[idx]:
                     

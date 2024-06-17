@@ -9,7 +9,7 @@ class Solution:
                 res.append(slate[:])
 
             for idx  in range(curr_idx, n+1):
-                if len(slate) < k:
+                # if len(slate) < k:
                     # you are pruning the branches which exceed len K
                     slate.append(idx)
                     backtrack(slate, idx+1) # in base case, we only add to result len(slate)==K

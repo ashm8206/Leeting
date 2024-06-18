@@ -23,10 +23,13 @@ class Solution:
         
 
             for i in range(curr_idx, len(s)):
-                if isPalindrome(s, curr_idx, i):
-                    slate.append(s[curr_idx:i+1])
-                    dfs(slate, i+1)
-                    slate.pop()
+
+                if isPalindrome(s, curr_idx, i): # if Constraint
+
+                    slate.append(s[curr_idx:i+1]) # append Answer
+                    dfs(slate, i+1) # next  ---> base, when do we cache result?? 
+                    # when we have processed entire String
+                    slate.pop() # remove Answer
 
         dfs([],0)
         return res

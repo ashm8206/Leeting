@@ -67,7 +67,8 @@ class Solution:
 
         # going clockwise 
         #               up, right, down, left
-        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+        # directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+        directions = [(1, 0), (0, -1), (-1, 0), (0, 1)]
         visited = set()
         backtrack()
         

@@ -37,7 +37,18 @@ class Solution:
         :rtype: None
         """
 
+        # Right hand rule /Maze solving algo, where you cant see the the board 
+        #  if You cant see the board, and obstacle TURN RIGHT
+        #  visited cells are Obstacles 
+
         def go_back():
+            # R ---> facing down
+            # Turn Right  --> faces next right cell
+            # Turn Right --> faces up
+            #  Move    cell in front, is one cell up
+            #  Turn Left --> faces next left cell
+            # Turn left --> faces next down cell
+
             robot.turnRight()
             robot.turnRight()
             robot.move()
@@ -50,6 +61,8 @@ class Solution:
             robot.clean()
 
             for i in range(4):
+                # Stop when you explored all possible paths, 
+                # i.e. all 4 directions (up, right, down, and left) for each visited cell.
                 new_d = (d+i)%4
 
                 nr = cell[0] + directions[new_d][0]
@@ -60,15 +73,14 @@ class Solution:
                     go_back()
 
                 robot.turnRight()
-                #
-
-        
-
+                #  you explore Up first, fron nr,nc
+                #  explore the next cell in clockwise direction
 
         # going clockwise 
         #               up, right, down, left
-        # directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-        directions = [(1, 0), (0, -1), (-1, 0), (0, 1)]
+        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+        # directions = [(1, 0), (0, -1), (-1, 0), (0, 1)]
+        # the order of directions dont matter
         visited = set()
         backtrack()
         

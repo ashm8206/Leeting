@@ -3,26 +3,44 @@ class Solution:
 
 
 
-        # Recursion/ Bactarcking
+        # Iterative
 
-        results = [""]
+        # results = [""]
 
-        best = 0
+        # best = 0
 
-        for word in arr:
+        # for word in arr:
 
             
-            for i in range(len(results)):
+        #     for i in range(len(results)):
 
-                new_res = results[i] + word
+        #         new_res = results[i] + word
 
-                if len(new_res)!= len(set(new_res)):
-                    continue
+        #         if len(new_res)!= len(set(new_res)):
+        #             continue
                 
-                results.append(new_res)
+        #         results.append(new_res)
 
-                best = max(best, len(new_res))
-        return best
+        #         best = max(best, len(new_res))
+        # return best
+
+
+        # Backtracking/ Recursion
+
+    
+
+        def dfs(slate, pos) -> int:      
+            # Use a set to check res for duplicate characters
+            if len(slate) != len(set(slate)):
+                return 0
+
+            # Recurse through each possible next option
+            # and find the best answer
+            best = len(slate)
+            for i in range(pos, len(arr)):
+                best = max(best, dfs(slate + arr[i], i+1))
+            return best
+        return dfs('',0)
 
 
         # Not sliding window, as it Subsequence not subarray

@@ -15,7 +15,6 @@ class Solution:
         res = []
         array = text.split(" ")
         n = len(array)
-        
 
         def dfs(visited, word):
 
@@ -24,17 +23,26 @@ class Solution:
             for nei in graph[word]:
                 if nei not in visited:
                     dfs(visited, nei)
+        
+        components = defaultdict(list)
+
+        for idx in range(0, n):
+            visited = set()
+            dfs(visited, array[idx])
+            components[idx].extend(visited)
+        
+        # print(components)
+            
 
         def backtrack(slate, idx):
 
             if idx==n:
                 res.append(" ".join(slate[:]))
                 return
-
-            visited = set()
-            dfs(visited, array[idx])
             
-            for word in visited:
+            wordlist = components[idx]
+            
+            for word in wordlist:
                 slate.append(word)
                 backtrack(slate, idx+1)
                 slate.pop()

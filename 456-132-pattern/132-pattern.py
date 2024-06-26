@@ -1,10 +1,15 @@
 class Solution:
     def find132pattern(self, nums: List[int]) -> bool:
-        # 0, 1, 2
+        # i, j,  k
         # 1 < 4 > 2
-        #  1st for minimum array from left  every minimum number : i 
-        # find the 2nd from the right  next Greater  == k 
-        # if there exists a sma
+
+        #Approach 
+        #  O(n^3)
+        # O(n^2) 
+        # --> for each j (maxElement)
+        # find the minmium uptil "j"
+        # to broaden the Range nums[i]..........nums[j]
+        # to find a nums[k] between such that nums[i] < num[k] < nums[j]
 
         n = len(nums)
         stack = []
@@ -24,18 +29,21 @@ class Solution:
             while stack and nums[stack[-1]] <= nums[i]:
                 stack.pop()
 
-            if stack: # 3 element 
+            if stack: # 3 element or "j", the new element hasnt displaced it
                 
                 if nums[potentialOnes[stack[-1]]] < nums[i]:
-                    # check the 1st element at that position from PotentialOnes
-                    # if it is < the currElement
-                    #  Then we found a 1 - 3 - 2 pair
-
-                    # the 3-2 pair is valid beacuse if the number of was greater or equal
-                    # it would've displaced the currMax element in stack 
-                    # by default curr[i] will either displace stack or  it is  > stack[-1]
+                    # get "1" or "i"
+                    # going to index 3 in PotentialOnes to get index of 1 
+                    # and find that index in nums to get "i"
+                    # compare to current element or nums[i]== k or "2"
                     return True
             
             stack.append(i)
     
         return False
+
+        # 4 - (WinSize) + 1
+        
+        # 0, 1, 2, 3, 4(x) 4 not included as it is len(s)
+        # 4-3 # last eligible index  == 1 winSize = 3
+        #  +1 for range func

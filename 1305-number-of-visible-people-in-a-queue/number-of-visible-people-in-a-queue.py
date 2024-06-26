@@ -7,13 +7,17 @@ class Solution:
 
         for i in range(n):
             while stack and heights[stack[-1]] < heights[i]:
-                # 5, can see the NGE 
+                # 6 can see NGE 8
+                # 5, can see the NGE 11
+                # That is all they can see
                 res[stack.pop()]+=1
 
             if stack:
                 # this element is greater than heights[i]
-                # there this element can see heights[i]
+                # therefore this element can see heights[i]
                 res[stack[-1]]+=1
+            
+            # before adding height
 
             stack.append(i)
 

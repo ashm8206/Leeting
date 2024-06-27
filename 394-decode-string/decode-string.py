@@ -29,26 +29,59 @@ class Solution:
         #         stack.append(substr*int(k))
         # return "".join(stack)
 
+        # stack = []
+
+        # for char in s:
+            
+        #     if char==']':
+        #         res = ''
+        #         while stack and stack[-1]!='[':
+        #             res = stack.pop() + res
+        #         # Pop '[' 
+        #         num = 0
+        #         k = 0
+        #         stack.pop()
+        #         ## Another alternative
+        #         # Can be done in the same way as stack
+        #         while stack and stack[-1].isdigit():
+        #             num = int(stack.pop())*10**k + num
+        #             k+=1
+        #         res = res * int(num)
+        #         stack.append(res)
+        #     else:
+        #         stack.append(char)
+        # return "".join(stack)
+
+
+        # Method II
+
         stack = []
+        counterStack = []
 
         for char in s:
             
-            if char==']':
+            if char.isdigit():
+                # save as Str
+                counterStack.append(char)
+
+            elif char == "]":
                 res = ''
-                while stack and stack[-1]!='[':
+                while stack and stack[-1]!="[":
                     res = stack.pop() + res
-                # Pop '[' 
-                num = 0
-                k = 0
-                stack.pop()
-                while stack and stack[-1].isdigit():
-                    num = int(stack.pop())*10**k + num
-                    k+=1
-                res = res * int(num)
-                stack.append(res)
-            else:
+                stack.pop()  # "remove [ "
+
+                count = counterStack.pop()
+                stack.append(res*count)
+            else: # [ or char
                 stack.append(char)
+                if char == '[':
+                    res = ''
+                    while counterStack and not isinstance(counterStack[-1],int):
+                        res = counterStack.pop() + res
+                    counterStack.append(int(res))
         return "".join(stack)
+                    
+
 
 
 

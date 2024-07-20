@@ -21,8 +21,8 @@ class MRUQueue:
         # Stored as Index, Value, sorted on Index
 
     def fetch(self, k: int) -> int:
+        last_idx = self.q[-1][0]
         _ , value  = self.q.pop(k-1) # 1 indexed, make it 0
-        last_idx = self.q[-1][0] if self.q else 0
         self.q.add((last_idx+1, value))
 
         return value

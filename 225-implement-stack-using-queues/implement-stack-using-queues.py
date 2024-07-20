@@ -12,15 +12,16 @@ class MyStack:
 
     def pop(self) -> int:
         size = len(self.queue)
-        while size > 1:
+        while size > 1: # Atleast 1 element 
             
             val = self.queue.popleft() # pop front
             if size == 2:
+                # adjust when you pop
                 self.top_val = val
-                
+
             self.queue.append(val)
             size -=1 
-        return self.queue.popleft() # the Topmost one
+        return self.queue.popleft() # return the Topmost one
 
 
     def top(self) -> int:

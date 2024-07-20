@@ -1,88 +1,75 @@
-from collections import deque
-from sortedcontainers import SortedList
+class Node(object):
 
-# LinkedList / Array 
-
-# Arrays
-# get O(1)
-# Fetch in O(n) as you gotta move N elements
-
-# Doubly Linked, (Pop in the Middle),  Doubly works better as we need the pointer to the element before
-# get O(n)
-# fetch O(1)
-
-# TreeSet, AVL Tree SortedList 
-# What is AVL, How does Self-balancing Work
-# log(n) < SQRT(N)
-class MRUQueue:
-
-    def __init__(self, n: int):
-        # Method I - Doubly LinkedList
-
-        # Method II SortedList 
-        # self.q = SortedList([ (i, i) for i in range(1, n+1)])
-        # Stored as Index, Value, sorted on Index
-
-        # Method III sqrt(n) 
-        nums = list(range(1, n + 1))
-        self.buckets = []
-
-        self.sqrt = math.floor(math.sqrt(n))
-        # why Ceil ? 
-        # It should work with floor too, 
-        # but it will mean more buckets ans bukcet_size is small
-
-        # Steps are:
-        #    # 1: get and pop -> indexing O(1) 
-        #        for bucket first,  k-1//Sqrt -> How many Times?
-        #        then into bucket for idx.  k-1%Sqrt  
-        #                  this SQRT get very 
-        #                  imp while finding th exact element idx inside bucket
-        #    # 2: append ->  to the last bucket O(1)
-        #    # adjust buckets from bucket[candidate_found] ---> bucket[Last]
-        #     Move leftmost from any bucket to right of candidate bucket, 
-        #     1 bucket down
-        #     Repeat and TC - (n^1/2)
-
-        for i in range(0, n, self.sqrt):
-            chunk = nums[i: i+self.sqrt]
-            self.buckets.append(chunk)
-
-        self.len_of_buckets = len(self.buckets)
-        # print(self.buckets)
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+        self.prev = None
 
 
-    def fetch(self, k: int) -> int:
+class MRUQueue(object):
 
-        # SortedList from sortedcontainers (works with Map, Dict APIs )
-        # O(log(n))
-        # last_idx = self.q[-1][0] # Pops from an empty list
-        # _ , value  = self.q.pop(k-1) # 1 indexed, make it 0
-        # self.q.add((last_idx+1, value)) 
+    def __init__(self, n):
+        """
+        :type n: int
+        """
 
-        # return value
+        self.dummyStart = Node(-1)
 
-        # Method III SQRT
+        #Atleast 1
+        curr = Node(1)
+        self.dummyStart.next = curr
+        curr.prev = self.dummyStart
+      
+        for i in range(2, n+1):
+            new_node = Node(i)
+            curr.next = new_node
+            new_node.prev = curr
+            curr = curr.next
+           
+        self.dummyEnd = Node(-1)
+        curr.next = self.dummyEnd
+        self.dummyEnd.prev = curr
+        
+    
 
-        bucket_idx = (k-1) // self.sqrt # Quotient
-        element_idx = (k-1) % self.sqrt # Remainder how many deviations within bucket
-        # Get and Del
-        element = self.buckets[bucket_idx].pop(element_idx)
+    def fetch(self, k):
+        """
+        :type k: int
+        :rtype: int
+        """
 
-        # append to the end of last bucket
-        self.buckets[self.len_of_buckets - 1].append(element)
+        curr = self.dummyStart.next
+        k = k - 1
+        print("k : {0}".format(k))
+       
+        # Get 
+        while k:
+            curr = curr.next  # 1
+            k-=1
+        print("--")
+        # Detach
+        next_node = curr.next
+        prev_node = curr.prev
 
-        # Adjust buckets [cand_bucket]--- > [last_bucket but 1 bucket] 
-        #  more their 1st idx to bucket before it
+        curr.next = None
+        curr.prev = None
 
-        for b in range(bucket_idx, self.len_of_buckets - 1):
-            left_bucket = self.buckets[b]
-            right_bucket = self.buckets[b+1]
+        prev_node.next = next_node
+        next_node.prev = prev_node
 
-            left_bucket.append(right_bucket.pop(0))
+        # Append to end
+        lastNode = self.dummyEnd.prev
+        
+        lastNode.next = curr  # curr is the target Node
+        curr.prev = lastNode
+        curr.next = self.dummyEnd
+        self.dummyEnd.prev = curr
 
-        return element
+        # print(lastNode.val, lastNode.next.val, curr.next.val, curr.prev.val, self.dummyEnd.prev.val)
 
+        return curr.val
+
+        
 
 
 # Your MRUQueue object will be instantiated and called as such:

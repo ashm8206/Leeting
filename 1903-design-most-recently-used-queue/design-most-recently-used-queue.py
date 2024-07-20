@@ -17,6 +17,8 @@ from sortedcontainers import SortedList
 class MRUQueue:
 
     def __init__(self, n: int):
+        # Method I - Doubly LinkedList
+
         # Method II SortedList 
         # self.q = SortedList([ (i, i) for i in range(1, n+1)])
         # Stored as Index, Value, sorted on Index

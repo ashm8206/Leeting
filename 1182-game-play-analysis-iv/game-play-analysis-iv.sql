@@ -14,7 +14,7 @@ WITH first_logins AS (
   FROM
     first_logins F
     INNER JOIN Activity A ON F.player_id = A.player_id
-    AND F.first_login = A.event_date -  '1 day'::interval
+    AND F.first_login = A.event_date -  INTERVAL '1 day'
 )
 SELECT
   ROUND(

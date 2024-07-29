@@ -19,5 +19,5 @@ WITH first_logins AS (
 SELECT
   ROUND(
     ((SELECT C.num_logins FROM consec_logins C)
-    / (SELECT COUNT(F.player_id) FROM first_logins F)::FLOAT)::NUMERIC
+    / (SELECT COUNT(F.player_id) FROM first_logins F)::NUMERIC)
   , 2) AS fraction

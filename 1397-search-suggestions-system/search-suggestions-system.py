@@ -90,6 +90,12 @@ class Solution:
             prefix += c
             i = bisect.bisect_left(A, prefix, lo=i) # M*LogN
             # we get left most index of prefix in the search
+            # and ad next 3 product that match prefix
+            
+            #  An optimization: 
+            #  passing lo : start index
+            #  In each Binary serach, it is not required to start lo = 0
+            #  Lo = atleast as small as the "i" from previous prefix matched
 
             res.append([w for w in A[i:i+3] if w.startswith(prefix)]) #--> o(3)*O(k)
         return res

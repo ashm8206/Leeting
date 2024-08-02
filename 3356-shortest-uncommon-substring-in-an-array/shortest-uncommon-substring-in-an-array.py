@@ -7,11 +7,11 @@ class Solution:
 
         for idx, cand in enumerate(arr):
             hmap_cand_substr[cand].add("")
-            hmap_str_cand[""].add((cand, idx))
+            hmap_str_cand[""].add(idx)
             for i in range(len(cand)):
                 for j in range(i,len(cand)):
                     hmap_cand_substr[cand].add(cand[i:j+1])
-                    hmap_str_cand[cand[i:j+1]].add((cand, idx))
+                    hmap_str_cand[cand[i:j+1]].add(idx)
         
         result  = []
         

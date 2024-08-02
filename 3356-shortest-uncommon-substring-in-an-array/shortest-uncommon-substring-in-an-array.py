@@ -1,3 +1,5 @@
+# My answer
+
 # class Solution:
 #     def shortestSubstrings(self, arr: List[str]) -> List[str]:
         
@@ -30,6 +32,9 @@
 #         # Time: N* N**2LogN**2
 #         # Space : O(N*N): all substrings
 
+
+
+# UpVoted answer ?
 
 class Solution:
     def shortestSubstrings(self, arr: List[str]) -> List[str]:

@@ -20,6 +20,6 @@ class Solution:
                     ans = op1 * op2
                 
                 stack.append(ans)
-                # print(stack)
+                
         return stack[0]
                 

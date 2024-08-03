@@ -2,17 +2,20 @@ class Solution:
     def minAddToMakeValid(self, s: str) -> int:
         # Can you find the Number of Unbalanced parenthesis and return that?
         
-        unbalanced = []
-        closed = 0
+        openstack = []
+        unbalanced = 0
         for ch in s:
             if ch == '(':
-                unbalanced.append('(')
+                openstack.append('(')
             else:
-                if len(unbalanced) > 0:
-                    unbalanced.pop()
+                "Encountered a close, can we balance it ?"
+                if openstack:
+                    openstack.pop()
                 else:
-                    closed +=1
+                    unbalanced +=1
 
-        return len(unbalanced) + closed
+        return len(openstack) + unbalanced
+
+        # return unbalanced open parenthesis from Openstack  + Unbalanced pair counts
 
     

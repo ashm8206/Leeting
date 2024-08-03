@@ -3,6 +3,8 @@ class Solution:
         
         n = len(s)
         res = []
+        wordDict = set(wordDict)
+
 
         # helper
         def backtrack(slate, start):

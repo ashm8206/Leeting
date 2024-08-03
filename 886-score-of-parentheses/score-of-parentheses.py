@@ -13,14 +13,14 @@ class Solution:
         # (() 1, 2
         # (())
 
-        depth = 0
+        # depth = 0
         stack =[0]
         for ch in s:
             if ch =='(':
-                depth+=1
+                # depth+=1
                 stack.append(0)
             else:
-                depth-=1
+                # depth-=1
                 v = stack.pop()
                 stack[-1] += max(2*v, 1)
         return stack.pop()

@@ -12,28 +12,15 @@ class Solution:
         # (( 2, 0
         # (() 1, 2
         # (())
-      
 
-        # (())()"
-        # 
-        score = 0
-        n = len(s)
-        
-        def helper(idx, depth):
-            nonlocal score
-            if idx > n-1:
-                return 
-            if s[idx]==')':
+        depth = 0
+        stack =[0]
+        for ch in s:
+            if ch =='(':
+                depth+=1
+                stack.append(0)
+            else:
                 depth-=1
-                if s[idx-1]=='(': 
-                    score+= 2**(depth)
-
-            elif s[idx]=='(':
-                depth +=1
-            
-        
-            
-            helper(idx+1, depth)
-
-        helper(0,0)
-        return score
+                v = stack.pop()
+                stack[-1] += max(2*v, 1)
+        return stack.pop()

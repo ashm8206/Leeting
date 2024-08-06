@@ -4,7 +4,6 @@ class Solution:
         atom = ''
         count = ''
         running_multiplier = 1
-
         hmap = {}
         
 

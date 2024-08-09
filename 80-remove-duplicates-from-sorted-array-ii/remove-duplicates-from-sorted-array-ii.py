@@ -16,14 +16,27 @@ class Solution:
 
         # Method II
 
+        # nextIndex = 0
+        # n = len(nums)
+
+        # for reader in range(n):
+        #     # uptil i <= 1 the idx
+        #     if nextIndex <=1 or nums[reader]!=nums[nextIndex-2]:
+        #         nums[nextIndex]= nums[reader]
+        #         nextIndex+=1
+        # return nextIndex
+
+
+
+
         nextIndex = 0
         n = len(nums)
-
-        for reader in range(n):
-            # uptil i <= 1 the idx
-            if nextIndex <=1 or nums[reader]!=nums[nextIndex-2]:
-                nums[nextIndex]= nums[reader]
+        
+        for i in range(n):
+            if i <= 1 or nums[nextIndex-2]!=nums[i]:
+                nums[nextIndex] = nums[i]
                 nextIndex+=1
+
         return nextIndex
 
         

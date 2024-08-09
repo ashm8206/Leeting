@@ -1,7 +1,7 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
 
-        insertIndex = 1 
+        # insertIndex = 1 
         # Next insert index of unique number
         # Index of 0 remains
         # even if element at index 0 is duplicated, it is the first time we see it
@@ -10,15 +10,23 @@ class Solution:
         #      incase its not equal, we found the first unique occurence
         #       we place it at insertIndex 
         #.       increment insertIndex+1
-        n = len(nums)
-        for reader in range(1,n):
-            if nums[reader]!= nums[insertIndex-1]:
-                nums[insertIndex] = nums[reader]
-                insertIndex+=1
-        return insertIndex
+        # n = len(nums)
+        # for reader in range(1,n):
+        #     if nums[reader]!= nums[insertIndex-1]:
+        #         nums[insertIndex] = nums[reader]
+        #         insertIndex+=1
+        # return insertIndex
         
         
         # that is the number of unique elements as array is Zero Indexed
-                
+        
+        res = 1
+        reader = 0
+        for i in range(1,len(nums)):
+            if nums[reader]!= nums[i]:
+                nums[res]= nums[i]
+                reader+=1
+                res+=1
+        return res
         
             

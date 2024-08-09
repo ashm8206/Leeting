@@ -1,11 +1,39 @@
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
        
-        l, r = 0, len(nums) - 1
-        while l < r:
-            m = l + (r-l) // 2
-            if m >= len(nums)-1 or nums[m] > nums[m + 1]:
-                r = m
+        # Greedy approach
+        # -inf [1, 2, 3, 1] -inf
+
+        # A peak element is an element that is strictly greater than its neighbors
+
+        #  the greedy strategy is to go toward the greater numbers
+
+        
+
+        n = len(nums)
+
+        if n==1:
+            return 0
+
+        l = 0 
+        r = n - 1
+
+        while l <=r :
+            mid = (l+r)//2
+
+            if mid+1 < n and nums[mid] <= nums[mid+1]:
+                l = mid + 1
+            elif mid-1 >=0 and nums[mid-1] >= nums[mid]:
+                r = mid - 1
             else:
-                l = m + 1
-        return l
+                # arr[mid] > arr[mid+1] and arr[mid] > arr[mid-1]
+                return mid
+        
+        # check the edges 
+        if nums[0] > nums[1]:
+            return  0
+        elif nums[n-1] > nums[n-2]:
+            return n-1
+        
+        
+

@@ -37,5 +37,9 @@ class RandomizedSet():
         """
         Get a random element from the set.
         """
+        # Returns a value from self.list with replacement
+        return choice(self.list)
+
         # Below returns a list, integer is expected
-        return choices(self.list, weights=[1]*len(self.list), k = 1)[0]
+        
+        # return choices(self.list, weights=[1]*len(self.list), k = 1)[0]

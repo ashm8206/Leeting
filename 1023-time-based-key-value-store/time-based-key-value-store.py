@@ -40,8 +40,11 @@ class TimeMap:
         # print(idx)
 
         if idx < len(self.keyMap[key]) and self.keyMap[key][idx][0] == timestamp:
-            # if [idx][0] <= timestamp
+            # if [idx][0] == timestamp, 
             return self.keyMap[key][idx][1] 
+        # if [idx][0] > timestamp, then return idx-1
+        # if idx-1 < 0 , return empty
+        
         return self.keyMap[key][idx-1][1] if idx - 1 >= 0 else ""
        
         # return self.keyMap[key][idx-1][1] if idx else ""

@@ -5,6 +5,11 @@ class RandomizedSet():
         Initialize your data structure here.
         """
         self.dict = {}
+        # We want to do random sampling.
+        # We are maintaining a list for the "choice" / "choices" func
+        #  These two functions only use (List, Tuple, and range values)
+
+        # Since we are maintaing a list, we will, have to keep it insync with the hashmap insert and remove O(1) time.
         self.list = []
 
         
@@ -17,7 +22,6 @@ class RandomizedSet():
         self.dict[val] = len(self.list)
         self.list.append(val)
         return True
-        
 
     def remove(self, val: int) -> bool:
         """
@@ -41,5 +45,4 @@ class RandomizedSet():
         return choice(self.list)
 
         # Below returns a list, integer is expected
-        
         # return choices(self.list, weights=[1]*len(self.list), k = 1)[0]

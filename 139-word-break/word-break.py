@@ -18,3 +18,6 @@ class Solution:
             return False
 
         return helper(0, s)
+
+        # Time-Complexity: O(n⋅m⋅k)
+        # Space: O(n)

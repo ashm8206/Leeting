@@ -14,7 +14,6 @@ class Solution:
                 if s[start: end] in wordDict:
               
                     if helper(end, s):
-                        
                         return True
             return False
 

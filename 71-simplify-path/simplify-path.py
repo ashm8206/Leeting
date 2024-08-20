@@ -7,7 +7,7 @@ class Solution:
         # # This deals with the multiple lash problem
         # # split on '/' we are dealing only with directory names
 
-        print(directories)
+        # print(directories)
         for dr in directories:
             if dr == '..':
                 if stack:

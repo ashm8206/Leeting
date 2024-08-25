@@ -19,6 +19,11 @@ class Solution:
         # return -1
 
         # Deque :
+        '''
+        We double the difference of the cost.
+And transfer this problem as Finding the longest continuous subarray where all its presum larger or equal to zero.
+This is Very classical sliding window problem.
+        '''
         diff = [x - y for x, y in zip(gas, cost)] * 2
         n = len(gas)
         reach = deque([])
@@ -29,7 +34,7 @@ class Solution:
 
             cur_tank += diff[i]
             reach.append(i)
-            
+
             if len(reach) == n and cur_tank >= 0:
                 return reach.popleft()
         return -1

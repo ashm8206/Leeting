@@ -35,7 +35,7 @@ class Solution:
 
             if level==k:
                 res.append(curr)
-
+                continue
             for nei in adjSet[curr]:
                 if nei not in visited:
                     queue.append((nei, level+1))

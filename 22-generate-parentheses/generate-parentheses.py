@@ -5,26 +5,47 @@ class Solution:
         # close open >= close
         res = []
         
-        def helper(open,close, slate):
+        # Bcaktracking style
 
-            if len(slate) == 2*n:
-                res.append("".join(slate[:]))
+        # def dfs(open,close, slate):
 
-                # print(slate,res)
-                return
+        #     if close == n:
+        #         res.append("".join(slate[:]))
+        #         return
             
-            if open < n :
+        #     if open < n :
 
-                slate.append('(')
-                helper(open+1,close, slate)
-                slate.pop()
+        #         slate.append('(')
+        #         dfs(open+1,close, slate)
+        #         slate.pop()
                 
-            if close < open:
-                slate.append(')')
-                helper(open,close+1, slate)
-                slate.pop()
+        #     if close < open:
+        #         slate.append(')')
+        #         dfs(open,close+1, slate)
+        #         slate.pop()
 
-        slate = ["("]
-        helper(1,0,slate)
+    
+        # slate = []
+        # dfs(0,0,slate)
+
+        def helper(slate, op, cl):
+
+            if op==0 and cl==0:
+                res.append("".join(slate[:]))
+                return
+            if cl < op or op < 0:
+                return
+
+            helper(slate +['('], op-1, cl)
+            
+            helper(slate + [')'], op, cl-1)
+         
+
+        helper([], n, n)
         return res
+
+
+       
+
+
             

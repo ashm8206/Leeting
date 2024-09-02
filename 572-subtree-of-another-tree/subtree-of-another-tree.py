@@ -10,8 +10,11 @@ class Solution:
         def isSameTree(p,q):
 
             # if either are None, check if both are None
+            if  p is None and q is None:
+                return True
+
             if p is None or q is None: #0 and 0
-                return p is None and q is None 
+                return False 
         
             if p.val!=q.val:
                 return False
@@ -28,11 +31,12 @@ class Solution:
             if node is None:
                 return False
 
-            # elif root.val==subRoot.val:
-            #     return isSameTree(root, subRoot)
-            elif isSameTree(node,subRoot):
+            # if node vals are same, then check if isSameTree
+
+            elif node.val==subRoot.val and isSameTree(node,subRoot):
                 return True
             
+            # check for their children
             else:
                 return checkEachNode(node.left) or checkEachNode(node.right)
         

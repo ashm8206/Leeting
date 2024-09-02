@@ -35,12 +35,12 @@ class Solution:
                 return
             if cl < op or op < 0:
                 return
-
-            helper(slate +['('], op-1, cl)
             
-            helper(slate + [')'], op, cl-1)
+            if op > 0:
+                helper(slate +['('], op-1, cl)
+            if cl > op:
+                helper(slate + [')'], op, cl-1)
          
-
         helper([], n, n)
         return res
 

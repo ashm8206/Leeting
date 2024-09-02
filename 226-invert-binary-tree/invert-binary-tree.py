@@ -42,4 +42,9 @@ class Solution:
         self.invertTree(root.right)
 
         return root
+
+        # We can reverse Step 1 and Step 2 order
+        # One will be top down, other will be bottom up
+        # Top Down: VLR 
+        # Bottom Up: LRV
         

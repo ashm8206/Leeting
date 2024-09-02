@@ -14,6 +14,18 @@ class Solution:
         queue = deque()
         queue.append(root)
 
+        # Alternative - Build parent pointers
+        graph = collections.defaultdict(list)
+        def build_graph(cur, parent):
+            if cur and parent:
+                graph[cur.val].append(parent.val)
+                graph[parent.val].append(cur.val)
+            if cur.left:
+                build_graph(cur.left, cur)
+            if cur.right:
+                build_graph(cur.right, cur) 
+        build_graph(root, None)
+
         while queue:
             curr = queue.popleft()
             if curr.left:

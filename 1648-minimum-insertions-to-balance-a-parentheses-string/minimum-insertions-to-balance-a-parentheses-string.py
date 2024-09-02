@@ -1,25 +1,7 @@
 class Solution:
     def minInsertions(self, s: str) -> int:
-        l = len(s)        
+        l = len(s)                
 
-        # Method I --> Doesnt work
-
-        # result = 0        
-        # candidates_right = []
-        # for i in range(l-1, -1, -1):
-        #     if s[i] == ")":
-        #         candidates_right.append(")")
-        #     else:
-        #         if len(candidates_right) == 0:
-        #             result += 2
-        #         elif len(candidates_right) == 1:
-        #             candidates_right.pop()
-        #             result += 1
-        #         else:
-        #             candidates_right.pop()
-        #             candidates_right.pop()
-        # print(len(candidates_right)%2, result, len(candidates_right)//2  )
-        # return result + len(candidates_right)//2 + (len(candidates_right)%2) * 2
         # return unbalanced_closing + open_brackets_needed for //2 closed_back +
         #  if closed==odd then (1 missing +1 closing)
 

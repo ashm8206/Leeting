@@ -35,20 +35,22 @@ class Solution:
         curr = root
         stack = [curr]
 
-        while stack or curr:
+        while True:
 
-            while curr:
+            if curr:
                 stack.append(curr)
                 curr = curr.left
             
-
-            curr = stack.pop()
-            k-=1 
-
-            if k==0:
-                return curr.val
+            elif stack:
+                curr = stack.pop()
+                k-=1 
+                if k==0:
+                    return curr.val
+                
             
-            curr = curr.right
+                curr = curr.right
+            else:
+                break
 
 
         

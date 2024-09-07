@@ -34,6 +34,11 @@ class Solution:
             # if node vals are same, then check if isSameTree
 
             elif node.val==subRoot.val and isSameTree(node,subRoot):
+                # will only check once if you add it here 
+                # isSameTree(node,subRoot) 
+                #  instead and Return True if condition met 
+
+                # else move on and try other children
                 return True
             
             # check for their children

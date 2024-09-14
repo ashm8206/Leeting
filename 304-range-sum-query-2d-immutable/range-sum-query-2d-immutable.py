@@ -29,15 +29,10 @@ class NumMatrix:
         ROWS, COLS = len(matrix), len(matrix[0])
 
         self.prefix_mat = [[0]*(COLS+1) for _ in range(ROWS+1)]
-
-        for r in range(1,ROWS+1):
-            prefix = 0
-            for c in range(1,COLS+1):
-                
-                prefix += matrix[r-1][c-1]
-                above =  self.prefix_mat[r-1][c]
-
-                self.prefix_mat[r][c] = prefix + above
+        
+        for r  in range(ROWS):
+            for c in range(COLS):
+                self.prefix_mat[r+1][c+1] = self.prefix_mat[r][c+1] + self.prefix_mat[r+1][c] - self.prefix_mat[r][c] + matrix[r][c]
         
         # print(self.prefix_mat)
 

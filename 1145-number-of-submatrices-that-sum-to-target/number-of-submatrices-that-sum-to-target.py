@@ -13,14 +13,17 @@ class Solution:
 
         res = 0
 
-        for r1 in range(r):
-            for r2 in range(r1, r):
+        for r1 in range(1,r+1):
+            for r2 in range(r1, r+1):
+ 
+                hmap = {0:1} # 1 time we have seen target 
+                # prefix [0]
+                # for these two rows, check if diff seen before
 
-                hmap = {0:1} # 1 time we have seen prefix [0]
-
-                for col in range(c):
-                    # print((r2,col),(r1-1,col))
-                    curr_sum = ps[r2+1][col+1] - (ps[r1][col+1] if r1 > 0 else 0)
+                for col in range(1,c+1):
+                    # for every col in this range
+                  
+                    curr_sum = ps[r2][col] - (ps[r1-1][col] if r1 > 0 else 0)
                     diff = curr_sum - target
 
                     res+= hmap.get(diff, 0)

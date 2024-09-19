@@ -1,6 +1,20 @@
 class Solution:
     def isNumber(self, s: str) -> bool:
 
+        """Rules:
+
+        1. Digit:
+            - Atleast 1 digit should be present.
+        2. Signs:
+            -It must be first char in decimal/integer number.
+            -It must be right after the exponent. 
+        3. Exponents:
+            - Just one e or E should be there
+            - Appear only after decimal / int number
+        4. Dots:
+            - No more than one dot.
+            - should not occur after exponent. """
+
         seen_digit = seen_exponent = seen_dot = False
         for i, c in enumerate(s):
             if c.isdigit():

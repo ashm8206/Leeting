@@ -28,6 +28,8 @@ class Solution:
             new_node.next = helper(node.next) if node.next else None
             new_node.random = helper(node.random) if node.random else None
 
+            # Postorder will create recursion exceeded. as Random could pt to a node already seen.
+
             return new_node
         return helper(head)
 

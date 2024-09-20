@@ -60,8 +60,11 @@ class Solution:
             
             if node in maps: # maps acts like a visited array
                 return maps[node]
-            
+
+            # set in map as PreOrder incase the random ptrs points bck
+            # this avoids maximum recursion exceeded.
             maps[node] = NodeCopy(node.val)
+        
             maps[node].left = clone_bt(node.left)
             maps[node].right = clone_bt(node.right)
             maps[node].random = clone_bt(node.random)

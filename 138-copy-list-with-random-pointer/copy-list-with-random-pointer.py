@@ -60,49 +60,6 @@ class Solution:
 
         # return hmap.get(head,None)
 
-        # Iterative O(1) Space
-
-        # if not head:
-        #     return head
-
-        # # Weave
-        # curr = head
-        # while curr:
-        #     nextNode = curr.next
-        #     newNode = Node(curr.val)
-        #     curr.next = newNode
-        #     newNode.next = nextNode
-        #     # print(curr.val,curr.next.val)
-        #     curr = nextNode
-
-        # # Random ptr Assignment
-        # ptr = head
-
-        # while ptr and ptr.next:
-        #     if ptr.random:
-        #         ptr.next.random = ptr.random.next 
-        #     ptr = ptr.next.next
-
-        # ptrA = head
-        # ptrB = head.next
-
-        # newHead = ptrB
-
-        # # A - A' - B - B' - C - C' 
-        # # pA
-        # #     pB
-
-        # # Unweave
-        # while ptrA :
-        #     ptrA.next = ptrB.next if ptrB else None
-        #     ptrB.next = ptrB.next.next if ptrB.next else None
-
-        #     ptrA = ptrA.next
-        #     ptrB = ptrB.next
-        # # We cant combine the two Random+unweaving cuz we need next ptrs intact
-        # return newHead
-
-
         if not head:
             return None
         
@@ -134,7 +91,7 @@ class Solution:
 
             ptrA = ptrB.next
             ptrB = ptrB.next
-        
+        # We cant combine the two Random+unweaving cuz we need next ptrs intact
         return dummy.next
 
 

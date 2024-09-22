@@ -20,7 +20,7 @@ class Solution:
                 start_idx = curr_idx
                 while stack and stack[-1][1] > h:
                     old_idx, old_height = stack.pop()
-                    max_area = max(max_area, old_height * (curr_idx - old_idx))
+                    max_area = max(max_area, old_height * (curr_idx - old_idx)) 
                     start_idx = old_idx # till wherever the previous could be extended
                 stack.append((start_idx, h))
             if stack:

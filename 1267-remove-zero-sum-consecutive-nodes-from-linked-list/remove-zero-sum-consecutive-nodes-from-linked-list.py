@@ -6,48 +6,58 @@
 class Solution:
     def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
         
-        # 1,2,3,
+        dummyNode = ListNode(0)
+        dummyNode.next = head
 
-        arr = []
-        
+        # Flaw 2: What if head changes?
+        # Initialzie curr @ dummy
 
-        def getArray(head,arr):
-            curr = head
-            while curr:
-                arr.append(curr.val)
-                curr= curr.next
-            
-            return arr
-        
-        def subArray(arr):
-            n = len(arr)
-            for i in range(n):
-                curr_sum = arr[i]
-                for j in range(i+1, n):
-                    curr_sum+=arr[j]
-                    if curr_sum == 0:
-                        for erase in range(i,j+1):
-                            arr[erase]= 0
+        curr = dummyNode
 
-            return [ val for val in arr if val!=0]
+        hmap = {}
+        prefix_sum = 0
 
-        def createList(arr):
-            dummy = ListNode(-1)
-            curr = dummy
-            for val in arr:
-                if dummy.next is None:
-                    dummy.next = ListNode(val)
-                else:
-                    curr.next = ListNode(val)
-                curr = curr.next
-            return dummy.next
+        while curr:
+            prefix_sum += curr.val
+
+            if prefix_sum in hmap:
+                # We keep this start node.
+                # start+1 .. curr will be removed
+                #  1. Removed From Hmap
+                #  2. Removed from Linkedlist 
+                startNode = hmap[prefix_sum]
+
+                sub_curr = startNode.next
+
+                # delete startNode --> curr.node - 1  values from hmap
+                # we only traverse till curr - 1, as we never added curr in hmap
+                # prefix @ Curr = prefix @ StartNode
+                # It wil give key error or worse, delete prefix @startNode, which is valid
                 
+                # Flawed Approach 1 : what if its Single node to delete
+            
+                # while sub_curr and sub_curr.next!=curr:
+                #     sub_prefix_sum += sub_curr.val
 
-        
-        arr = getArray(head, [])
+                #     del hmap[sub_prefix_sum]
+                #     sub_curr = sub_curr.next
 
-        non_zero_arr = subArray(arr)
+                startNode = hmap[prefix_sum]
+                curr = startNode.next
+                
+                p = prefix_sum + curr.val
+                # del startNode.next --> curr -1 
+                # at curr = p = prefix_sum
+                while p != prefix_sum:
+                    del hmap[p]
+                    curr = curr.next
+                    p += curr.val
+           
+                startNode.next = curr.next
 
-        new_head = createList(non_zero_arr)
+            else:
+                hmap[prefix_sum] = curr 
+            
+            curr = curr.next
 
-        return new_head
+        return dummyNode.next

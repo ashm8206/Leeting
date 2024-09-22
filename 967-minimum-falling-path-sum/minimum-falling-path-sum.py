@@ -4,39 +4,44 @@ class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
         
         # BFS
-        # m = len(matrix)
-        # n = len(matrix[0])
+        m = len(matrix)
+        n = len(matrix[0])
 
-        # minFal = float("inf")
-        # queue = deque()
-        # hmap = defaultdict(lambda : 10**5)
-        # for j in range(n):
-        #     queue.append((0,j))
-        #     hmap[(0,j)] = matrix[0][j]
-       
+        minFal = float("inf")
+        queue = deque()
+        hmap = defaultdict(lambda : 10**5)
+        for j in range(n):
+            queue.append((0,j))
+            hmap[(0,j)] = matrix[0][j]
+        visited = set()
 
-        # while queue:
-        #     r, c = queue.popleft()
-        #     sumSoFar = hmap[(r,c)]
+        while queue:
+            r, c = queue.popleft()
+            sumSoFar = hmap[(r,c)]
             
         
-        #     for dx, dy in [(1,-1), (1,0),(1,1)]:
-        #         nr, nc = r + dx, c + dy
+            for dx, dy in [(1,-1), (1,0),(1,1)]:
+                nr, nc = r + dx, c + dy
 
-        #         if 0<=nr < m and 0 <= nc < n:
+                if 0<=nr < m and 0 <= nc < n:
                   
-        #             if matrix[nr][nc] + sumSoFar <= hmap[(nr,nc)]:
+                    if matrix[nr][nc] + sumSoFar <= hmap[(nr,nc)]:
 
-        #                 hmap[(nr, nc)] = matrix[nr][nc] + sumSoFar
-        #                 queue.append((nr,nc))
+                        hmap[(nr, nc)] = matrix[nr][nc] + sumSoFar
 
+                        #minFal = min(minFal, hmap[(nr, nc)])
+
+                    if (nr,nc) not in visited:
+                        queue.append((nr,nc))
+
+                    visited.add((nr,nc))
         
-        # for j in range(n):
+        for j in range(n):
             
-        #     minFal = min(minFal, hmap[(m-1,j)])
-        # return minFal 
+            minFal = min(minFal, hmap[(m-1,j)])
+        return minFal 
 
-        
+        # DP
         minFal = float("inf")
         m = len(matrix)
         n = len(matrix[0])

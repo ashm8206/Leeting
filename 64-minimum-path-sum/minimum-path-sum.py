@@ -7,10 +7,18 @@ class Solution:
 
         #optimized
 
-            
+        # Assume, Invalid cells have some large Num
+        
+        '''
+        [0][0] = minSum is its Value
+        [0][1..m] = minSum  is prefixsum
+        [1..n][0] = minSum  is prefixsum
+        '''
+        # Col starting [1..m] of First Row
         for  j in range(1,m):
             grid[0][j] += grid[0][j-1]
 
+        # Col starting [1..n] of col Row
         for  i in range(1,n):
             grid[i][0] += grid[i-1][0]
 

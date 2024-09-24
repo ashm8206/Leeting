@@ -4,7 +4,7 @@ class Solution:
         def getRunLen(rle_str):
             rle_str = deque(list(rle_str))
             stack = []
-
+            
             while rle_str:
                 var = rle_str.popleft()
                 if stack and stack[-1][0] == var:

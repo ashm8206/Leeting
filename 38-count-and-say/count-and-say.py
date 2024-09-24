@@ -3,20 +3,33 @@ class Solution:
 
         # Iterative
         def getRunLen(rle_str):
+
+            #  Method I
             # rle_str = deque(list(rle_str))
-            rle_str = list(rle_str)
+            # # rle_str = list(rle_str)
+            # stack = []
+            
+            # while rle_str:
+            #     var = rle_str.popleft()
+            #     # var = rle_str.pop(0)
+            #     if stack and stack[-1][0] == var:
+            #         stack[-1][1]+=1
+            #     else:
+            #         stack.append([var, 1])
+            # RLE = "".join( str(y) + x  for x, y in stack)
+
             stack = []
-            
-            while rle_str:
-                # var = rle_str.popleft()
-                var = rle_str.pop(0)
-                if stack and stack[-1][0] == var:
-                    stack[-1][1]+=1
+            n = len(rle_str)
+            cnt = 1
+            for i in range(0, n):
+                if i < n-1 and rle_str[i]==rle_str[i+1]:
+                    cnt+=1
                 else:
-                    stack.append([var, 1])
-            RLE = "".join( str(y) + x  for x, y in stack)
+                    stack.append(str(cnt))
+                    stack.append(rle_str[i])
+                    cnt = 1
             
-            return RLE
+            return "".join(stack)
 
         RLE = '1'
         while n > 1:

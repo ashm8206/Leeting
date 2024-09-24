@@ -19,9 +19,14 @@ class Solution:
 
         while curr.next!=head:
             if  curr.val <= curr.next.val:
+                # 3,|-4-| 5,  1. First casee
                 if curr.val <= insertVal and insertVal<=curr.next.val:
                     break
             else:
+                # curr.val > curr.next.val
+
+                # 3, 5,  6| 0 1. First casee
+
                 if curr.val <= insertVal or insertVal<=curr.next.val:
                     break
 

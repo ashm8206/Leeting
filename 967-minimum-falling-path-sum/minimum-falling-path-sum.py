@@ -60,3 +60,24 @@ class Solution:
         for j in range(n):
             minFal = min(minFal, matrix[m-1][j])
         return minFal
+
+
+        #  SIMPLE METHOD II
+        minFal = float("inf")
+        m = len(matrix)
+        n = len(matrix[0])
+
+        for i in range(1, m):
+            for j in range(n):
+                if j == 0:
+                    matrix[i][j] += min( matrix[i-1][j],  matrix[i-1][j+1])
+                
+                elif j==n-1:
+                    matrix[i][j] += min( matrix[i-1][j-1],  matrix[i-1][j])
+                
+                else:
+                    matrix[i][j] += min( matrix[i-1][j-1],  min(matrix[i-1][j],(matrix[i-1][j+1])))
+        
+        for j in range(n):
+            minFal = min(minFal, matrix[m-1][j])
+        return minFal

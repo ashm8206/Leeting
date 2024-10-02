@@ -1,22 +1,21 @@
 class Solution:
     def mincostTickets(self, days: List[int], costs: List[int]) -> int:
-        last_day = days[-1] 
-        days = set(days)
-        dp = [0 for _ in range(last_day+1)]
         
-        for i in range(1, last_day+1):
-            if i not in days:
-                dp[i] = dp[i-1]
-                continue
-            dp[i] = min(dp[i-1] + costs[0], 
-                       min(
-                           dp[max(i-7, 0)] + costs[1],
-                           dp[max(i-30, 0)] + costs[2]
-                          )
-                       )
-        return dp[-1]
-    
+        n = len(days)
+        dp = {}
+        def dfs(i):
+            if i == n:
+                return 0
+            if i in dp:
+                return dp[i]
+            
+            dp[i] = float("inf")
 
-        
+            for d, c in zip([1,7,30],costs):
+                j = i
+                while j < n and days[j] < days[i]+d:
+                    j+=1
+                dp[i] = min(dp[i], c+dfs(j)) 
+            return dp[i]
 
-
+        return dfs(0)

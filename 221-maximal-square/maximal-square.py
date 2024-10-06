@@ -9,7 +9,7 @@ class Solution:
         def helper(r,c):
 
             nonlocal maxSqSide
-            
+
             if r >= R or c >= C:
                 return 0
             
@@ -26,4 +26,18 @@ class Solution:
             return cache[(r,c)]
 
         helper(0,0) 
+
+        """dp = [ [0 for j in range(C)] for i in range(R)]
+        for r,c in cache.keys():
+            dp[r][c] = cache[(r,c)]
+        print(dp)
+        """
         return maxSqSide * maxSqSide
+
+        """
+        [1, 0, 1, 0, 0], 
+        [1, 0, 2, 2, 1], 
+        [1, 1, 1, 1, 1], 
+        [1, 0, 0, 1, 0]
+        """ 
+        #DP Result

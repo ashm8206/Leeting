@@ -8,10 +8,10 @@ class Solution:
 
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         
-        newHead = None
         
-        # if head is None or head.next is None:
-        #     return head
+        
+        if head is None or head.next is None:
+            return head
         # Iterative
         # prev, curr = None, head 
 
@@ -34,31 +34,34 @@ class Solution:
         # return prev
 
 
-        #Recursion
+        #Recursion Method I # Give New head
+
         # TakeYouForward https://www.youtube.com/watch?v=D2vI2DNJGd8&t=920s
-        # newHead = self.reverseList(head.next)
-        # front = head.next
-        # front.next = head
-        # head.next = None
+        newHead = self.reverseList(head.next)
+        last = head.next
+        last.next = head
+        head.next = None
 
-        # return newHead
-
-        def helper(head):
-            nonlocal newHead
-            if head is None or head.next is None:
-                if newHead is None:
-                    newHead = head
-                return head
-            
-            last = helper(head.next)
-            last.next = head
-            head.next = None
-            last = head
-
-            return last
-
-        helper(head)
         return newHead
+
+        # newHead = None
+        # Method II - Give the last value 
+        # def helper(head):
+        #     nonlocal newHead
+        #     if head is None or head.next is None:
+        #         if newHead is None:
+        #             newHead = head
+        #         return head
+            
+        #     last = helper(head.next)
+        #     last.next = head
+        #     head.next = None
+        #     last = head
+
+        #     return last
+
+        # helper(head)
+        # return newHead
 
 
         

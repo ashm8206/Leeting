@@ -33,7 +33,7 @@ class Solution:
                 prev = self.reverse(head,k)
                 head.next = self.reverseKGroup(curr, k)
                 return prev
-            else: # leave as is
+            else: # leave as is # Nodes < K
                 return head
             
 

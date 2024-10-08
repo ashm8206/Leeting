@@ -17,34 +17,39 @@ class DLinkedList:
     pop(node=None): remove the referenced node. 
                     If None is given, remove the one from tail, which is the least recently used.
                     
-    Both operation, apparently, are in O(1) complexity.
+    Both operation, are in O(1) complexity.
     """
     def __init__(self):
-        self._sentinel = Node(None, None) # dummy node
-        self._sentinel.next = self._sentinel.prev = self._sentinel
+        self.head = Node(-1, -1)
+        self.tail = Node(-1, -1)
+        self.head.next = self.tail
+        self.tail.prev = self.head
         self._size = 0
     
     def __len__(self):
         return self._size
     
     def append(self, node):
-        node.next = self._sentinel.next
-        node.prev = self._sentinel
-        node.next.prev = node
-        self._sentinel.next = node
+        # Add at head
+        node.next = self.tail
+        temp = self.tail.prev
+        self.tail.prev = node
+        temp.next = node 
+        node.prev = temp
         self._size += 1
     
     def pop(self, node=None):
+        # remove from tail
+
         if self._size == 0:
             return
         
         if not node:
-            node = self._sentinel.prev
+            node = self.head.next # get last node
 
         node.prev.next = node.next
         node.next.prev = node.prev
         self._size -= 1
-        
         return node
         
 class LFUCache:
@@ -74,12 +79,13 @@ class LFUCache:
         self._capacity = capacity
         
         self._node = dict() # key: Node, Dictionary of Nodes
-        self._freq = collections.defaultdict(DLinkedList) # Bucket Frequencncies and In Frequency as Key Implement Value as DLL
+
+        self._freq = collections.defaultdict(DLinkedList) 
+        # Bucket Frequency as defaultdict
+
         self._minfreq = 1  
         # keep Count of Minfreq, it is atleast 1
 
-        # if self._freq[minFreq] == 0 (no node)
-        # then add minfreq+=1  as the next one is the new Min frequency
         
         
     def _update(self, node):
@@ -106,10 +112,15 @@ class LFUCache:
         """
         freq = node.freq
         
-        self._freq[freq].pop(node)
+        self._freq[freq].pop(node) 
+        # pop from end
+
+        # update Min fre incase its small
         if self._minfreq == freq and not self._freq[freq]:
             self._minfreq += 1
         
+        # update node
+
         node.freq += 1
         freq = node.freq
         self._freq[freq].append(node)
@@ -127,6 +138,10 @@ class LFUCache:
         
         node = self._node[key]
         self._update(node)
+
+        # remove node from the freq bucket
+        # add to the old_freq + 1 bucket
+
         return node.val
 
     def put(self, key, value):
@@ -157,20 +172,26 @@ class LFUCache:
         if self._capacity == 0:
             return
         
-        if key in self._node:
+        if key in self._node:  # Existing key
             node = self._node[key]
             self._update(node)
             node.val = value
-        else:
+        else: # adding new key
+
+            # evict head of monfreq bucket
+            # reduce size
+
             if self._size == self._capacity:
-                node = self._freq[self._minfreq].pop()
+                node = self._freq[self._minfreq].pop() 
                 del self._node[node.key]
                 self._size -= 1
                 
             node = Node(key, value)
             self._node[key] = node
+            
             self._freq[1].append(node)
-            self._minfreq = 1
+            self._minfreq = 1  # new value, is always min freq 1
+        
             self._size += 1
 
 # Your LFUCache object will be instantiated and called as such:

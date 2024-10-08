@@ -24,8 +24,8 @@ class LRUCache:
             return -1
 
         node = self.dic[key]
-        self.remove(node)
-        self.add(node)
+        self.remove(node) # Remove where it is 
+        self.add(node) # Move to to the end
         return node.val
 
     def put(self, key: int, value: int) -> None:
@@ -34,22 +34,22 @@ class LRUCache:
             self.remove(old_node)
 
         node = ListNode(key, value)
-        self.dic[key] = node
-        self.add(node)
+        self.dic[key] = node # Add Key, to Dictionary of keys/Nodes
+        self.add(node) # add Node
 
         if len(self.dic) > self.capacity:
             node_to_delete = self.head.next
             self.remove(node_to_delete)
             del self.dic[node_to_delete.key]
 
-    def add(self, node):
+    def add(self, node): # add at the End
         previous_end = self.tail.prev
         previous_end.next = node
         node.prev = previous_end
         node.next = self.tail
         self.tail.prev = node
 
-    def remove(self, node):
+    def remove(self, node): # Remove Node wherever it is
         node.prev.next = node.next
         node.next.prev = node.prev
             

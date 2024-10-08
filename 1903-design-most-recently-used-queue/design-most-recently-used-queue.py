@@ -40,13 +40,13 @@ class MRUQueue(object):
 
         curr = self.dummyStart.next
         k = k - 1
-        print("k : {0}".format(k))
+        # print("k : {0}".format(k))
        
         # Get 
         while k:
             curr = curr.next  # 1
             k-=1
-        print("--")
+      
         # Detach
         next_node = curr.next
         prev_node = curr.prev
@@ -64,8 +64,6 @@ class MRUQueue(object):
         curr.prev = lastNode
         curr.next = self.dummyEnd
         self.dummyEnd.prev = curr
-
-        # print(lastNode.val, lastNode.next.val, curr.next.val, curr.prev.val, self.dummyEnd.prev.val)
 
         return curr.val
 

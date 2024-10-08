@@ -4,8 +4,9 @@ class Node:
     def __init__(self, key, val):
         self.key = key
         self.val = val
-        self.freq = 1
-        self.prev = self.next = None
+        self.freq = 1 
+        self.prev = None
+        self.next = None
 
 class DLinkedList:
     """ An implementation of doubly linked list.
@@ -72,9 +73,10 @@ class LFUCache:
         self._size = 0
         self._capacity = capacity
         
-        self._node = dict() # key: Node
-        self._freq = collections.defaultdict(DLinkedList)
-        self._minfreq = 0
+        self._node = dict() # key: Node, Dictionary of Nodes
+        self._freq = collections.defaultdict(DLinkedList) # Bucket Frequencncies and In Frequency as Key Implement Value as DLL
+        self._minfreq = 1  
+        # keep Count of Minfreq, it is atleast
         
         
     def _update(self, node):

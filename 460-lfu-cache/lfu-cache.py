@@ -76,7 +76,10 @@ class LFUCache:
         self._node = dict() # key: Node, Dictionary of Nodes
         self._freq = collections.defaultdict(DLinkedList) # Bucket Frequencncies and In Frequency as Key Implement Value as DLL
         self._minfreq = 1  
-        # keep Count of Minfreq, it is atleast
+        # keep Count of Minfreq, it is atleast 1
+
+        # if self._freq[minFreq] == 0 (no node)
+        # then add minfreq+=1  as the next one is the new Min frequency
         
         
     def _update(self, node):

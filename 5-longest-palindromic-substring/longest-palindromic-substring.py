@@ -17,6 +17,8 @@ class Solution:
                 if dp[i][j] > max_length:
                     # print(i, dp[i][j], n, j)
                     if i - dp[i][j] == n - j:
+                    
                         max_length = dp[i][j]
                         max_end = i
+                        # print(max_length, max_end)
         return s[max_end - max_length:max_end]

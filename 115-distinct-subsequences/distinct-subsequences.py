@@ -9,7 +9,7 @@ class Solution:
 
         def helper(i, j):
 
-            if i==m or j==n:
+            if i==m or j==n or  m - i < n - j:
                 return 1 if j==n else 0
 
             if (i,j) in memo:

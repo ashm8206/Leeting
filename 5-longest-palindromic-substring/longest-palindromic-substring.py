@@ -15,7 +15,8 @@ class Solution:
                     dp[i][j] = 1 + dp[i - 1][j - 1]
                 # Code to check i and j
                 if dp[i][j] > max_length:
-                    if i - dp[i][j] == len(s) - j:
+                    # print(i, dp[i][j], n, j)
+                    if i - dp[i][j] == n - j:
                         max_length = dp[i][j]
                         max_end = i
         return s[max_end - max_length:max_end]

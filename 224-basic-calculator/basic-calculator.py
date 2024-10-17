@@ -32,10 +32,8 @@ class Solution:
                 #  But we must evaluate the previous operation first
                 # This is what the if/elif is about
 
-                if operation == '+':
-                    result += last_num
-                    last_num = cur_num
-                elif operation == '-':
+               
+                if operation == '-':
                     result += last_num
                     last_num = -cur_num
                 elif operation == '*':
@@ -45,11 +43,14 @@ class Solution:
                     #  Store result in op1 the next time we see an operator (+ or -)
                     # we dont add these to theresult just yet, as there could be another string of operations '*' or '/'following these
                     last_num *= cur_num
-                else:
+                elif operation =='/':
                     # operation is '/'
 
                     last_num = int(last_num / cur_num)
                     #  Int makes sure the answer tends towards 0
+                else:
+                    result += last_num
+                    last_num = cur_num
 
                 if c == ')':
                     #  yes now we have curr_num == Result + Last_num  whatever was in ()
@@ -62,12 +63,19 @@ class Solution:
                     last_num = stack.pop()
                     result = stack.pop()
                 else:
-                    #  if it is not ')' 
-                    # we have seen a new operation
-                    # so we pdate it and reset the curr_num
+                    #  we are  havent seen  ')'
+                    # as in Basic cal II
+                    # 
+                    # operation = curr_operation
+                    # result curr_num = 0
                     operation = c
                     cur_num = 0
-        return result + last_num
+
+        # last number is the absolute last number seen, 
+        # we need to add it to the result
+        return result + last_num 
+
+
 
 # Method II - Recursion
 

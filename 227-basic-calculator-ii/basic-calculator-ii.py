@@ -8,7 +8,7 @@ class Solution:
         last_num = 0
         result = 0
         s += '+'
-        for i, ch in enumerate(s):
+        for ch in s:
     
             if ch.isdigit():
                 curr_num = curr_num + ch

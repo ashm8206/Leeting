@@ -3,30 +3,28 @@ class MyStack:
     # Neetcode with Top enhacement
     # https://www.youtube.com/watch?v=rW4vm0-DLYc
     def __init__(self):
-        self.top_val = 0
+        # self.top_val = 0
         self.queue = deque()
 
     def push(self, x: int) -> None:
-        self.queue.append(x)
-        self.top_val = x
+        self.queue.appendleft(x)
+
+        size = len(self.queue)
+        while size > 1:
+            self.queue.appendleft(self.queue.pop())
+
+            size -=1
+    
+        # self.top_val = x
 
     def pop(self) -> int:
-        size = len(self.queue)
-        while size > 1: # Atleast 1 element 
-            
-            val = self.queue.popleft() # pop front
-            if size == 2:
-                # adjust when you pop
-                self.top_val = val
-
-            self.queue.append(val)
-            size -=1 
-        return self.queue.popleft() # return the Topmost one
+        return self.queue.pop() # return the Topmost one
 
 
     def top(self) -> int:
 
-        return self.top_val
+        return self.queue[-1] # return queue front
+        # return self.top_val
         
 
     def empty(self) -> bool:

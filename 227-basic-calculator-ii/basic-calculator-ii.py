@@ -42,11 +42,11 @@ class Solution:
                 curr_num = ''
                 operation = ch
         
-        result += last_num
+       
         # while stack:
         #     result += stack.pop()
 
-        return result
+        return result + last_num
         
 
 

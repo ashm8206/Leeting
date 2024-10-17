@@ -1,55 +1,79 @@
 class Solution:
     def calculate(self, s: str) -> int:
         stack = []
-        result = last_num = cur_num = 0
-        operation = '+'
-        s += '+'
-        for i, c in enumerate(s):
 
+        result = 0
+        last_num = cur_num = 0
+
+        operation = '+'
+        s += '+' 
+        # we evaluate last operation after we see the next operation
+        #  last vhar might be a ')' or number each will be handled sepratly
+        # hence we need to add another '+' to explicitly add answers
+
+        for c in s:
             if c.isdigit():
                 cur_num = cur_num * 10 + int(c)
+            
 
             if c == '(':
-                # Append Result, Last_num, operation
-                
                 stack.append(result)
                 stack.append(last_num)
                 stack.append(operation)
-                # Initialize values to be Inside the '('
+
+                # initialize the result, last_name and operation
+
                 result = last_num = 0
                 operation = '+'
+                # the curr_num will be the result from inside the '(  )' 
+                
             elif c in '+-*/)':
-                # print(c, cur_num, last_num, result)
-                if operation == '+':
-                    
-                    result += last_num
-                    last_num = cur_num
-                    
-                elif operation == '-':
+                # we have encountered a new operation, 
+                #  But we must evaluate the previous operation first
+                # This is what the if/elif is about
+
+               
+                if operation == '-':
                     result += last_num
                     last_num = -cur_num
                 elif operation == '*':
-                    last_num = last_num * cur_num
-                else:
-                    last_num = int(last_num / cur_num)
-                
-                # New Operation or ')'
-                if c == ')':
-                    # mini result, of all operation in ()
-                    # curr_num = result + last_num
-                    cur_num = result + last_num
+                    # we wait before adding these 
+                    # We just evalute based on curr_num == op2
+                    # last_num = op1 
+                    #  Store result in op1 the next time we see an operator (+ or -)
+                    # we dont add these to theresult just yet, as there could be another string of operations '*' or '/'following these
+                    last_num *= cur_num
+                elif operation =='/':
+                    # operation is '/'
 
-                    # pop the result, last_num and  operation before (
+                    last_num = int(last_num / cur_num)
+                    #  Int makes sure the answer tends towards 0
+                else:
+                    result += last_num
+                    last_num = cur_num
+
+                if c == ')':
+                    #  yes now we have curr_num == Result + Last_num  whatever was in ()
+                    #  We pop the last operation before '('
+                    #  We pop result, last_num and previous operation
+
+                    #  The result after ')' will be evaluated when next operation is seen'
+                    cur_num = result + last_num
                     operation = stack.pop()
                     last_num = stack.pop()
                     result = stack.pop()
                 else:
+                    #  we are  havent seen  ')'
+                    # as in Basic cal II
+                    # 
+                    # operation = curr_operation
+                    # result curr_num = 0
                     operation = c
                     cur_num = 0
-                
 
-        return result + last_num
-
+        # last number is the absolute last number seen, 
+        # we need to add it to the result
+        return result + last_num 
 # Method II - recursion
 
 # class Solution:

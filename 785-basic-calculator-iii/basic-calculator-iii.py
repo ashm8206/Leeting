@@ -5,7 +5,7 @@ class Solution:
         result = 0
         last_num = cur_num = 0
 
-        operation = '+'
+        prev_operation = '+'
         s += '+' 
         # we evaluate last operation after we see the next operation
         #  last vhar might be a ')' or number each will be handled sepratly
@@ -19,12 +19,12 @@ class Solution:
             if c == '(':
                 stack.append(result)
                 stack.append(last_num)
-                stack.append(operation)
+                stack.append(prev_operation)
 
                 # initialize the result, last_name and operation
 
                 result = last_num = 0
-                operation = '+'
+                prev_operation = '+'
                 # the curr_num will be the result from inside the '(  )' 
                 
             elif c in '+-*/)':
@@ -33,17 +33,17 @@ class Solution:
                 # This is what the if/elif is about
 
                
-                if operation == '-':
+                if prev_operation == '-':
                     result += last_num
                     last_num = -cur_num
-                elif operation == '*':
+                elif prev_operation == '*':
                     # we wait before adding these 
                     # We just evalute based on curr_num == op2
                     # last_num = op1 
                     #  Store result in op1 the next time we see an operator (+ or -)
                     # we dont add these to theresult just yet, as there could be another string of operations '*' or '/'following these
                     last_num *= cur_num
-                elif operation =='/':
+                elif prev_operation =='/':
                     # operation is '/'
 
                     last_num = int(last_num / cur_num)
@@ -59,7 +59,7 @@ class Solution:
 
                     #  The result after ')' will be evaluated when next operation is seen'
                     cur_num = result + last_num
-                    operation = stack.pop()
+                    prev_operation = stack.pop()
                     last_num = stack.pop()
                     result = stack.pop()
                 else:
@@ -68,7 +68,7 @@ class Solution:
                     # 
                     # operation = curr_operation
                     # result curr_num = 0
-                    operation = c
+                    prev_operation = c
                     cur_num = 0
 
         # last number is the absolute last number seen, 

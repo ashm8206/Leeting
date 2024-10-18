@@ -1,34 +1,40 @@
 class Solution:
     def getSumAbsoluteDifferences(self, nums: List[int]) -> List[int]:
-        # 2, 3, 5
-        # 10, 8, 5, 0
-        #     0, 2, 5, 10 
-        #  10-0-2 --> 8, 0
-        #  10-2-3 --> 5, 2
-        #  10 - 5-5  --> 0, 5
-
-
-
+        
         n = len(nums)
-        prefixSum = [0]*(n+1)
-        suffixSum = [0]*(n+1)
+        # prefixSum = [0]*(n+1)
+        # suffixSum = [0]*(n+1)
 
-        for i in range(1, n+1):
-            prefixSum[i] = prefixSum[i-1] + nums[i-1]
+        # for i in range(1, n+1):
+        #     prefixSum[i] = prefixSum[i-1] + nums[i-1]
 
-            suffixSum[n-i] = suffixSum[n-i+1] + nums[n-i]
-        # # print(prefixSum)
-        # # print(suffixSum)
+        #     suffixSum[n-i] = suffixSum[n-i+1] + nums[n-i]
+        
+        # result = []
+        # for i in range(n):
+        #     res = (i*nums[i] - prefixSum[i]) + (suffixSum[i] - nums[i]*(n-i))
+        #     # print(res)
+        #     result.append(res)
+        # return result
+
+        total = sum(nums)
+        left_sum = 0
+        right_sum = total
+
         result = []
-        for i in range(n):
-            res = (i*nums[i] - prefixSum[i]) + (suffixSum[i] - nums[i]*(n-i))
-            # print(res)
-            result.append(res)
+        for i in range(0, n):
+            right_sum -= nums[i]
+            index_sum = abs(left_sum  - nums[i]*i) + abs(right_sum  - nums[i]*(n-i-1))
+            left_sum+= nums[i]
+            result.append(index_sum)
+            # print(index_sum)
+            # print(left_sum, right_sum)
+        # [2,5,10]
+        # [10,8,5]
         return result
         
-        # O(N)
-        # O(N)
-
-        # can you calculate prefix sum on the flyy??
+        
+       
+       
 
         

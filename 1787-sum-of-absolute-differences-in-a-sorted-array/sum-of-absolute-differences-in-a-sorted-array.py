@@ -24,13 +24,13 @@ class Solution:
         result = []
         for i in range(0, n):
             right_sum -= nums[i]
+            
             index_sum = abs(left_sum  - nums[i]*i) + abs(right_sum  - nums[i]*(n-i-1))
             left_sum+= nums[i]
             result.append(index_sum)
-            # print(index_sum)
-            # print(left_sum, right_sum)
+         
         # [2,5,10]
-        # [10,8,5]
+        # [8,5,0]
         return result
         
         

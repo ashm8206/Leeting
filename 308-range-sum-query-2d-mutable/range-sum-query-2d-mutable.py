@@ -18,10 +18,10 @@ class NumMatrix:
         
 
     def update(self, row: int, col: int, val: int) -> None:
-        if row < 0 or row>= len(self.matrix):
-            return 
-        if col < 0 or col>= len(self.matrix[0]):
-            return 
+        # if row < 0 or row>= len(self.matrix):
+        #     return 
+        # if col < 0 or col>= len(self.matrix[0]):
+        #     return 
         self.matrix[row][col]=val
         #update prefix sum
         self.row_prefix_sum[row] = self.create_prefix_sum(self.matrix[row])

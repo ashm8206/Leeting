@@ -1,48 +1,36 @@
 class NumMatrix:
 
-    # https://www.youtube.com/watch?v=KE8MQuwE2yA
-
-    # def __init__(self, matrix: List[List[int]]):
-    #     self.prefix_mat = [[0]*len(matrix[0]) for _ in range(len(matrix))]
-
-    #     for r in range(len(matrix)):
-    #         for c in range(len(matrix[0])):
-    #             if c == 0:
-    #                 self.prefix_mat[r][c] = matrix[r][c]
-    #             else:
-    #                 self.prefix_mat[r][c] = self.prefix_mat[r][c-1] + matrix[r][c]
-        
-    #     # print(self.prefix_mat)
-
-    # def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
-  
-    #     result = 0
-    #     for r in range(row1, row2 + 1):
-    #         if col1 > 0:
-    #             result += self.prefix_mat[r][col2] - self.prefix_mat[r][col1-1]
-    #         else:
-    #             result+= self.prefix_mat[r][col2] 
-    #     return result
-
     def __init__(self, matrix: List[List[int]]):
 
         ROWS, COLS = len(matrix), len(matrix[0])
-
-        self.prefix_mat = [[0]*(COLS+1) for _ in range(ROWS+1)]
         
-        for r  in range(ROWS):
+        
+
+        self.prefix_mat = [[0 for _ in range(COLS)] for _ in range(ROWS)]
+        
+        for r in range(ROWS):
             for c in range(COLS):
-                self.prefix_mat[r+1][c+1] = self.prefix_mat[r][c+1] + self.prefix_mat[r+1][c] - self.prefix_mat[r][c] + matrix[r][c]
+                above = 0 if r == 0 else self.prefix_mat[r-1][c]
+                left =  0 if c == 0 else self.prefix_mat[r][c-1]
+                topRight = 0 if (c==0 or r==0) else self.prefix_mat[r-1][c-1]       
+                
+                self.prefix_mat[r][c] = above + left - topRight + matrix[r][c]
+              
+        # self.prefix_mat = [[0]*(COLS+1) for _ in range(ROWS+1)]
+        
+        # for r  in range(ROWS):
+        #     for c in range(COLS):
+        #         self.prefix_mat[r+1][c+1] = self.prefix_mat[r][c+1] + self.prefix_mat[r+1][c] - self.prefix_mat[r][c] + matrix[r][c]
         
         # print(self.prefix_mat)
 
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
-        row1, col1, row2, col2 = row1+1, col1+1, row2+1, col2+1
+        row1, col1, row2, col2 = row1, col1, row2, col2
 
         bottomRight = self.prefix_mat[row2][col2]
-        above = self.prefix_mat[row1-1][col2]
-        left = self.prefix_mat[row2][col1-1]
-        topRight = self.prefix_mat[row1-1][col1-1]
+        above = self.prefix_mat[row1-1][col2] if row1 > 0 else 0
+        left = self.prefix_mat[row2][col1-1] if col1 > 0 else 0
+        topRight = self.prefix_mat[row1-1][col1-1] if row1 > 0 and col1 > 0 else 0
 
         return bottomRight - above -left + topRight
 

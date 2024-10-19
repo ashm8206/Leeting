@@ -1,11 +1,14 @@
 class NumMatrix:
 
     def create_prefix_sum(self,row):
-        prefix_sum = []
-        sum = 0
-        for val in row:
-            sum += val
-            prefix_sum.append(sum)
+        n = len(row)
+        prefix_sum = [0]*(n)
+       
+        for i in range(n):
+            if i > 0:
+                prefix_sum[i] = prefix_sum[i-1] + row[i]
+            else:
+                prefix_sum[i] =  row[i]
         return prefix_sum
         
     def __init__(self, matrix: List[List[int]]):
@@ -18,27 +21,22 @@ class NumMatrix:
         
 
     def update(self, row: int, col: int, val: int) -> None:
-        # if row < 0 or row>= len(self.matrix):
-        #     return 
-        # if col < 0 or col>= len(self.matrix[0]):
-        #     return 
+
         self.matrix[row][col]=val
-        #update prefix sum
         self.row_prefix_sum[row] = self.create_prefix_sum(self.matrix[row])
         
 
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
         # iterate throught row1 to row2
-        sum = 0 
+        region_sum = 0 
         for r in range(row1, row2+1):
-        # calculate prefix[col2]-prefix[col1] (this sum)
 
             if col1==0:
-                sum += self.row_prefix_sum[r][col2]
+                region_sum += self.row_prefix_sum[r][col2]
             else:
-                sum += self.row_prefix_sum[r][col2] - self.row_prefix_sum[r][col1-1]
+                region_sum += self.row_prefix_sum[r][col2] - self.row_prefix_sum[r][col1-1]
         
-        return sum
+        return region_sum
         
 
 

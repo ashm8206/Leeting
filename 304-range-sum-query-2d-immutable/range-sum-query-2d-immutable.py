@@ -15,14 +15,6 @@ class NumMatrix:
                 topRight = 0 if (c==0 or r==0) else self.prefix_mat[r-1][c-1]       
                 
                 self.prefix_mat[r][c] = above + left - topRight + matrix[r][c]
-              
-        # self.prefix_mat = [[0]*(COLS+1) for _ in range(ROWS+1)]
-        
-        # for r  in range(ROWS):
-        #     for c in range(COLS):
-        #         self.prefix_mat[r+1][c+1] = self.prefix_mat[r][c+1] + self.prefix_mat[r+1][c] - self.prefix_mat[r][c] + matrix[r][c]
-        
-        # print(self.prefix_mat)
 
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
         row1, col1, row2, col2 = row1, col1, row2, col2

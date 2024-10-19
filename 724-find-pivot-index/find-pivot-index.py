@@ -3,8 +3,8 @@ class Solution:
 
         n = len(nums)
 
-        if n == 1:
-            return 0
+        # if n == 1:
+        #     return 0
 
         left = 0
         total = sum(nums)

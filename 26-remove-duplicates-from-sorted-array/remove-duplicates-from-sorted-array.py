@@ -16,17 +16,19 @@ class Solution:
         #         nums[insertIndex] = nums[reader]
         #         insertIndex+=1
         # return insertIndex
+
+        insertIndex = 0
+        n = len(nums)
+        for reader in range(1,n):
+            if nums[reader]!= nums[insertIndex]:
+                insertIndex+=1
+                nums[insertIndex] = nums[reader]
+                
+        return insertIndex + 1
         
         
         # that is the number of unique elements as array is Zero Indexed
         
-        res = 1
-        reader = 0
-        for i in range(1,len(nums)):
-            if nums[reader]!= nums[i]:
-                nums[res]= nums[i]
-                reader+=1
-                res+=1
-        return res
+       
         
             

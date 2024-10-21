@@ -13,7 +13,7 @@ class Solution:
         #  They may contain Zeroes if there were indeed Zeroes in the array
         #  If there were no zeros, they will never show up
       
-        lastZeroFoundAt = 0
+        lastZeroFoundAt = 0 # its not strictly a zero.
         for fast in range(n): # reader Pointer
 
             if nums[fast]!=0:

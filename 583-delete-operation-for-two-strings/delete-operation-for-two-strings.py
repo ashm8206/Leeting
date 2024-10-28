@@ -4,7 +4,8 @@ class Solution:
         m = len(word1)
         n = len(word2)
 
-        memo = [ [-1 for j in range(n+1)] for i in range(m+1)]
+        memo = [ [0 for j in range(n+1)] for i in range(m+1)]
+        
         for i in range(m+1):
             memo[i][0] = i
         

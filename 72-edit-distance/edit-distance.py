@@ -61,11 +61,13 @@ class Solution:
         m = len(word1)
         n = len(word2)
 
-        memo = [ [-1 for j in range(n+1)] for i in range(m+1)]
+        memo = [ [0 for j in range(n+1)] for i in range(m+1)]
         for i in range(m+1):
+            # empty and string uptil this index
             memo[i][0] = i
         
         for j in range(n+1):
+            # empty and string uptil this index
             memo[0][j] = j
 
         for i in range(1, m+1):
@@ -75,3 +77,11 @@ class Solution:
                 else:
                     memo[i][j] = 1 + min(memo[i-1][j], memo[i][j-1], memo[i-1][j-1])
         return memo[m][n]
+
+        # Word1 to Word2
+        # i -> Word1
+        # j -> Word2
+        # Insert Char in Word1: 1 + memo[i][j-1] # assume we inserted a char
+        # Delete Char in Word2: # : 1 + memo[i-1][j]
+        # Replace char 1 + word[i-1][j-1] 
+        # word1[i-1]!=word2[j-1], then their cost  + 1 for the replacement

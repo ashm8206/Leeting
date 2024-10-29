@@ -40,19 +40,26 @@ class Solution:
                 
                 nums[twoPtr],nums[runner] = nums[runner], nums[twoPtr]
                 twoPtr -=1
+                # runner+=1
+
+                # Dont move runner by 1 
+                # As what is swapped might be zero,
+                # which has to keep our invariant
+                # 
+                #  # <-- zeroPtr : 0
+                # twoPtr ---> : 2
+
+                # zeroPtr will not be 0, and not 2 as 2 is swapped, so it will point to starting of 1
+                # twoPtr could be pointing at anything
 
             else:
+                # encounters 1 so increment.
                 runner +=1
 
         return nums
 
 
-        # [2,1,2]
-        # [2,1,2]
 
-        # [0,0 slowptr, .....,twoPtr .....]
-        # [2,0,1]
-        # [1,0,2]
 
             
 

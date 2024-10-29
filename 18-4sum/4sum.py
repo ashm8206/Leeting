@@ -45,8 +45,6 @@ class Solution:
                     hi -= 1
                     while lo < hi and nums[lo] == nums[lo - 1]:
                         lo += 1
-                    # while hi > lo and hi+1 < len(nums)-1 and nums[hi] == nums[hi + 1]:
-                    #     hi -= 1
 
             return res
 

@@ -9,7 +9,7 @@ class Solution:
             cnt_one += data[right]
             # right += 1
             # maintain the length of the window to ones
-            if right - left + 1 > ones:
+            while right - left + 1 > ones:
                 # updating the number of 1's by removing the oldest element
                 cnt_one -= data[left]
                 left += 1

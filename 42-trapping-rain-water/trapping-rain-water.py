@@ -32,18 +32,12 @@ class Solution:
 
         maxLeft[0] = height[0]
         maxRight[n-1] = height[n-1]
-        
-        # maxLVal = 0 
-        # maxRVal = 0 
 
         for i in range(1,n):
-            # maxLVal = max(maxLVal,height[i])
-            # maxLeft[i] = maxLVal
             maxLeft[i] = max(maxLeft[i-1], height[i])
             
         for j in range(n-2, -1,-1):
-            # maxRVal = max(maxRVal,height[j])
-            # maxRight[j] = maxRVal
+       
             maxRight[j] = max(maxRight[j+1], height[j])
 
         for i in range(n):
@@ -55,24 +49,19 @@ class Solution:
         
         # Two Ptr O(N), O(1) 
 
-        # left = 0
-        # right = n - 1     
-
-        # maxLeft = height[left]
-        # maxRight = height[right]
-
-        # while left < right:
-        #     if maxLeft < maxRight:
-        #         left+=1 # cant store at edges, so increment first
-
-        #         maxLeft = max(height[left],maxLeft) 
-        #         ans+= maxLeft - height[left]
-        #     else:
-        #         right-=1
-        #         maxRight = max(height[right],maxRight) 
-        #         ans+= maxRight - height[right]
-             
-        # return ans
+        left, right = 0, len(height) - 1
+        ans = 0
+        left_max, right_max = 0, 0
+        while left < right:
+            if height[left] < height[right]:
+                left_max = max(left_max, height[left])
+                ans += left_max - height[left]
+                left += 1
+            else:
+                right_max = max(right_max, height[right])
+                ans += right_max - height[right]
+                right -= 1
+        return ans
 
 
 

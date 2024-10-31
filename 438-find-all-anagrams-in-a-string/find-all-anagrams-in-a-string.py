@@ -26,7 +26,7 @@ class Solution:
 
 
             if p_count == s_count:
-                res.append(i-len_p+1)
+                res.append(i-len_p+1) # start index i-k+1
         return res
 
             

@@ -10,8 +10,10 @@ class Solution:
             diff1 = num-k
             diff2 = num+k
 
+            #  store min of Pair
+            #  so if anytime, there a pair with seen minmum, it is not double counted
             if diff1 in hmap:
-                unique_pairs.add(min(diff1,num))
+                unique_pairs.add(min(diff1,num)) 
             
             if diff2 in hmap:
                 unique_pairs.add(min(diff2,num))

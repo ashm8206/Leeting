@@ -47,6 +47,7 @@ class Solution:
             s_count[s[R]]+=1
             if s_count[s[R]] == t_count[s[R]]:
                 # increase only when counts match, not when count is greater
+                # greater doesnt help us get minmuz window substring
 
                 have+=1
             
@@ -61,6 +62,8 @@ class Solution:
             
                 if s[L] in t_count and s_count[s[L]] < t_count[s[L]]:
                     have-=1
+                    # will cause to break
+                    
                 L = L+1
 
         return ans

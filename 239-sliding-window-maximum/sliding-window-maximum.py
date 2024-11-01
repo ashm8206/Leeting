@@ -15,34 +15,17 @@ class Solution:
         #     r+=1
         # return res
 
-        # dq = deque()
-        # res =[]
-        # n = len(nums)
-
-        # for i in range(n):
-        #     if dq and dq[0] <= i-k: # Index - K --> clear out boundary
-        #         # 4-3 = 1 
-        #         # win ending at 2, 3, 4, 
-        #         # discard if index <=1
-        #         dq.popleft()
-            
-        #     while dq and nums[i] > nums[dq[-1]]:
-        #         # new number is greater
-        #         dq.pop()
-            
-        #     dq.append(i)
-        #     res.append(nums[dq[0]])
         
-        # # discard 1st K values.
-        # return res[k-1:]
-
+        # 
         n = len(nums)
         dq = deque()
         res = []
         for i in range(n):
+
             if dq and dq[0] == i-k:
                 dq.popleft()
 
+            # Monotonically decreasing queue
             while dq and nums[i] > nums[dq[-1]]:
                 # Largest, then next largest
                 dq.pop()

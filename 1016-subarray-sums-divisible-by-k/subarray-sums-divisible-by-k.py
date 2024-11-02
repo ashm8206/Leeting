@@ -3,18 +3,35 @@ class Solution:
         n = len(nums)
         res = 0
 
+        # curr_sum = 0 %k  --> 0
+
         hmap = {0: 1} # hmap of prefix sum seen so sofar, with their counts
-        curr_sum = 0
+       
+        remainder = 0
         
+        # 3%2 : mod 1
+        # (3+4)%2 = 1
+        # (1+4)%2 = 1
+        curr_sum = 0
         for i in range(n):
-            curr_sum = (curr_sum + nums[i]) % k
+            # remainder = (remainder + nums[i]) % k
             
+            # key = curr_sum % k
+
+            curr_sum +=nums[i]
+            remainder = curr_sum % k
+
             # No need for Difff
             # As
             # prefixSum[i] % k == prefixSum[j] % k
+            #  r1 = r0
 
-            res += hmap.get(curr_sum,0) # number of times it occured before
+            res += hmap.get(remainder,0) # number of times it occured before
             
-            hmap[curr_sum] = hmap.get(curr_sum, 0) + 1
+            hmap[remainder] = hmap.get(remainder, 0) + 1
 
         return res
+
+
+       
+        

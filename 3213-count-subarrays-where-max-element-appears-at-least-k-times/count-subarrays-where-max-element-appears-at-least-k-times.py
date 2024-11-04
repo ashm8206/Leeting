@@ -23,7 +23,7 @@ class Solution:
                 
             # L is contain the Last index + 1 point where the cndition was valid
             # All subarray arrays till L (inclusive) can be starting index for subrray till now
-            
+            # print(L, R)
             ans += L
         return ans
 

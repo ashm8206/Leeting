@@ -14,13 +14,17 @@ class Solution:
             if nums[R] == maxElement:
                 max_cnt+=1
             
-            while max_cnt == k:
+            while max_cnt >= k:
+
+              
                 if nums[L] == maxElement:
                     max_cnt -=1
                 L = L + 1 # valid window 
-            # add the last index where it was still valid + 1
-            # to get total number of subarray ending at that last valid index
-            ans+= L 
+                
+            # L is contain the Last index + 1 point where the cndition was valid
+            # All subarray arrays till L (inclusive) can be starting index for subrray till now
+            
+            ans += L
         return ans
 
         # method II
@@ -34,6 +38,8 @@ class Solution:
         #     freq = len(list_of_max_element_idx)
 
         #     if freq >= k:
+
+        #         # find the Max Index from the right which has atleast K Elements
         #         ans += list_of_max_element_idx[-k] + 1
         #         # counts the len
         # return ans

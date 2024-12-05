@@ -19,12 +19,9 @@ class Solution(object):
 
             next = ord(str1[i])-ord("a") + 1
 
-            if str1[i]!=str2[j] and chr(ord("a")+(next%26))!= str2[j]:
-                i+=1
-            else: 
-                i+=1
+            if str1[i]==str2[j] or chr(ord("a")+(next%26))== str2[j]:
                 j+=1
-                
+            i+=1      
         return j==N
 
            

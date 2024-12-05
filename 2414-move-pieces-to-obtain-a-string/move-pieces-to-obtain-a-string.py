@@ -26,10 +26,22 @@ class Solution(object):
             
             
             # if one exahusts, both have to exhaust
+
+            # why? 
+            #  Each iteration we are matching every no-blank pair
+
+            # if there are more L / R in one string, 
+            # One will exhaust before the other
+
+            #  if startL=targetL and startR=targetR
+            #  even in case of All blanks, i.e 0 Ls and Rs
+            # "__" == "__" They will exhaust together!!
+            
             if start_idx == n or target_idx==n:
+                # print(start_idx, target_idx)
                 return (start_idx==n and target_idx==n)
-            # "_L__R__R_L" and "L______RR_"
-            #  this can happen due to unequal number of R and L
+         
+            
 
             # check is positions are valid and if the chars match
 

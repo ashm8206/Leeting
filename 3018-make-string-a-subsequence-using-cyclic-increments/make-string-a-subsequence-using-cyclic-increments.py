@@ -16,18 +16,15 @@ class Solution(object):
         j = 0
 
         while i < M and j < N:
-            
-            if str1[i]==str2[j]: 
+
+            next = ord(str1[i])-ord("a") + 1
+
+            if str1[i]!=str2[j] and chr(ord("a")+(next%26))!= str2[j]:
+                i+=1
+            else: 
                 i+=1
                 j+=1
-            else: 
-                next = ord(str1[i])-ord("a") + 1
-
-                if chr(ord("a")+(next%26))== str2[j]:
-                    i+=1
-                    j+=1
-                else:
-                    i+=1
+                
         return j==N
 
            

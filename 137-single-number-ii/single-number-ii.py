@@ -26,18 +26,21 @@ class Solution(object):
 
             # & with !seenTwice: 
             # Any num in seenOnce also in seenTwice are removed from seenOnce
+            # 3rd Appearance: Becuase in seenTwice, don't add to seenOnce
+
             seen_once = ~seen_twice & (seen_once ^ num)
+            # seen Once and Only once and NOT in seenTwice
             
-            # XOR with Seen_Twice
-            # If num was seen twice/even times before, it will be added
-            # If seen odd times it will be removed, 
-
-            # & with !seenOnce: 
-            #  ~seenOnce masks out bits that are already set in seenOnce. 
+           
+            # & ~SeenOnce
             # If a bit in num is also in seenOnce, 
-            # the AND operation will ensure that the number does not get added to seenTwice again.
+            # the AND operation will ensure that the number does not get added to seenTwice
 
+            # This ensures only those seenTwice are added in SeenTwice
+            # As double numbers will Null out in seenOnce.
+            
             seen_twice = ~seen_once & (seen_twice ^ num)
+            #^ Not in seenOnce but in SeenTwice
         return seen_once
 
 

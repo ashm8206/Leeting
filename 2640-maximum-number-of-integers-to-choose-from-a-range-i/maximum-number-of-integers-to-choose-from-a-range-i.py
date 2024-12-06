@@ -9,14 +9,16 @@ class Solution(object):
 
         banned = set(banned)
         curr_sum = 0
-        arr = []
-        for i in range(1,n+1):
-            if i not in banned:
-                curr_sum+=i
-                arr.append(i)
+        # arr = []
+        output = 0
+        for num in range(1,n+1):
+            if num not in banned:
+                curr_sum+=num
+                output+=1
             if curr_sum > maxSum:
-                curr_sum-=arr.pop()
-                return len(arr)
-        return len(arr)
+                curr_sum-=num
+                output-=1
+                break
+        return output
 
         

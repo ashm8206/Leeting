@@ -63,8 +63,11 @@ class Solution(object):
                         temp[i] = temp[i].upper()  # Change to uppercase
                     else:
                         temp[i] = temp[i].lower()  # Change to lowercase
+                    
+                    # print("mask: ", mask, "LetterIdx: " , letter_idx, "final :", temp[i])       
                     letter_idx += 1
-            # Add the generated string to the result
             result.append(''.join(temp))
+            # print("*********")
+           
         
         return result

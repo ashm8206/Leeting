@@ -59,6 +59,7 @@ class Solution(object):
                 if S[i].isalpha():  # If the character is a letter
                     # Use the bitmask to decide whether to change case
                     if (mask >> letter_idx) & 1:
+                    
                         temp[i] = temp[i].upper()  # Change to uppercase
                     else:
                         temp[i] = temp[i].lower()  # Change to lowercase

@@ -6,7 +6,7 @@ class Solution:
         :rtype: int
         """
 
-        left = 0
+        left = 1
         right = max(quantities)
 
         # Perform binary search until the boundaries converge
@@ -23,23 +23,37 @@ class Solution:
     
     def can_distribute(self, x: int, quantities: List[int], n: int) -> bool:
 
-        j = 0 
+        # j = 0 
         # pointer to the first not fully distributed product
-        remaining = quantities[j]
+        # remaining = quantities[j]
         
 
-        for i in range(n):
+        # for i in range(n):
 
-            if remaining <=x:
-                # this less than x quantity will be taken by a store
-                j+=1
-                if j==len(quantities):
-                    return True
-                else:
-                    remaining = quantities[j]
-            else:
-                remaining-=x
-        return j==len(quantities)
+        #     if remaining <=x:
+        #         # this less than x quantity will be taken by a store
+        #         j+=1
+        #         if j==len(quantities):
+        #             return True
+        #         else:
+        #             remaining = quantities[j]
+        #     else:
+        #         remaining-=x
+        # return j==len(quantities)
+
+
+        # Method II
+        total_stores = 0
+        for qty in quantities:
+            total_stores += math.ceil(qty/x)
+        
+        if total_stores<=n:
+            return True
+        return False
+
+
+
+
 
 
         

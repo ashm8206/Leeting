@@ -31,26 +31,7 @@ class Solution:
         # Determine if the result will be positive or negative
         is_positive = (dividend < 0) == (divisor < 0)  # True if same sign
 
-        # # Work with absolute values to avoid overflow
-        # a = abs(dividend)
-        # b = abs(divisor)
-
-        # ans = 0
-
-        # # Main logic: Try to find the largest possible quotient by bit-shifting
-        # while a >= b:
-        #     q = 0
-        #     # Find the largest power of 2 such that b * (2^q) <= a
-        #     while a >= (b << (q + 1)):
-        #         q += 1
-
-        #     # Add the corresponding power of 2 to the answer
-        #     ans += (1 << q)
-
-        #     # Subtract the corresponding power of divisor from the dividend
-        #     a -= (b << q)
-
-          # Work with absolute values
+        # Work with absolute values
         dividend, divisor = abs(dividend), abs(divisor)
         quotient = 0 
         while dividend >= divisor:
@@ -70,8 +51,13 @@ class Solution:
 
 
         # # If the result overflows, return INT_MAX (edge case)
-        if quotient == (1 << 31) and is_positive:
-            return (1 << 31) - 1  # Return INT_MAX
+        if quotient == (1 << 31):
+            if is_positive:
+                return (1 << 31) - 1  # Return INT_MAX
+            else:
+                return -(1 << 31) 
+        # MAX_INT = 2147483647  # 2**31 - 1
+        # MIN_INT = -2147483648  # -2**31
 
         # Return the result, considering the sign
         return quotient if is_positive else -quotient

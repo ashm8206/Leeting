@@ -13,8 +13,8 @@ class Solution:
 
         heapq.heapify(pq)
         while pq:
-            
-            if len(markedSet)>=n:
+
+            if len(markedSet)==n:
                 break
 
             while pq and pq[0][1] in markedSet:

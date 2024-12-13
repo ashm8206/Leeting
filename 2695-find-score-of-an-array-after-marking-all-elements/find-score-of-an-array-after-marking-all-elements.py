@@ -7,30 +7,23 @@ class Solution:
             #  Var Score+=  add minHeap(top) Pop (not marked found:)
             #  markedMap :  add  to it
         score = 0
-        pq = [(val, i) for i, val in enumerate(nums)]
+        nums = [(val, i) for i, val in enumerate(nums)]
         markedSet = set()
-        n = len(pq)
+        n = len(nums)
 
-        heapq.heapify(pq)
-        while pq:
+        heapq.heapify(nums)
+        while nums:
 
-            if len(markedSet)==n:
-                break
+            val, idx = heapq.heappop(nums)
+            if idx in markedSet:
+                continue
 
-            while pq and pq[0][1] in markedSet:
-                # print("Before",pq)
-                heapq.heappop(pq)
-                # print("After" , pq)
-            
-            val, idx = heapq.heappop(pq)
             score += val
             markedSet.add(idx)
 
-            if idx+1 < n:
+            if idx < n-1:
                 markedSet.add(idx+1)
             if idx-1>=0:
                 markedSet.add(idx-1)
 
-            # print(score, markedSet)
-            # print("--------")
         return score

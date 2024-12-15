@@ -1,7 +1,7 @@
 class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
 
-
+       
 
         numStack = []
         
@@ -25,9 +25,9 @@ class Solution:
 
         
         
-        # # - Trunk the remaining K digits at the end
-        # # - in the case k==0: return the entire list
-        # finalStack = numStack[:-k] if k else numStack
+        # - Trunk the remaining K digits at the end
+        # - in the case k==0: return the entire list
+        finalStack = numStack[:-k] if k else numStack
         
-        # # trip the leading zeros
-        # return "".join(finalStack).lstrip('0') or "0"
+        # trip the leading zeros
+        return "".join(finalStack).lstrip('0') or "0"

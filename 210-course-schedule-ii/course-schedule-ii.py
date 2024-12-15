@@ -30,19 +30,19 @@ class Solution:
             coursesNoPreq = [ idx for idx, ideg in enumerate(graph.indegree)if ideg==0]
             coursesNoPreq = deque(coursesNoPreq)
 
-            visited= set()
+            # visited= set()
             while coursesNoPreq:
                 courseToTake = coursesNoPreq.popleft()
                 coursesOrder.append(courseToTake)
 
                 for nei in graph.adjList[courseToTake]:
-                    if nei not in visited: 
+                    # if nei not in visited: 
                         # Don't add nei, already in queue to queue again
                         # These will be  marked as visited.
                         graph.indegree[nei]-=1
                         if graph.indegree[nei] == 0: 
                             coursesNoPreq.append(nei)
-                            visited.add(nei)
+                            # visited.add(nei)
             return coursesOrder if len(coursesOrder) == numCourses else []
 
 #             for end, start in prerequisites:

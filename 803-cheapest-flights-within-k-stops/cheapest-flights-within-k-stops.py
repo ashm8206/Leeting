@@ -54,7 +54,10 @@ class Solution:
     
             curr_wt, curr_stops, node = heapq.heappop(pq)
 
-            if visited[node] < curr_stops or curr_stops > k + 1:
+            # we are allowed a maximum of K levels
+            # we can go upto a maximum of k+1 level
+            # curr_stops - 1 > k
+            if visited[node] < curr_stops or curr_stops - 1 > k :
                 continue
 
             visited[node] = curr_stops  

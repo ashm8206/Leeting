@@ -39,8 +39,6 @@ class Solution:
                 continue
 
             # visited.add(node)
-            # if node==end_node:
-            #     return -prob
             
             for nei, path_prob in graph.adj_list[node]:
                 # if nei not in visited:

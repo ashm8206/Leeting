@@ -2,12 +2,12 @@ class Solution:
     def maximumLengthOfRanges(self, nums: List[int]) -> List[int]:
         n = len(nums)
         previousGreater = [-1] * n
-        nextGreater = [n] * n
+        nextGreater = [-1] * n
         stack = []
         ans = []
 
-        for curr_idx in range(n):
-            while stack and nums[stack[-1]] < nums[curr_idx]:
+        for curr_idx in range(n+1):
+            while stack and (curr_idx==len(nums) or nums[stack[-1]] < nums[curr_idx]):
                 idx =  stack.pop()
                 nextGreater[idx] = curr_idx
             if stack:
@@ -15,7 +15,6 @@ class Solution:
             stack.append(curr_idx)
         
         for  l, r in zip(previousGreater,nextGreater):
-    
             ans.append(r-l-1)
         return ans
 

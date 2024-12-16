@@ -64,7 +64,7 @@ class Solution:
 
             
             for nei, wt_to_nei in g.adj_list[currNode]:
-                # if visit to neigh = optimal_visit_time_curr_node +  wt(curr_node, nei)
+                # if dist to neigh = optimal_visit_time_curr_node +  wt(curr_node, nei)
                 if dist[nei] > dist[currNode] + wt_to_nei:
                     dist[nei] = dist[currNode] + wt_to_nei
                     heapq.heappush(pq,(dist[nei],nei))

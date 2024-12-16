@@ -48,24 +48,28 @@ class Solution:
         ### DIJSKSTRAS
 
         g = Graph(n)
-        visted =  { i: 2**31 for i in range(1,n+1)} # V.IMP # visited +distance array
+        dist =  { i: 2**31 for i in range(1,n+1)} # V.IMP # visited +distance array
 
         for start, end, weight in times:
             g.adj_list[start].append((end,weight))
 
         pq = [(0,k)] #K --> Source
-        visted[k] = 0
+        dist[k] = 0
 
         while pq:
             currDist, currNode = heapq.heappop(pq)
+
+            if dist[currNode] < currDist:
+                continue
+
             
             for nei, wt_to_nei in g.adj_list[currNode]:
                 # if visit to neigh = optimal_visit_time_curr_node +  wt(curr_node, nei)
-                if visted[nei] > visted[currNode] + wt_to_nei:
-                    visted[nei] = visted[currNode] + wt_to_nei
-                    heapq.heappush(pq,(visted[nei],nei))
+                if dist[nei] > dist[currNode] + wt_to_nei:
+                    dist[nei] = dist[currNode] + wt_to_nei
+                    heapq.heappush(pq,(dist[nei],nei))
         
-        return  -1 if max(visted.values()) == 2**31 else max(visted.values())
+        return  -1 if max(dist.values()) == 2**31 else max(dist.values())
         
         
             

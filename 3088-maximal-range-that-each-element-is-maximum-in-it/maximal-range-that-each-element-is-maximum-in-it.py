@@ -3,25 +3,20 @@ class Solution:
         n = len(nums)
         previousGreater = [-1] * n
         nextGreater = [n] * n
-        idx_stack = []
-
+        stack = []
         ans = []
-        # ans = [0]*n
-
 
         for curr_idx in range(n):
-            while idx_stack and nums[idx_stack[-1]] < nums[curr_idx]:
-                idx = idx_stack.pop()
+            while stack and nums[stack[-1]] < nums[curr_idx]:
+                idx =  stack.pop()
                 nextGreater[idx] = curr_idx
-
-            previousGreater[curr_idx] = -1 if not idx_stack else idx_stack[-1]
-            idx_stack.append(curr_idx)
-        # print(previousGreater, nextGreater)
+            if stack:
+                previousGreater[curr_idx] = stack[-1]
+            stack.append(curr_idx)
+        
         for  l, r in zip(previousGreater,nextGreater):
-            # if r-l-1 <=0:
-            #     ans.append(n)
-            # else:
-                ans.append(r-l-1)
+    
+            ans.append(r-l-1)
         return ans
 
 

@@ -13,7 +13,7 @@ class Solution:
             n = len(events)
             start = -1
 
-            print(events)
+            # print(events)
             for i in range(n):
                 if count == 0:
                     start = events[i][0]

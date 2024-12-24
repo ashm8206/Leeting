@@ -1,5 +1,6 @@
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        #https://youtu.be/nONCGxWoUfM NeetCode
         intervals.sort(key = lambda x: x[0])
         ans = 0
         e1 = -inf
@@ -17,6 +18,3 @@ class Solution:
                 e1 = e2
         
         return ans
-
-    
-  

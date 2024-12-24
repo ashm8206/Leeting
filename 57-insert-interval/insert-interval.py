@@ -3,12 +3,17 @@ class Solution:
 
             # Line Sweep:
             count = 0
-            events = SortedList()
+            events =  []
             res = []
 
             for s, e in intervals + [newInterval]:
-                events.add((s,1))
-                events.add((e,-1))
+                # events.add((s,1))
+                # events.add((e,-1))
+                events.append((s,1))
+                events.append((e,-1))
+                
+
+            events.sort()
 
             n = len(events)
             start = -1

@@ -28,6 +28,10 @@ class MyCalendarTwo:
                 # Revert the changes if there's a conflict
                 self.events[start] -= 1
                 self.events[end] += 1
+
+                if self.events[start] == 0:
+                    del self.events[start]
+
                 return False
                 
         return True

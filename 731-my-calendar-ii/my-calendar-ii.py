@@ -20,7 +20,9 @@ class MyCalendarTwo:
         
         # Check for conflicts by scanning through all times
         count = 0
-        for value in self.events.values():
+        for time, value in self.events.items():
+            if time > end:
+                break
             count += value
             if count > 2:
                 # Revert the changes if there's a conflict

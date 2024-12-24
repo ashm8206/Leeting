@@ -16,7 +16,6 @@ class Solution:
         for s, e in meetings:
             minEndTime = 10**10
             nextRoomIdx = 0
-            foundRoom = False
 
             for i in range(n):
                 # for room in meeting rooms:
@@ -25,14 +24,14 @@ class Solution:
                     meeting_rooms[i] = e 
                     # didnt have to wait, so time is pushed not duration
                     meeting_counts[i]+=1
-                    foundRoom = True
+           
                     break # done, break from looping rooms
                 
                 if meeting_rooms[i] < minEndTime:
                     minEndTime = meeting_rooms[i]
                     nextRoomIdx = i
-            # else:
-            if not foundRoom:
+            else:
+          
                 meeting_rooms[nextRoomIdx] += e-s # duration 
                 # add duration incase it gets pushed back
                 meeting_counts[nextRoomIdx]+=1

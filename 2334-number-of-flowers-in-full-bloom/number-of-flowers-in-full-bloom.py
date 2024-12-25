@@ -15,6 +15,11 @@ class Solution:
 
         ans = []
         for person in people:
+            # Why bisect right  ?
+            # idx-1 == right 
+            # [0, 1,3,4,11] 
+            # : 3 : 3: 3-1 = 2 == right
+            # : 2 : 2, but 2-1 == 1
             i = bisect_right(positions, person) - 1
             ans.append(prefix[i])
         

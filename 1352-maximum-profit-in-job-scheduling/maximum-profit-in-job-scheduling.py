@@ -2,33 +2,6 @@ from heapq import heappush, heappop
 class Solution:
     def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
 
-        n = len(startTime)
-        events = []
-        for i in range(n):
-            # 1 for start event
-            # 0 for end event
-            # We want end events to occur before start event for same time
-            events.append((startTime[i], 1, i))
-            events.append((endTime[i], 0, i))
-            
-        events.sort()
-        
-        maxProfit = [0]*n
-        previousMax = 0
-        
-        for time, eventType, index in events:
-			# If it is a start event, calculate its maximum profit, using previous maximum profit
-            if eventType == 1:
-                maxProfit[index] = previousMax + profit[index]
-			# If it is an end, update previous maximum profit
-            else:
-                previousMax = max(maxProfit[index], previousMax)
-            
-        return previousMax
-
-        
-
-
         # LIS - Like Pattern
         # Keep all overlapping intervals in a Heap
         # for each new curr interval, 
@@ -65,6 +38,32 @@ class Solution:
 
         #     maxProfit = max(maxProfit, maxVal+profit)
         # return maxProfit
+
+
+        # line - SWEEP
+        n = len(startTime)
+        events = []
+        for i in range(n):
+            # 1 for start event
+            # 0 for end event
+            # We want end events to occur before start event for same time
+            events.append((startTime[i], 1, i))
+            events.append((endTime[i], 0, i))
+            
+        events.sort()
+        
+        maxProfit = [0]*n
+        previousMax = 0
+        
+        for time, eventType, index in events:
+			# If it is a start event, calculate its maximum profit, using previous maximum profit
+            if eventType == 1:
+                maxProfit[index] = previousMax + profit[index]
+			# If it is an end, update previous maximum profit
+            else:
+                previousMax = max(maxProfit[index], previousMax)
+            
+        return previousMax
         
         # # DP (Top-down) [Unintuitive]
 

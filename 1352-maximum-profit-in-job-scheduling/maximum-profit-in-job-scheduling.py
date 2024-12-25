@@ -11,33 +11,40 @@ class Solution:
         # extend this current_interval and add it to the Heap
         # keep track of maxProfit in a sperate variable
 
-        # jobs = []
-        # for i in range(len(profit)):
-        #     jobs.append([startTime[i], endTime[i], profit[i]])
 
-        # # Step 2: Sort the jobs based on their start time
-        # jobs.sort(key=lambda x: x[0])
-        # maxProfit = 0
-        # maxVal = 0
+        # Q2 Only relevant overlapping intervals are kept in heap: save space
+        #  - Future intervals maintain non-overlap property with removed intervals, cuz we Sort Events by START TIME
+        #  MAXVAL : No need to maintain the past evnets in Heap. 
+        # MaxVal tracks max Profit from past events non-overlaping
 
-        # pq = []
 
-        # for start, end, profit in jobs:
-        #     # Among all Overlapping options available
-        #     # pop all non-overlapping intervals with curr
-        #     # and extend curr with Most profitable Non-overlapping interval
+        jobs = []
+        for i in range(len(profit)):
+            jobs.append([startTime[i], endTime[i], profit[i]])
 
-        #     while pq and start >= pq[0][0]: # start >= end Non-overlap condi
-        #         _, val = heappop(pq)
-        #         maxVal = max(val, maxVal)
+        # Step 2: Sort the jobs based on their start time
+        jobs.sort(key=lambda x: x[0])
+        maxProfit = 0
+        maxVal = 0
+
+        pq = []
+
+        for start, end, profit in jobs:
+            # Among all Overlapping options available
+            # pop all non-overlapping intervals with curr
+            # and extend curr with Most profitable Non-overlapping interval
+
+            while pq and start >= pq[0][0]: # start >= end Non-overlap condi
+                _, val = heappop(pq)
+                maxVal = max(val, maxVal)
             
-        #     # extend chain
-        #     heappush(pq,(end, maxVal+profit))
+            # extend chain
+            heappush(pq,(end, maxVal+profit))
 
-        #     # loop invariant: After each iteration heap will have all overlapping interval chains
+            # loop invariant: After each iteration heap will have all overlapping interval chains
 
-        #     maxProfit = max(maxProfit, maxVal+profit)
-        # return maxProfit
+            maxProfit = max(maxProfit, maxVal+profit)
+        return maxProfit
 
 
         # line - SWEEP

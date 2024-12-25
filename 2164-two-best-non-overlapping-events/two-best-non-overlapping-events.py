@@ -2,42 +2,31 @@ import heapq
 class Solution:
     def maxTwoEvents(self, events: List[List[int]]) -> int:
         
-      
-        # maxProfit = 0
-        # maxVal = 0 
-        # # track the most optimal Value Sofar
+        events.sort()
+        
+        maxProfit = 0
+        maxVal = 0 
 
-        # # even if previous event is Popped out, if it gave the maxVal,
-        # # that will remain constant, until a greater maxVal shows up
+        pq = []
 
-        # # inwhich case it will be counted towards maxVal + currEvent'sProfit
+        for start, end, profit in events:
 
-        # # if the previous pair, non-overlapping was indeed so high !
-        # # maxProfit will be unchanged for (newMaxVal+newCurrentEventProfit)
-
-        # pq = []
-
-        # for start, end, profit in events:
-        #     # Among all Overlapping options available
-        #     # pop all non-overlapping intervals with curr
-        #     # and keep track of the MaxVal Non-overlapping interval
-
-        #     while pq and start > pq[0][0]: # start >= end Non-overlap condi
-        #         _, val = heappop(pq)
-        #         maxVal = max(val, maxVal)
+            while pq and start > pq[0][0]: # start >= end Non-overlap condi
+                _, val = heappop(pq)
+                maxVal = max(val, maxVal)
             
-        #     # At most 2 Overlapping, 
-        #     # we just want to find a Pair or Single MaxVal
+            # At most 2 Overlapping, 
+            # we just want to find a Pair or Single MaxVal
 
-        #     maxProfit = max(maxProfit, maxVal+profit)
-
-        #     heappush(pq,(end, profit))
+            heappush(pq,(end, profit)) # dont add extended
 
         #     # loop invariant: After each iteration heap will have all overlapping interval with their profits
+            maxProfit = max(maxProfit, maxVal+profit)
+        return maxProfit
 
-            
-        # return maxProfit
 
+
+        # line - Sweep
         times = []
         for e in events:
             # 1 denotes start time.

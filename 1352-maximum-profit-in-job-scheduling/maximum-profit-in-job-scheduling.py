@@ -2,6 +2,33 @@ from heapq import heappush, heappop
 class Solution:
     def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
 
+        n = len(startTime)
+        events = []
+        for i in range(n):
+            # 1 for start event
+            # 0 for end event
+            # We want end events to occur before start event for same time
+            events.append((startTime[i], 1, i))
+            events.append((endTime[i], 0, i))
+            
+        events.sort()
+        
+        maxProfit = [0]*n
+        previousMax = 0
+        
+        for time, eventType, index in events:
+			# If it is a start event, calculate its maximum profit, using previous maximum profit
+            if eventType == 1:
+                maxProfit[index] = previousMax + profit[index]
+			# If it is an end, update previous maximum profit
+            else:
+                previousMax = max(maxProfit[index], previousMax)
+            
+        return previousMax
+
+        
+
+
         # LIS - Like Pattern
         # Keep all overlapping intervals in a Heap
         # for each new curr interval, 
@@ -11,34 +38,33 @@ class Solution:
         # extend this current_interval and add it to the Heap
         # keep track of maxProfit in a sperate variable
 
-        jobs = []
-        for i in range(len(profit)):
-            jobs.append([startTime[i], endTime[i], profit[i]])
+        # jobs = []
+        # for i in range(len(profit)):
+        #     jobs.append([startTime[i], endTime[i], profit[i]])
 
-        # Step 2: Sort the jobs based on their start time
-        jobs.sort(key=lambda x: x[0])
+        # # Step 2: Sort the jobs based on their start time
+        # jobs.sort(key=lambda x: x[0])
+        # maxProfit = 0
+        # maxVal = 0
 
-        maxProfit = 0
-        maxVal = 0
+        # pq = []
 
-        pq = []
+        # for start, end, profit in jobs:
+        #     # Among all Overlapping options available
+        #     # pop all non-overlapping intervals with curr
+        #     # and extend curr with Most profitable Non-overlapping interval
 
-        for start, end, profit in jobs:
-            # Among all Overlapping options available
-            # pop all non-overlapping intervals with curr
-            # and extend curr with Most profitable Non-overlapping interval
-
-            while pq and start >= pq[0][0]: # start >= end Non-overlap condi
-                _, val = heappop(pq)
-                maxVal = max(val, maxVal)
+        #     while pq and start >= pq[0][0]: # start >= end Non-overlap condi
+        #         _, val = heappop(pq)
+        #         maxVal = max(val, maxVal)
             
-            # extend chain
-            heappush(pq,(end, maxVal+profit))
+        #     # extend chain
+        #     heappush(pq,(end, maxVal+profit))
 
-            # loop invariant: After each iteration heap will have all overlapping interval chains
+        #     # loop invariant: After each iteration heap will have all overlapping interval chains
 
-            maxProfit = max(maxProfit, maxVal+profit)
-        return maxProfit
+        #     maxProfit = max(maxProfit, maxVal+profit)
+        # return maxProfit
         
         # # DP (Top-down) [Unintuitive]
 

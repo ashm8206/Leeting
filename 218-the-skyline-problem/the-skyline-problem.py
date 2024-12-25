@@ -1,5 +1,31 @@
+
+from heapq import heappush, heappop
 class Solution:
     def getSkyline(self, buildings):
+       
+        # Create events: (x, height)
+        events = [(l, -h, r) for l, r, h in buildings]
+        events += list({(r, 0, 0) for _, r, _ in buildings})
+        
+        # Process events
+        heap = [(0, float('inf'))]  # (height, end_x)
+        res = []
+        
+        for x, h, r in sorted(events):
+            # Remove ended buildings
+            while heap[0][1] <= x:
+                heappop(heap)
+            
+            # Add new building
+            if h:
+                heappush(heap, (h, r))
+            
+            # Update skyline if height changes
+            if not res or res[-1][1] != -heap[0][0]:
+                res.append([x, -heap[0][0]])
+                
+        return res
+
         # Create events for all x-coordinates (both start and end of buildings)
         events = []
         for left, right, height in buildings:

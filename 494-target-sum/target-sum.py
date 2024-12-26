@@ -2,6 +2,36 @@
 class Solution:
     
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
+
+        # top Down
+
+        count = 0
+        n = len(nums)
+
+        memo = {}
+
+        def helper(running_sum, idx):
+            nonlocal count
+            
+            if idx == n:
+                return 1 if running_sum==target else 0
+
+            if (running_sum, idx) in memo:
+                return memo[(running_sum, idx)]
+            
+            memo[(running_sum, idx)] = (
+                helper(running_sum + nums[idx], idx+1) 
+                + helper(running_sum - nums[idx] , idx+1)
+            )
+            return memo[(running_sum, idx)]
+
+        # for loop is not not for tradition combinations
+        # we only want Combindations of len(N) start from idx 0... end N
+        # Each idx has two option, take / don't take
+        return helper(0, 0)
+
+        # bottom up T: O(n* Sum(nums)) S: O(n*m)
+        # can be reduced to O(N) space, with just previous row.
         n = len(nums)
         # dp = [ 0 for _ in range(sum(nums)) for i in range(n+1)]
         # since we will get negative sums, and cant have -ve indices
@@ -21,30 +51,7 @@ class Solution:
                 # add +1 way way or the previous count
         return dp[n][target]
 
-        # count = 0
-        # n = len(nums)
-
-        # memo = {}
-
-        # def helper(running_sum, idx):
-        #     nonlocal count
-            
-        #     if idx == n:
-        #         return 1 if running_sum==target else 0
-
-        #     if (running_sum, idx) in memo:
-        #         return memo[(running_sum, idx)]
-            
-        #     memo[(running_sum, idx)] = (
-        #         helper(running_sum + nums[idx], idx+1) 
-        #         + helper(running_sum - nums[idx] , idx+1)
-        #     )
-        #     return memo[(running_sum, idx)]
-
-        # # for loop is not not for tradition combinations
-        # # we only want Combindations of len(N) start from idx 0... end N
-        # # Each idx has two option, take / don't take
-        # return helper(0, 0)
+       
         
 
         

@@ -22,8 +22,7 @@ class Trie:
                 node.children[c] = TrieNode()
 
             node = node.children[c] 
-           
-            
+
             if node.n < 3:
                 node.words.append(word)
                 node.n += 1
@@ -32,10 +31,9 @@ class Trie:
         node = self.root
         for c in prefix:
             if c in node.children:
-                node = node.children[c] 
-            else: #--> return empty list
+                node = node.children[c]
+            else:
                 return []
-            
             """
             Another way of writing the above is:
             
@@ -52,23 +50,25 @@ class Trie:
 class Solution:
     def suggestedProducts(self, A: List[str], searchWord: str) -> List[List[str]]:
         # Method  I
-        # A.sort()
+        A.sort()
         """
         Sorting is important, to return lexographically ordered suggestion
 
         It is important to process words in order, as we add words at each level
         upto size 3
 
-        To make sure, the correct lexographically words are adde as the Top 3 suggestions, (similar to oxford dict, it helps to have the input sorted)
+        To make sure, the correct lexographically words are added as the Top 3 suggestions, (similar to oxford dict, it helps to have the input sorted)
         """
-        # trie = Trie()
-        # for word in A: trie.add_word(word)
+        trie = Trie()
+        for word in A:
+            trie.add_word(word)
+
     
-        # result, prefix = [], ''
-        # for c in searchWord:
-        #     prefix += c 
-        #     result.append(trie.find_word_by_prefix(prefix))
-        # return result    
+        result, prefix = [], ''
+        for c in searchWord:
+            prefix += c 
+            result.append(trie.find_word_by_prefix(prefix))
+        return result    
 
         """A Note on Time Complexity
 
@@ -83,22 +83,22 @@ class Solution:
 
         # Method II - LeftMost Binary Search
 
-        A.sort()
-        res, prefix = [], ''
-        i = 0
-        for c in searchWord: 
-            prefix += c
-            i = bisect.bisect_left(A, prefix, lo=i) # M*LogN
-            # we get left most index of prefix in the search
-            # and ad next 3 product that match prefix
+        # A.sort()
+        # res, prefix = [], ''
+        # i = 0
+        # for c in searchWord: 
+        #     prefix += c
+        #     i = bisect.bisect_left(A, prefix, lo=i) # M*LogN
+        #     # we get left most index of prefix in the search
+        #     # and ad next 3 product that match prefix
             
-            #  An optimization: 
-            #  passing lo : start index
-            #  In each Binary serach, it is not required to start lo = 0
-            #  Lo = atleast as small as the "i" from previous prefix matched
+        #     #  An optimization: 
+        #     #  passing lo : start index
+        #     #  In each Binary serach, it is not required to start lo = 0
+        #     #  Lo = atleast as small as the "i" from previous prefix matched
 
-            res.append([w for w in A[i:i+3] if w.startswith(prefix)]) #--> o(3)*O(k)
-        return res
+        #     res.append([w for w in A[i:i+3] if w.startswith(prefix)]) #--> o(3)*O(k)
+        # return res
 
         # TC : 
         # 1. Sort : NlogN 

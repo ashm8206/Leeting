@@ -1,28 +1,36 @@
 
 class Solution:
 
-    
     def lexicalOrder(self, n: int) -> List[int]:
         
         result = []
-        @lru_cache()
+    
         def dfs(curr_num):
-
-            if int(curr_num) > n:
-                return
-
-            if int(curr_num) in result:
-                return
-            result.append(int(curr_num))
+            
+            if curr_num > n:
+                return 
+                
+            result.append(curr_num)
 
             for i in range(10):
-                
-                dfs(curr_num+str(i))
+                next_num = curr_num*10 + i
+                if next_num <= n:
+                    dfs(next_num)
+                else:
+                    break
 
         for i in range(1, 10):
-            dfs(str(i))
-
+            dfs(i)
         return result
+
+        # result = []
+
+        # def dfs(i):
+
+        
+
+        # for i in range(1, 10):
+        #     dfs(i)
 
         
         

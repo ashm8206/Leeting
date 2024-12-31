@@ -21,6 +21,7 @@ class AutocompleteSystem:
             if c not in node.children:
                 node.children[c] = TrieNode()
             node = node.children[c]
+            # node.sentences.append((-count, sentence))
             node.sentences[sentence] += count 
             # node.sentences[sentence] += count # this is -ve for the heap
     

@@ -28,6 +28,9 @@ class AutocompleteSystem:
     def input(self, c: str) -> List[str]:
 
         if c == "#":
+            # Returns an empty array []  
+            # stores the inputted sentence in the system.
+
             curr_sentence = "".join(self.curr_sentence)
             self.add_sentence(curr_sentence, 1)
             self.curr_sentence = [] # typed sentence storing

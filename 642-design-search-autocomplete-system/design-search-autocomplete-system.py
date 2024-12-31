@@ -11,7 +11,9 @@ class AutocompleteSystem:
             self.add_sentence(sentence,count)
         
         self.curr_sentence = [] # typed sentence storing
-        self.curr_node = self.root 
+        self.curr_node = self.root # curr_node
+        # These above two have to be "objects" to store state
+
         self.dead = TrieNode() 
 
     def add_sentence(self, sentence, count):

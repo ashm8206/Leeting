@@ -1,3 +1,4 @@
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -13,12 +14,17 @@ class Solution:
 
         # res = []
 
+        dp = {}
+
         def helper(n):
             # base case:
             if n%2==0:
                 return []
             if n==1:
                 return [TreeNode(0)]
+
+            if n in dp:
+                return dp[n]
 
             res = []
 
@@ -31,6 +37,7 @@ class Solution:
                     for right in rightTrees:
                         root = TreeNode(0, left=left, right=right)
                         res.append(root)
+            dp[n] = res
             return res
 
         return helper(n)

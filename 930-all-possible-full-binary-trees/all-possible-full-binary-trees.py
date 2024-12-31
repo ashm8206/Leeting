@@ -12,8 +12,6 @@ class Solution:
         # # 0, 6. 1, 5 2, 4 3, 3 4, 2 5, 1, 6,0
         # what happens for 2 ?  or 4 or 6 ? -> []
 
-        # res = []
-
         dp = {}
 
         def helper(n):

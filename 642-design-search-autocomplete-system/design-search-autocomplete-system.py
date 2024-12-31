@@ -21,7 +21,8 @@ class AutocompleteSystem:
             if c not in node.children:
                 node.children[c] = TrieNode()
             node = node.children[c]
-            node.sentences[sentence] -= count # this is -ve for the heap
+            node.sentences[sentence] += count 
+            # node.sentences[sentence] += count # this is -ve for the heap
     
     def input(self, c: str) -> List[str]:
 
@@ -40,7 +41,7 @@ class AutocompleteSystem:
             return []
         
         self.curr_node = self.curr_node.children[c]
-        items = [(val, key) for key, val in self.curr_node.sentences.items()]
+        items = [(-val, key) for key, val in self.curr_node.sentences.items()]
         ans = heapq.nsmallest(3, items)
         return [key for count, key in ans]
 

@@ -1,5 +1,7 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
+
+        # https://leetcode.com/problems/regular-expression-matching/solutions/883719/python-top-down-dp-clean-concise-o-m-n/
         @lru_cache()
         def dp(i,j):
             if j == len(p):

@@ -9,12 +9,11 @@ class Solution:
     # 1,2,3,4
     # 5,6,7,8
     # half + delta = k
-    # # k - half
+    # delta =  k - half  i.e delta = index in first half
 
         def helper(n, k):
             if n==1:
                 return 0
-            
             length = 2**(n-1)
             half = length //2
 

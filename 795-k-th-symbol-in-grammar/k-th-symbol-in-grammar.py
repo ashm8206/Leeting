@@ -23,7 +23,6 @@ class Solution:
             else:
                 res = helper(n-1, k-half)
                 return 0 if res==1 else 1
-                # return  1 - helper(n, k - half)
         return helper(n,k)
         
 

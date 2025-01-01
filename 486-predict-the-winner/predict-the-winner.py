@@ -1,6 +1,6 @@
 class Solution:
     def predictTheWinner(self, nums: List[int]) -> bool:
-        
+        # https://www.youtube.com/watch?v=giomYhFJo6g
         dp = {}
         def helper(left,right, turn):
             if left > right:
@@ -14,7 +14,7 @@ class Solution:
                 res = max(nums[left]+ helper(left+1,right,2), nums[right]+ helper(left,right-1,2))
             else:
                 # turn 2
-                # we want to try and minimize turn 1 score
+                # we want to try and minimize turn 1 score above where its added
                 # so mininum is returned
 
                 res = min(helper(left+1,right,1), helper(left,right-1,1))

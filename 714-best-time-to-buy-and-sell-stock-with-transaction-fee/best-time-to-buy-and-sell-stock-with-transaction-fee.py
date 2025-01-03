@@ -2,6 +2,7 @@ class Solution:
     def maxProfit(self, prices: List[int], fee: int) -> int:
 
         dp = {}
+        @lru_cache()
         def dfs(i, buying):
             if i>=len(prices):
                 return 0 # 0 profit

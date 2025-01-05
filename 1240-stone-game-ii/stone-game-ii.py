@@ -21,4 +21,6 @@ class Solution:
                     ans = max(ans, suffix_sum[i] - helper(i+x,max(x,m)))
             dp[(i,m)] = ans
             return dp[(i,m)]
-        return helper(0,1)
+        return helper(0,1) 
+        # (i,m) : maxStones Alice collects starting at index i, 
+        # with first X = 1

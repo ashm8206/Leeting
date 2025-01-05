@@ -20,9 +20,14 @@ class Solution:
             curr_sum = (curr_sum + nums[i])%p
             # find the complement
             needed = (curr_sum - target + p ) % p
-
+            # pt1. curr_sum
             # diff = target-curr_sum
             # if diff in array
+            # cache curr_sum:
+
+            # pt2. adding P chat GPT:
+
+            # pt3. subarray divisble by target
 
             if needed in mod_map:
                 min_len = min(min_len, i - mod_map[needed]) 

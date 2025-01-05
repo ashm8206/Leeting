@@ -1,5 +1,6 @@
 class Solution:
     def maxSubstringLength(self, s: str) -> int:
+        # https://leetcode.ca/2024-04-24-3104-Find-Longest-Self-Contained-Substring/
         first, last = {}, {}
         for i, c in enumerate(s):
             if c not in first:

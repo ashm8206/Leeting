@@ -1,34 +1,53 @@
 class Solution:
     def shortestPalindrome(self, s: str) -> str:
-        length = len(s)
-        reversed_string = s[::-1]  # Reverse the string
+        
+        # Subproblem 1
+        #find the longest Palindromic prefix : X
+        # return substring X and its Start and End Position
 
-        # Iterate through the string to find the longest palindromic prefix
-        for i in range(length):
-            if s[: length - i] == reversed_string[i:]:
-                return reversed_string[:i] + s
-        return ""
-        # length = len(s)
-        # if length == 0:
-        #     return s
+        #final Problem
+        # return reversed(S[R+1:N]) + X
+        #  dc abacd
 
+        # if not s:
+        #     return ""
+            
+        # def isPalindrome(s, end):
+        #     # Check if s[0:end+1] is a palindrome
+        #     i, j = 0, end
+        #     while i < j:
+        #         if s[i] != s[j]:
+        #             return False
+        #         i += 1
+        #         j -= 1
+        #     return True
+        
         # # Find the longest palindromic prefix
-        # left = 0
-        # for right in range(length - 1, -1, -1):
-        #     if s[right] == s[left]:
-        #         left += 1
+        # n = len(s)
+        # longest_pal = 0
+        
+        # # Try each position as potential end of palindromic prefix
+        # for i in range(n-1, -1, -1):
+        #     if isPalindrome(s, i):
+        #         longest_pal = i
+        #         break
+        
+        # return s[longest_pal + 1:][::-1] + s
 
-        # # If the whole string is a palindrome, return the original string
-        # if left == length:
-        #     return s
+        if not s:
+            return ""
+        
+        # Get original string and its reverse
+        rev = s[::-1]
+        new_s = s
+        
+        # Find the longest palindromic prefix by checking if truncated 
+        # reversed string exists at the start of original string
+        for i in range(len(s)):
+            if s.startswith(rev[i:]):
+                return rev[:i] + s
+        
+        return rev + s[1:]
 
-        # # Extract the suffix that is not part of the palindromic prefix
-        # non_palindrome_suffix = s[left:]
-        # reverse_suffix = non_palindrome_suffix[::-1]
 
-        # # Form the shortest palindrome by prepending the reversed suffix
-        # return (
-        #     reverse_suffix
-        #     + self.shortestPalindrome(s[:left])
-        #     + non_palindrome_suffix
-        # )
+      

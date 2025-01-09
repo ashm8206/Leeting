@@ -45,5 +45,5 @@ class Solution:
             j += 1
         
         # Add remaining characters from both strings
-        print(lcs(A,B))
+        # print(lcs(A,B))
         return ''.join(result) + A[i:] + B[j:]

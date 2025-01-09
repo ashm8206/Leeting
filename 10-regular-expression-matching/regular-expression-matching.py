@@ -1,25 +1,26 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
 
-        # https://leetcode.com/problems/regular-expression-matching/solutions/883719/python-top-down-dp-clean-concise-o-m-n/
+        # Option 1# https://leetcode.com/problems/regular-expression-matching/solutions/883719/python-top-down-dp-clean-concise-o-m-n/
+
+        m, n = len(s), len(p)
         @lru_cache()
-        def dp(i,j):
-            if j == len(p):
-                return i == len(s)
-
-            # preceeding logic first
-            if j+1 < len(p) and p[j+1] == "*":
-                # match preceeding 
-                ans = dp(i, j+2) # matches zero j+2 j+1==*, skip these
-                if i < len(s) and (s[i]==p[j] or p[j]=="."): 
-                    ans = ans or dp(i+1,j)
-                return ans
-                    # skip 1 char in s, 
-                    # don't skip in p since it can match 1 or more characters
+        def dfs(i, j):
+            if j == n:
+                return i == m
             
-            if i < len(s) and (s[i]==p[j]) or p[j]==".": 
-                # match a single charac
-                return dp(i+1,j+1)
-            return False
-        return dp(0,0)
+            match = i < m and (s[i] == p[j] or p[j] == ".")
+            # use * only if prev is match
+            # this condition can cause the pattern to keep growing
+            # But we are only interested in  upto i < m
 
+            if (j + 1) < n and p[j + 1] == "*":
+                return (dfs(i, j + 2) or          # don't use * 
+                       (match and dfs(i + 1, j))) # use *
+                # use * only if prev is match
+            if match:
+                return dfs(i + 1, j + 1)
+            return False
+        
+        return dfs(0, 0)
+        

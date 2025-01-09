@@ -29,39 +29,36 @@ class Solution:
 
         # you are missing the comparsion for ("" "") and missing hence the result will be off By 1
         
+        n = len(word1)
+        m = len(word2)
 
+        dp = {}
+        def helper(i, j):
+            if i==n:
+                return m - j 
+                # number of remaining characters in word2
+            if j==m:
+                return n - i
+
+            if (i,j) in dp:
+                return dp[(i,j)]
+            
+            if word1[i]==word2[j]:
+                dp[(i,j)] =  helper(i+1, j+1)
+            else:
+                dp[(i,j)] = 1 + min(helper(i+1, j+1),min(helper(i, j+1),helper(i+1, j)))
+                
+            return dp[(i,j)]
+            
+
+        return helper(0,0)
     
-        # m = len(word1)
-        # n = len(word2)
-        # memo = {}
-
-        # def helper(s1, s2, m, n):
-
-        #     if m <= -1:
-        #         return n + 1
-        #     if n <= -1:
-        #         return m + 1
-            
-        #     if (m, n) in memo:
-            
-        #         return memo[(m, n)]
-
-        #     print(memo, print(m,n))
-
-        #     if s1[m]==s2[n]:
-        #         return helper(s1,s2,m-1,n-1)
-
-        #     else:
-        #         memo[(m, n)] = 1 +  min(helper(s1,s2,m,n-1),helper(s1,s2,m-1,n), helper(s1,s2,m-1,n-1))
-            
-        #     return memo[(m, n)]
         
-        # return helper(word1,word2, m-1, n-1)
-
         m = len(word1)
         n = len(word2)
 
         memo = [ [0 for j in range(n+1)] for i in range(m+1)]
+
         for i in range(m+1):
             # empty and string uptil this index
             memo[i][0] = i

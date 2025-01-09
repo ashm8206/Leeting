@@ -12,13 +12,14 @@ class Solution:
             
             if i < len(s) and (s[i]==p[j] or p[j]=="?"):
                 dp[(i,j)] = dfs(i+1,j+1)
-                return dp[(i,j)]
             
             if p[j]=="*":
                
                 dp[(i,j)]  =  dfs(i, j+1) or ( i < len(s) and dfs(i+1, j))
-                return  dp[(i,j)]
+              
 
+            if (i,j) in dp and dp[(i,j)]:
+                return True
             # if it  doesnt match return False
             dp[(i,j)]= False
             return  dp[(i,j)]

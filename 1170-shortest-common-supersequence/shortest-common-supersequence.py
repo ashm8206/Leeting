@@ -1,60 +1,49 @@
 class Solution:
     def shortestCommonSupersequence(self, str1: str, str2: str) -> str:
         
-        m = len(str1)
-        n = len(str2)
-
-        dp = [ [0 for j in range(n+1)]for i in range(m+1)]
-
-        for i in range(m+1):
-            dp[i][0] = 0
-
-        for j in range(n+1):
-            dp[0][j] = 0
-
         
-        for i in range(1,m+1):
-            for j in range(1,n+1):
+        A, B = str1, str2
+        def lcs(A,B):
+            n = len(str1)
+            m = len(str2)
+            A, B = str1, str2
 
-                
-                if str1[i-1]==str2[j-1]:
-                    dp[i][j]= 1 + dp[i-1][j-1]
-                else:
-                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-
-       
-        i = m
-        j = n
-        seq = []
-        lcs = []
-
-        while  i > 0 and j >  0:
-           
-
-            if str1[i-1]==str2[j-1]:
-                seq.append(str1[i-1])
-                lcs.append(str1[i-1])
-                i-=1
-                j-=1
+            dp = [['' for j in range(m+1)] for i in range(n+1)]
             
-            
-            elif dp[i-1][j] > dp[i][j-1]:
-                seq.append(str1[i-1])
-                i-=1
-            else:
-                seq.append(str2[j-1])
-                j-=1
+            for i in range(n - 1, -1, -1):
+                for j in range(m - 1, -1, -1):
+
+                    if A[i] == B[j]:
+                        dp[i][j] = A[i] + dp[i + 1][j + 1]
+                    else:
+                        if len(dp[i][j+1]) >= len(dp[i+1][j]):
+                            dp[i][j] = dp[i][j+1] 
+                        else:
+                            dp[i][j] = dp[i+1][j]
+             
+            return dp[0][0]
+  
+        i = j = 0
+        result = []
+        
     
-        # print("".join(reversed(lcs)))
-      
-        while i > 0:
-            seq.append(str1[i-1])
-            # print(str1[i-1])
-            i-=1
-        while j > 0:
-            seq.append(str2[j-1])
-            # print(str2[j-1])
-            j-=1
-
-        return  ''.join(reversed(seq))
-        # return dp[m][n]
+        # Iterate through the LCS and build the supersequence
+        for c in lcs(A, B):
+            # Add characters from A until we find the common character
+            while A[i] != c:
+                result.append(A[i])
+                i += 1
+            
+            # Add characters from B until we find the common character
+            while B[j] != c:
+                result.append(B[j])
+                j += 1
+            
+            # Add the common character and advance both pointers
+            result.append(c)
+            i += 1
+            j += 1
+        
+        # Add remaining characters from both strings
+        print(lcs(A,B))
+        return ''.join(result) + A[i:] + B[j:]

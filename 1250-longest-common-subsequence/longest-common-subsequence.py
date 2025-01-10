@@ -19,53 +19,37 @@ class Solution:
 
         # Tabulation
 
-        # n = len(text1)
-        # m = len(text2)
+        n = len(text1)
+        m = len(text2)
 
-        # dp = [ [-1 for j in range(n+1)]for i in range(m+1)]
+        dp = [ [0 for j in range(n+1)]for i in range(m+1)]
 
-        # for i in range(m+1):
-        #     dp[i][0] = 0
+     
+        
+        for i in range(m-1, -1, -1):
+            for j in range(n-1,-1,-1):
 
-        # for j in range(n+1):
-        #     dp[0][j] = 0
+                if text1[j]==text2[i]:
+                    dp[i][j]= 1 + dp[i+1][j+1]
+                else:
+                    dp[i][j] = max(dp[i+1][j], dp[i][j+1])
+        return dp[0][0]
 
         
-        # for i in range(1,m+1):
-        #     for j in range(1, n+1):
-
-        #         if i==m+1 or j ==n+1:
-        #             return 0
-                
-        #         if text1[j-1]==text2[i-1]:
-        #             dp[i][j]= 1 + dp[i-1][j-1]
-        #         else:
-        #             dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-
-      
-        # return dp[m][n]
+        # Space Optimized Tabulation
 
         n = len(text1)
         m = len(text2)
 
         prev = [0 for i in range(m+1)]
-        curr = [-1 for i in range(m+1)]
-        curr[0] = 0
-
         
-        for i in range(1,n+1):
-            for j in range(1,m+1):
-                
-                if i==n+1 or j ==m+1:
-                    return 0
+        for i in range(n-1,-1,-1):
+            curr = [0 for i in range(m+1)]
+            for j in range(m-1,-1,-1):
 
-                if text1[i-1]==text2[j-1]:
-                        curr[j] = 1 + prev[j-1]
+                if text1[i]==text2[j]:
+                    curr[j] = 1 + prev[j+1]
                 else:
-                    curr[j] = max(prev[j], curr[j-1])
-
+                    curr[j] = max(prev[j+1], prev[j])
             prev = curr
-            curr = [-1 for i in range(m+1)]
-            curr[0] = 0
-        
-        return prev[-1]
+        return prev[0]

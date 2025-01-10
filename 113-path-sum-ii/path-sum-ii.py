@@ -25,18 +25,18 @@ class Solution:
                 #Boolean Problems vs Filling the list In Problems
             if root.left:
                 helper(root.left,curr_sum,path)
-                path.pop()
+                # path.pop()
             
             if root.right:
                 helper(root.right,curr_sum,path)
-                path.pop()
+                # path.pop()
             #This Step is Important while passing a Mutable list as slate.
             # for #7 the if condition is not met
             # 7 ---> Two null nodes on Left and Right
             # pops 7 off the path
 
             # then for #2  (7 is no longer on the path)
-            # path.pop()
+            path.pop()
 
     
 

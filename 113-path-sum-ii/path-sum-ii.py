@@ -19,19 +19,27 @@ class Solution:
 
             if root.left is None and root.right is None:
                 if curr_sum == targetSum:
-                    res.append(list(path)) # new list 
+                    res.append(path[:]) # new list 
         
 
                 #Boolean Problems vs Filling the list In Problems
-            helper(root.left,curr_sum,path)
-            helper(root.right,curr_sum,path)
+            if root.left:
+                helper(root.left,curr_sum,path)
+                path.pop()
+            
+            if root.right:
+                helper(root.right,curr_sum,path)
+                path.pop()
             #This Step is Important while passing a Mutable list as slate.
             # for #7 the if condition is not met
             # 7 ---> Two null nodes on Left and Right
             # pops 7 off the path
 
             # then for #2  (7 is no longer on the path)
-            path.pop()
+            # path.pop()
+
+    
+
         
         helper(root,curr_sum,path)
         return res

@@ -60,26 +60,11 @@ class Solution:
         # return dp[0][0] == 1
 
 
-        if abs(len(s)-len(t))>=2 or t==s:
-            return False
+        if abs(len(s) - len(t)) > 1 or s==t: return False
+
+        if len(s) < len(t): s,t=t,s
+
         
-        i,j=0,0        
-        edited=False
-        
-        while i < len(s) and j <len(t):
-            if s[i]!=t[j]:
-                if not edited: #this is the first time a character is found different
-                   edited =True
-                else:
-                    #found more than 1 character different return False
-                    return False
-                if len(s)>=len(t):
-                    i+=1
-                if len(s)<=len(t):
-                    j+=1
-                    
-            else:
-                i+=1
-                j+=1
-                
+        for i in range(len(t)):
+            if s[i]!=t[i]: return s[i+1:] == t[i:] or s[i+1:] == t[i+1:]
         return True

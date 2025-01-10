@@ -6,32 +6,35 @@
 #         self.right = right
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        count = 0
-        curr_sum = 0
-
-        def computeSumInPath(root, curr_sum):
-            nonlocal count
+        
+        # hmap = {0:1}
+        hmap = {}
+        ans = 0
+        
+        
+        def helper(root, curr_sum):
+            nonlocal ans
             if not root:
-                return 0
-
+                return
+            
             curr_sum += root.val
 
+            diff = curr_sum - targetSum
+
             if curr_sum == targetSum:
-                count+=1
-        
-            computeSumInPath(root.left,curr_sum)
-            computeSumInPath(root.right,curr_sum)
-        
-        
-        def computeEachNode(root):
-            if not root:
-                return 
-            computeSumInPath(root,0)
-            computeEachNode(root.left)
-            computeEachNode(root.right)
+                ans+=1
 
+            if diff in hmap:
+                ans+= hmap[diff]
+            
+            hmap[curr_sum] = hmap.get(curr_sum, 0) + 1
 
-        computeEachNode(root)
-        # Over all nodes it will check ComputeSumInPath
+            
+            
+            helper(root.left, curr_sum)
+            helper(root.right, curr_sum)
 
-        return count
+            hmap[curr_sum]-=1  
+            # remove the leaf node, before proceededing to parallel subtree
+        helper(root, 0)
+        return ans

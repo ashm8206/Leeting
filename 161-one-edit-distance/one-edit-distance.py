@@ -62,9 +62,12 @@ class Solution:
 
         if abs(len(s) - len(t)) > 1 or s==t: return False
 
-        if len(s) < len(t): s,t=t,s
+        i, j = 0, 0        # pointers to slide over the strings
 
-        
-        for i in range(len(t)):
-            if s[i]!=t[i]: return s[i+1:] == t[i:] or s[i+1:] == t[i+1:]
-        return True
+        # slide i on s & t till they have different character
+        while i < m and j < n and s[i] == t[j]:
+            i += 1
+            j += 1
+
+
+        return s[i:] == t[j + 1:] or s[i + 1:] == t[j:] or s[i + 1:] == t[j + 1:]

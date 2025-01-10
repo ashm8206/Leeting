@@ -7,7 +7,7 @@
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         
-        # hmap = {0:1}
+        # hmap = {0:0}
         hmap = {}
         ans = 0
         
@@ -18,7 +18,6 @@ class Solution:
                 return
             
             curr_sum += root.val
-
             diff = curr_sum - targetSum
 
             if curr_sum == targetSum:
@@ -27,9 +26,8 @@ class Solution:
             if diff in hmap:
                 ans+= hmap[diff]
             
-            hmap[curr_sum] = hmap.get(curr_sum, 0) + 1
 
-            
+            hmap[curr_sum] = hmap.get(curr_sum, 0) + 1
             
             helper(root.left, curr_sum)
             helper(root.right, curr_sum)

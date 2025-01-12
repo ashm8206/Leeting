@@ -11,13 +11,12 @@ class Solution:
         
         l = self.minDepth(root.left)
         r = self.minDepth(root.right)
-        
         if l == 0:
             return 1 + r
-        elif r == 0:
+        if r == 0:
             return 1 + l
-        return 1 + min(l, r)
         
+        return 1 + min(l, r)
 
        # Python3
 # class Solution:

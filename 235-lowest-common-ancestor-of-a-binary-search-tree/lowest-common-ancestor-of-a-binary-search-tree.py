@@ -22,16 +22,13 @@ class Solution:
 
         # Method II
 
-        p_val = p.val
-        q_val = q.val
-        node = root
+        curr = root
 
-        while node:
-
-            parent_val = node.val
-            if p_val < parent_val and q_val < parent_val:
-                node = node.left
-            elif p_val > parent_val and q_val > parent_val:
-                node = node.right
-            else:
-                return node
+        while curr:
+            if p.val > curr.val and q.val > curr.val:
+                curr = curr.right
+            elif p.val < curr.val and q.val < curr.val:
+                curr = curr.left
+            elif (p.val >= curr.val and q.val <= curr.val) or (p.val <= curr.val and q.val >= curr.val):
+                return curr
+        return None

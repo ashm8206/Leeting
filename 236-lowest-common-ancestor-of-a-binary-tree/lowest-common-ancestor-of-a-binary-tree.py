@@ -25,6 +25,8 @@ class Solution:
         # return left or right # one of them comes before case II
 
 
+        # Method II
+
         self.ans = None
 
         def helper(root, p, q): 

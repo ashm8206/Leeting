@@ -32,6 +32,9 @@ class Solution:
             if qLeft or qRight:
                 qseen = True
 
+            
+            # we can combine them^^
+
             # if pLeft or pRight or root == p:
             #     pseen = True
             

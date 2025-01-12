@@ -7,44 +7,48 @@
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         
-        self.ans = 0
-        def helper(root):
-            nonlocal k
-            if not root:
-                return None
-            helper(root.left)
+        # self.ans = 0
+        # def helper(root):
+        #     nonlocal k
+        #     if not root:
+        #         return None
+        #     left = helper(root.left)
+        #     if left is not None:
+        #         return left
+        #     k-=1
+        #     if k==0:
+        #         # self.ans = root.val
+        #         return root.val
+        #     return helper(root.right)
+        
+        # # helper(root)
+        # # return self.ans
+        # return helper(root)
+        
+
+        curr = root
+        stack = []
+
+        while stack  or curr:
+
+            while curr:
+                # if you no longer can go left
+                # you are at the left most node / at the parent VR
+                # where more nodes in the right subtree
+
+                # keep a track of what you saw in the stack
+                # You may need to pop it later
+                stack.append(curr)
+                # keep track of it before you curr = curr.left
+
+                curr = curr.left
+
+            curr = stack.pop()
             k-=1
             if k==0:
-                self.ans = root.val
-            helper(root.right)
+                return curr.val
+            curr = curr.right # lefmost node
         
-        helper(root)
-        return self.ans
-        
-
-        
-        # if not root:
-        #     return -1
-
-        # curr = root
-        # stack = [curr]
-
-        # while True:
-
-        #     if curr:
-        #         stack.append(curr)
-        #         curr = curr.left
-            
-        #     elif stack:
-        #         curr = stack.pop()
-        #         k-=1 
-        #         if k==0:
-        #             return curr.val
-                
-            
-        #         curr = curr.right
-        #     else:
-        #         break
 
 
         

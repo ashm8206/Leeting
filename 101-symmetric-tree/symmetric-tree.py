@@ -14,9 +14,8 @@ class Solution:
 
             if t1 is None or t2 is None:
                 return False
-            if t1.val == t2.val and isMirror(t1.left,t2.right) and isMirror(t1.right,t2.left):
-                return True
-            return False
+
+            return t1.val == t2.val and isMirror(t1.left,t2.right) and isMirror(t1.right,t2.left)
         return isMirror(root.left, root.right)
 
         # def isMirror(t1, t2):

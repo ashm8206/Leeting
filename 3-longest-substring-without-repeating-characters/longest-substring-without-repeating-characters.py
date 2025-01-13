@@ -1,34 +1,52 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        
+
         maxLen = 0
+        hmap = defaultdict(int)
         n = len(s)
         L = 0
-        # if n < 1:
-        #     return maxLen 
-            # return 0
-        
-        # L, R  = 0, 0
-
-
-
-        hmap = defaultdict(int)
-    
         for R in range(n):
-            hmap[s[R]] += 1
+            hmap[s[R]]+=1
+            while hmap[s[R]] > 1:
+                hmap[s[L]] -=1
+                L+=1
+                if hmap[s[L]] == 0:
+                    del hmap[s[L]]
+            maxLen = max(maxLen, R-L+1)
+        return maxLen
 
-            while hmap[s[R]] > 1: # chars are repeated
-                # shrink window 
-                # print(s[L:R+1], s[R])
-                hmap[s[L]]-=1
-                L = L + 1
-                # print(s[L:R+1], s[R])
-                # print("--")
+
+
+
+
+        
+        # maxLen = 0
+        # n = len(s)
+        # L = 0
+        # # if n < 1:
+        # #     return maxLen 
+        #     # return 0
+        
+        # # L, R  = 0, 0
+
+
+
+        # hmap = defaultdict(int)
+    
+        # for R in range(n):
+        #     hmap[s[R]] += 1
+
+        #     while hmap[s[R]] > 1: # chars are repeated
+        #         hmap[s[L]]-=1
+        #         L += 1
+        #         if hmap[s[L]]== 0:
+        #             del hmap[s[L]]
                 
             
-            maxLen = max(maxLen, R-L+1)
         
-        return maxLen
+        #     maxLen = max(maxLen, R-L+1)
+        
+        # return maxLen
         
         # Testcase: 
         # dvdf : Just maintaining set wont work

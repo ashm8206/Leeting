@@ -3,6 +3,7 @@ class Solution:
     def smallestRange(self, nums: List[List[int]]) -> List[int]:
         
         ans = [-10**6, 10**6]
+        
         maxVal = -10**6
 
         pq = []

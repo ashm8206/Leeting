@@ -22,8 +22,8 @@ class MyCalendar:
         # Check for conflicts by scanning through all times
         count = 0
         for time, value in self.events.items():
-            if time > end:
-                break
+            # if time > end:
+            #     break
             count += value
             if count > 1:
                 # Revert the changes if there's a conflict

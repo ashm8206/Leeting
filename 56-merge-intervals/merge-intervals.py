@@ -1,6 +1,28 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         
+        n = len(intervals)
+
+        intervals = sorted(intervals,key=lambda x: x[0])
+        result = []
+        if n == 1:
+            return intervals
+        else:
+            result.append(intervals[0])
+
+        for start, end in intervals:
+            if result and start <= result[-1][1]:
+                # keep processing the stack
+                new_start = min(result[-1][0], start)
+                new_end = max(result[-1][1], end)
+                result.pop()
+                result.append([new_start, new_end])
+            else:
+                result.append([start,end])
+        return result
+
+
+
         # Line-Sweep
         count = 0
         events = SortedList()
@@ -24,26 +46,6 @@ class Solution:
                 else:
                     res.append([start, events[i][0]])
         return res
- 
-        n = len(intervals)
-
-        intervals = sorted(intervals,key=lambda x: x[0])
-        result = []
-        if n == 1:
-            return intervals
-        else:
-            result.append(intervals[0])
-
-        for start, end in intervals:
-            if result and result[-1][0] <= end:
-                # keep processing the stack
-                new_start = min(result[-1][0], start)
-                new_end = max(result[-1][1], end)
-                result.pop()
-                result.append([new_start, new_end])
-            else:
-                result.append([start,end])
-        return result
 
                 
            

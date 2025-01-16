@@ -29,21 +29,21 @@ class Solution:
 
         pq = []
 
-        for start, end, profit in jobs:
+        for start, end, curr_profit in jobs:
             # Among all Overlapping options available
             # pop all non-overlapping intervals with curr
             # and extend curr with Most profitable Non-overlapping interval
 
-            while pq and start >= pq[0][0]: # start >= end Non-overlap condi
+            while pq and pq[0][0] <= start: # start >= end Non-overlap condi
                 _, val = heappop(pq)
                 maxVal = max(val, maxVal)
             
             # extend chain
-            heappush(pq,(end, maxVal+profit))
+            heappush(pq,(end, maxVal+curr_profit))
 
             # loop invariant: After each iteration heap will have all overlapping interval chains
 
-            maxProfit = max(maxProfit, maxVal+profit)
+            maxProfit = max(maxProfit, maxVal+curr_profit)
         return maxProfit
 
 

@@ -57,8 +57,8 @@ class Trie:
             else:
                 curr = curr.children[ch]
                 curr.prefix_count -=1
-        if curr.is_end:
-            curr.word_count-=1
+        # if curr.is_end:
+        curr.word_count-=1
         
 
         # node = self.root

@@ -23,6 +23,7 @@ class Solution:
             
             new_start = max(A[currA][start],B[currB][start])
             new_end = min(A[currA][end],B[currB][end]) 
+
             if new_start <= new_end:
                 result.append([new_start,new_end])
             # https://www.piratekingdom.com/leetcode/tricks/is-overlap
@@ -32,7 +33,8 @@ class Solution:
             # [1,5], [6,10] --> Good Test case, since values need to be strictly increasing
 
             if A[currA][end] < B[currB][end]:
-                # increment the smaller endpt as it has does its interction if it had to
+                # increment the smaller endpt 
+                # as it has wont intersect any further
                 currA+=1
             else:
                 currB+=1

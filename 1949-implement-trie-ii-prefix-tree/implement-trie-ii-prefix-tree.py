@@ -2,8 +2,8 @@ class TrieNode:
 
     def __init__(self):
         self.children = dict()
-        self.count = 0
         self.is_end = False
+        self.prefix_count = 0
         self.word_count = 0
 
 class Trie:
@@ -18,7 +18,8 @@ class Trie:
             if char not in node.children:
                 node.children[char] =  TrieNode()
             node = node.children[char]
-            node.count+=1
+            node.prefix_count+=1
+
         node.is_end = True
         node.word_count+=1
         
@@ -44,20 +45,32 @@ class Trie:
                 return 0
             node = node.children[char]
 
-        return node.count
+        return node.prefix_count
 
     def erase(self, word: str) -> None:
 
-        node = self.root
+        curr = self.root
 
-        for char in word:
-            if char not in node.children:
+        for ch in word:
+            if ch not in curr.children:
                 return
-            node = node.children[char]
-            node.count-=1
+            else:
+                curr = curr.children[ch]
+                curr.prefix_count -=1
+        if curr.is_end:
+            curr.word_count-=1
+        
+
+        # node = self.root
+
+        # for char in word:
+        #     if char not in node.children:
+        #         return
+        #     node = node.children[char]
+        #     node.prefix_count-=1
 
        
-        node.word_count -=1
+        # node.word_count -=1
 
         
 

@@ -1,7 +1,8 @@
 class TrieNode:
     def __init__(self):
+        self.children = dict()
         self.isEnd = False
-        self.next = [None] * 26  # For lowercase English letters
+        
 
 class Trie:
     def __init__(self):
@@ -10,10 +11,10 @@ class Trie:
     def insert(self, word: str):
         node = self.root
         for char in word:
-            idx = ord(char) - ord('a')
-            if not node.next[idx]:
-                node.next[idx] = TrieNode()
-            node = node.next[idx]
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            # node = node.next[idx]
+            node = node.children[char]
         node.isEnd = True
 
 class Solution:
@@ -37,12 +38,13 @@ class Solution:
 
         # Iterate through the string from the current start index
         for i in range(start, self.n):
-            idx = ord(s[i]) - ord('a')
+            # idx = ord(s[i]) - ord('a')
+            char = s[i]
             # If the current character is not in the Trie, break the loop
-            if not node.next[idx]:
+            if char not in node.children:
                 break
 
-            node = node.next[idx]
+            node = node.children[char]
             current_prefix += s[i]
 
             # If we find a valid word (end of a word in the Trie)

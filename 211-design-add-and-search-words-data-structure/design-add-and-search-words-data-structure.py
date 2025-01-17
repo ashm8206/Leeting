@@ -2,6 +2,7 @@ class TrieNode:
     def __init__(self):
         self.children = dict()
         self.is_end = False
+        # self.word = []
 
 class WordDictionary:
 
@@ -15,9 +16,12 @@ class WordDictionary:
                 node.children[c] = TrieNode()
             node = node.children[c]
         node.is_end = True
+        # node.word.append(word)
 
     def search(self, word: str) -> bool:
+        # res = []
         return self.searchWord(word, self.root)
+
     
     def searchWord(self, word, root):
         node = root
@@ -30,7 +34,11 @@ class WordDictionary:
                 return False # any other character, or match not found
             else:
                 node = node.children[c]
-        return node.is_end==True
+
+        if node.is_end:
+            # res.append(node.word
+            return True
+        return False
         
 
 

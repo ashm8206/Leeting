@@ -36,6 +36,10 @@ class Solution:
                 if prev_operation == '-':
                     result += last_num
                     last_num = -cur_num
+                elif prev_operation == "+":
+                    result += last_num
+                    last_num = cur_num
+
                 elif prev_operation == '*':
                     # we wait before adding these 
                     # We just evalute based on curr_num == op2
@@ -43,14 +47,14 @@ class Solution:
                     #  Store result in op1 the next time we see an operator (+ or -)
                     # we dont add these to theresult just yet, as there could be another string of operations '*' or '/'following these
                     last_num *= cur_num
-                elif prev_operation =='/':
+                else:
+                    #  prev_operation =='/':
                     # operation is '/'
 
                     last_num = int(last_num / cur_num)
                     #  Int makes sure the answer tends towards 0
-                else:
-                    result += last_num
-                    last_num = cur_num
+                
+                    
 
                 if c == ')':
                     #  yes now we have curr_num == Result + Last_num  whatever was in ()

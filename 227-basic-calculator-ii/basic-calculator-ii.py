@@ -4,19 +4,19 @@ class Solution:
         
         # stack = []
         pre_operation = '+'
-        curr_num = ''
+        curr_num = 0
         last_num = 0
         result = 0
         s += '+'
         for ch in s:
     
             if ch.isdigit():
-                curr_num = curr_num + ch
+                curr_num = curr_num * 10 +  int(ch)
 
-            if ch in ('+','-','*','/'):
+            elif ch in ('+','-','*','/'):
                 
-                # Excecute the previous operation 1st
-                curr_num = int(curr_num)
+                # curr_num = int(curr_num)
+
                 if pre_operation == '-':
                     # stack.append(-curr_num)
                     result += last_num
@@ -37,14 +37,11 @@ class Solution:
                     # stack.append(int(curr_num))
                     result += last_num
                     last_num = curr_num
+
                 # update the operation
                 # update the curr_number
-                curr_num = ''
+                curr_num = 0
                 pre_operation = ch
-        
-       
-        # while stack:
-        #     result += stack.pop()
 
         return result + last_num
         

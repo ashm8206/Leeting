@@ -1,65 +1,127 @@
-class TrieNode:
-    def __init__(self):
-        self.children = {}
-        # Keep track of which strings contain this substring
-        self.string_indices = set()
-
+from collections import defaultdict
 class Solution:
     def shortestSubstrings(self, arr: list[str]) -> list[str]:
-        def insert_all_substrings(s: str, string_idx: int, root: TrieNode):
-            # Insert all possible substrings of s into the trie
-            n = len(s)
-            for i in range(n):  # starting position
-                for j in range(i + 1, n + 1):  # ending position
-                    curr = root
-                    # Add this substring to trie
-                    for char in s[i:j]:
-                        if char not in curr.children:
-                            curr.children[char] = TrieNode()
-                        curr = curr.children[char]
-                        curr.string_indices.add(string_idx)
-        
-        def find_shortest_unique(s: str, string_idx: int, root: TrieNode) -> str:
-            n = len(s)
-            shortest = None
-            
-            # Try all possible substrings
-            for i in range(n):  # start
-                for j in range(i + 1, n + 1):  # end
-                    substr = s[i:j]
-                    
-                    # Check if this substring exists in trie and is unique
-                    curr = root
-                    is_unique = True
-                    for char in substr:
-                        if char not in curr.children:
-                            is_unique = False
-                            break
-                        curr = curr.children[char]
-                    
-                    if not is_unique:
-                        continue
-                        
-                    # Check if this substring only appears in current string
-                    if curr.string_indices == {string_idx}:
-                        if shortest is None or (len(substr) < len(shortest)) or \
-                           (len(substr) == len(shortest) and substr < shortest):
-                            shortest = substr
-                            
-            return shortest if shortest else ""
 
-        # Build trie with all substrings
-        root = TrieNode()
-        for i, s in enumerate(arr):
-            insert_all_substrings(s, i, root)
+
+        n = len(arr)
+        ans = [""]*n
+        all_subtr = defaultdict(list)
+        seen = set()
+
+        for i in range(n):
+            word_len = len(arr[i])
+            word = arr[i]
+            for s in range(word_len):
+                for e in range(s+1,word_len+1):
+                    substr = word[s:e]
+                    if (i, substr) not in seen:
+                        all_subtr[substr].append(i)
+                        seen.add((i, substr))
         
-        # Find shortest unique substring for each string
-        answer = []
-        for i, s in enumerate(arr):
-            answer.append(find_shortest_unique(s, i, root))
+        # print(all_subtr)
+        
+        for subtr, indices_list in all_subtr.items():
+            if len(indices_list)==1:
+                # get the word index it belongs to
+                idx = indices_list[0]
+
+                if not ans[idx] or len(subtr) < len(ans[idx]) or len(subtr)== len(ans[idx]) and subtr < ans[idx]:
+                    ans[idx] = subtr
+        return ans
+
+
+
+        # n = len(arr)
+        # ans = [""] * n
+        # all_substrings = defaultdict(list)
+        # # allsubstrings from  each word in the array 
+        # # and where they came from
+
+
+        # # Collect all substrings for each string in arr
+        # for i in range(n):
+        #     s = arr[i]
+        #     length = len(s)
+        #     seen = set()
+        #     for start in range(length):
+        #         for end in range(start + 1, length + 1):
+        #             substring = s[start:end]
+        #             if substring not in seen:
+        #                 all_substrings[substring].append(i)
+        #                 seen.add(substring)
+
+        # # Find the shortest unique substring for each string
+        # for substr, indices in all_substrings.items():
+        #     if len(indices) == 1:  # Unique to one string
+        #         idx = indices[0]
+        #         if not ans[idx] or (len(substr) < len(ans[idx]) or 
+        #                             (len(substr) == len(ans[idx]) and substr < ans[idx])):
+        #             ans[idx] = substr
+
+        # return ans
+
+# class TrieNode:
+#     def __init__(self):
+#         self.children = {}
+#         # Keep track of which strings contain this substring
+#         self.string_indices = set()
+
+# class Solution:
+#     def shortestSubstrings(self, arr: list[str]) -> list[str]:
+#         def insert_all_substrings(s: str, string_idx: int, root: TrieNode):
+#             # Insert all possible substrings of s into the trie
+#             n = len(s)
+#             for i in range(n):  # starting position
+#                 for j in range(i + 1, n + 1):  # ending position
+#                     curr = root
+#                     # Add this substring to trie
+#                     for char in s[i:j]:
+#                         if char not in curr.children:
+#                             curr.children[char] = TrieNode()
+#                         curr = curr.children[char]
+#                         curr.string_indices.add(string_idx)
+        
+#         def find_shortest_unique(s: str, string_idx: int, root: TrieNode) -> str:
+#             n = len(s)
+#             shortest = None
             
-        return answer
+#             # Try all possible substrings
+#             for i in range(n):  # start
+#                 for j in range(i + 1, n + 1):  # end
+#                     substr = s[i:j]
+                    
+#                     # Check if this substring exists in trie and is unique
+#                     curr = root
+#                     is_unique = True
+#                     for char in substr:
+#                         if char not in curr.children:
+#                             is_unique = False
+#                             break
+#                         curr = curr.children[char]
+                    
+#                     if not is_unique:
+#                         continue
+                        
+#                     # Check if this substring only appears in current string
+#                     if curr.string_indices == {string_idx}:
+#                         if shortest is None or (len(substr) < len(shortest)) or \
+#                            (len(substr) == len(shortest) and substr < shortest):
+#                             shortest = substr
+                            
+#             return shortest if shortest else ""
+
+#         # Build trie with all substrings
+#         root = TrieNode()
+#         for i, s in enumerate(arr):
+#             insert_all_substrings(s, i, root)
         
+#         # Find shortest unique substring for each string
+#         answer = []
+#         for i, s in enumerate(arr):
+#             answer.append(find_shortest_unique(s, i, root))
+            
+#         return answer
+
 # class Trie:
 #     def __init__(self):
 #         self.children = [None] * 26  # Array of 26 possible characters

@@ -1,5 +1,65 @@
 class Solution:
     def calculate(self, s: str) -> int:
+
+        stack = []
+
+        result = 0
+        prev_oper = "+"
+        last_num = 0
+        curr_num = 0
+        s+="+"
+
+        for c in s:
+            if c == " ":
+                continue
+            
+            if c.isdigit():
+                curr_num = curr_num * 10 + int(c)
+            
+            elif c == "(":
+                stack.append(result)
+                stack.append(last_num)
+                stack.append(prev_oper)
+
+                result = 0
+                last_num = 0
+                prev_oper = "+"
+            
+            elif c in ")+-*/":
+
+                if c == "-":
+                    result+=last_num
+                    last_num = -curr_num
+
+                elif c== "+":
+                    result+=last_num
+                    last_num = curr_num
+                elif c=="*":
+
+                    last_num *= curr_num
+                else:
+                    last_num = last_num / int(c) # why dont we add to result ?
+
+
+                if c == ")":  # why is this separate from the previous elif
+                    cur_num = result + last_num
+                    prev_operation = stack.pop()
+                    last_num = stack.pop()
+                    result = stack.pop()
+                else:
+                    cur_num = 0
+                    prev_oper = c
+        
+        return result + last_num
+                
+                
+
+
+
+
+
+
+    def calculate(self, s: str) -> int:
         stack = []
 
         result = 0

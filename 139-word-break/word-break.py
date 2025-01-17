@@ -7,6 +7,21 @@ class Solution:
 
         memo = {}
 
+        def helper(idx):
+            if idx ==n:
+                return True
+            
+            if idx in memo:
+                return memo[idx]
+
+            found = False
+            for i in range(idx, n):
+                if s[idx:i+1] in wordDict:
+                    if helper(i+1):
+                        found = True
+            memo[idx] = found
+            return memo[idx]
+
         # def helper(start):
 
         #     if start >= n:

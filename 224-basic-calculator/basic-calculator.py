@@ -3,15 +3,16 @@ class Solution:
 
         stack = []
 
-        result = 0
-        prev_oper = "+"
-        last_num = 0
-        curr_num = 0
+        result = 0 # why do we need this ?
+        last_num = 0 # why do we need this ?
+
+        curr_num = 0 
+        prev_oper = "+" # why do we need this ?
         s+="+"
 
         for c in s:
-            if c == " ":
-                continue
+            # if c == " ":
+            #     continue
             
             if c.isdigit():
                 curr_num = curr_num * 10 + int(c)

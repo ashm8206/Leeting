@@ -18,9 +18,7 @@ class Solution:
                     j += 1
                 else:
                     i += 1
-            if j == len(p):
-                return True
-            return False
+            return j==len(p)
         lo = 0
         hi = len(removable)
         while lo < hi:

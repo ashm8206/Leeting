@@ -3,8 +3,11 @@ class Solution:
         suffix = [-1]*len(s)
         j = len(t)-1
         for i in reversed(range(len(s))): 
-            if 0 <= j and s[i] == t[j]: j -= 1
+            if 0 <= j and s[i] == t[j]: 
+                j -= 1
             suffix[i] = j 
+
+        
         ans = j + 1
         j = 0 
         for i, ch in enumerate(s): 

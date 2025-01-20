@@ -2,6 +2,34 @@ from heapq import heappush, heappop
 class Solution:
     def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
 
+        jobs = [(s,e,p) for s, e , p in zip(startTime,endTime,profit)]
+
+        jobs.sort(key = lambda x: x[0])
+        maxProfit = 0
+        maxVal = 0
+        maxheap = []
+
+
+        for s, e, p in jobs:
+
+            while maxheap and maxheap[0][0] <= s: 
+                # while non-overlapping: select the best
+                _, curr_profit  = heapq.heappop(maxheap)
+                maxVal = max(curr_profit, maxVal)
+            
+            heapq.heappush(maxheap,(e, p+maxVal))
+
+            maxProfit = max(maxProfit,p+maxVal)
+        return maxProfit
+
+
+
+
+
+
+
+
+
         # LIS - Like Pattern
         # Keep all overlapping intervals in a Heap
         # for each new curr interval, 

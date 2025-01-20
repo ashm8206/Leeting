@@ -36,14 +36,14 @@ class Solution:
                     # we dont care about the reverse case
                     # grid1[1] and grid2[0]
 
-        print(grid2)
+        # print(grid2)
         count = 0
         visited = set()
         for r in range(m):
             for c in range(n):
                 if grid2[r][c]==1 and (r,c) not in visited:
                     dfs(r,c)
-                    print(r,c)
+                    # print(r,c)
                     count+=1
         return count
     

@@ -22,7 +22,7 @@ class Solution:
                     # keep the job ptr here
             else:
                 return total_profit
-        return total_profit
+        # return total_profit
 
 
 

@@ -13,12 +13,12 @@ class FileSystem:
     def ls(self, path: str) -> List[str]:
     
         node = self.root
-        if path!="/":
-            folders = path.split("/")
-            for i, f in enumerate(folders):
-                if f == "":
-                    continue
-                node = node.children[f] # keep going down
+        # if path!="/":
+        folders = path.split("/")
+        for i, f in enumerate(folders):
+            if f == "":
+                continue
+            node = node.children[f] # keep going down
         # return  else:
             if not node.is_dir:
                 return [f] # return a list that contains this files name

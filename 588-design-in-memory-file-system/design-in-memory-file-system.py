@@ -13,15 +13,19 @@ class FileSystem:
     def ls(self, path: str) -> List[str]:
     
         node = self.root
-        # if path!="/":
         folders = path.split("/")
+
         for i, f in enumerate(folders):
             if f == "":
                 continue
-            node = node.children[f] # keep going down
-        # return  else:
+
+            node = node.children[f] 
+  
             if not node.is_dir:
-                return [f] # return a list that contains this files name
+                return [f]
+            # if anytime you find a path that contains name
+            # return it
+            
         return [k for k, v in sorted(node.children.items())]
 
     def mkdir(self, path: str) -> None:
@@ -35,7 +39,8 @@ class FileSystem:
             if f not in node.children:
                 node.children[f] = TrieNode()
             node = node.children[f] # if it exists move or move after creation
-            node.is_dir = True
+            node.is_dir = True 
+            # all on this path are directories
 
     def addContentToFile(self, filePath: str, content: str) -> None:
         node = self.root

@@ -17,7 +17,8 @@ class Solution:
                 processing_time, idx = heapq.heappop(h)
                 time+=processing_time
                 res.append(idx)
-            elif i < n:
+            else:
+                
                 time = tasks[i][0]
         return res
 

@@ -90,7 +90,7 @@ class Solution:
                     total_buildings+=1
                     bfs(i,j, m, n)
 
-        #print(dist)
+        # print(distance)
         minimum = float('inf')
         for i in range(m):
             for j in range(n):

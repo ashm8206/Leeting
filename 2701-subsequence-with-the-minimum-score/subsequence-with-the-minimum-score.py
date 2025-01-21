@@ -7,7 +7,7 @@ class Solution:
         
         # First pass: build suffix array going from right to left
         right = len(t) - 1  # pointer for string t
-        for i in reversed(range(len(s))):
+        for i in range(len(s)-1, -1, -1):
             if 0 <= right and s[i] == t[right]:
                 right -= 1  # found a match, move t pointer left
             suffix[i] = right  

@@ -15,6 +15,7 @@ class Solution:
                 x, u = heappop(pq)
                 if dist[u] < x:
                     continue
+
                 for v, w in graph[u]: 
                     if x+w < dist[v]: 
                         dist[v] = x+w
@@ -22,4 +23,13 @@ class Solution:
             return dist 
         
         dist0, dist1 = fn(0), fn(n-1)
-        return [dist0[n-1] < inf and (dist0[u] + w + dist1[v] == dist0[n-1] or dist0[v] + w + dist1[u] == dist0[n-1]) for u, v, w in edges]
+
+    
+        res = []
+        for u, v, w in edges:
+            if dist0[n-1] < inf and ( dist0[u] + w + dist1[v] == dist0[n-1] or dist0[v] + w + dist1[u] == dist0[n-1]):
+                res.append(True)
+            else:
+                res.append(False)
+        return res
+        # return [dist0[n-1] < inf and (dist0[u] + w + dist1[v] == dist0[n-1] or dist0[v] + w + dist1[u] == dist0[n-1]) ]

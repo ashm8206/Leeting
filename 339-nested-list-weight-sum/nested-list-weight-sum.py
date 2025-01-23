@@ -46,20 +46,20 @@ from collections import deque
 class Solution:
     def depthSum(self, nestedList: List[NestedInteger]) -> int:
 
-        # self._integerList =[]
+        total = 0
 
-        # def flatten_list(nestedList, level):
-        #     for nestInt in nestedList:
-        #         if nestInt.isInteger():
-        #             self._integerList.append((nestInt.getInteger(),level))
-        #         else:
-        #             flatten_list(nestInt.getList(),level + 1)
+        def helper(nestedList, level):
+            nonlocal total
+            for nextInt in nestedList:
+                if nextInt.isInteger():
+                    total+= (nextInt.getInteger() * level)
+                else:
+                    helper(nextInt.getList(),level + 1)
+        helper(nestedList, 1)
+        return total
 
         
-        # flatten_list(nestedList,1)
-        # #print(self._integerList)
-        # res  = sum([reduce(mul, tup) for tup in self._integerList])
-        # return res
+        
 
         ans = 0
         depth = 1
@@ -74,6 +74,7 @@ class Solution:
                 if x.isInteger(): ans += depth * x.getInteger()
 
                 else: queue.extend(x.getList())
+                
             if queue:
                 depth+=1
         return ans 

@@ -23,12 +23,14 @@ class Solution:
         ]
 
         res = []
+        # 582
+        # D,LXXXII
 
         for val, symb in digits:
+            if num == 0:
+                break
             count, num = divmod(num, val)
-            # print(count, num, val)
             res.append(count * symb)
-        
         return "".join(res)
 
 

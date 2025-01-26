@@ -14,10 +14,7 @@ class Solution:
                     break
             else:
                 res.append(ch)
-            # print(res)
-        # how do you handle sign ?
-        
-        # print(res)
+                
         if len(res) > 0:
             ans = sign*int("".join(res)) 
             if ans < -2**31:

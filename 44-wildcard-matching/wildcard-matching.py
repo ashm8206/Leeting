@@ -15,7 +15,7 @@ class Solution:
             
             if (i,j) in dp:
                 return dp[(i,j)]
-            
+
             if (s[i]==p[j] or p[j]=="?"):
                 dp[(i,j)] = dfs(i+1,j+1)
                 return dp[(i,j)]
@@ -24,11 +24,6 @@ class Solution:
                 dp[(i,j)] = dfs(i, j+1) or dfs(i+1, j)
                 return dp[(i,j)]
             
-            # if i < len(s) and (s[i]==p[j] or p[j]=="?"):
-            #     return dfs(i+1,j+1)
-            
-            # if p[j]=="*":
-            #     return dfs(i, j+1) or ( i < len(s) and dfs(i+1, j))
             dp[(i,j)] = False
             return dp[(i,j)]
     

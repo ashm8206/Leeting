@@ -1,27 +1,45 @@
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
+        
+        if (dividend == -2**31 and divisor == -1): 
+            return 2**31 - 1
+
+        a = abs(dividend)
+        b = abs(divisor)
+        res = 0
+        for x in range(31, -1, -1):    # Loop from 31 down to 0
+            if (a >> x) - b >= 0:    # Check if divisor*2^x fits into current remainder
+                res += 1 << x        # Add 2^x to result
+                a -= b << x    
+        return res if (dividend > 0) == (divisor > 0) else -res
+
+
+
+
+
+
 
 
         # TLE
         # exactly 1 -ve add Negative sign  add -ve at end
-        # negative = 0
+        negative = 0
     
-        # if dividend < 0:
-        #     negative+=1
+        if dividend < 0:
+            negative+=1
 
-        # if divisor < 0:
-        #     negative+=1
+        if divisor < 0:
+            negative+=1
         
-        # quotient = 0
+        quotient = 0
 
-        # while dividend - divisor >=0:
-        #     dividend -= divisor 
-        #     quotient+=1
+        while dividend - divisor >=0:
+            dividend -= divisor 
+            quotient+=1
 
-        # if negative%2:
-        #     return quotient * -1
-        # else:
-        #     return quotient
+        if negative%2:
+            return quotient * -1
+        else:
+            return quotient
 
         # method II 
         # Special case when dividend is equal to divisor
@@ -40,10 +58,13 @@ class Solution:
 
             # Double the value while it is still smaller than the dividend
             while value + value <= dividend:
+                
                 value += value
                 power_of_two += power_of_two
+                # print(value, power_of_two)
 
             # Add the power of two multiples of divisor to the quotient
+            # Value * PowerOfTwo copies, Why poweroFTw, cuz we double
             quotient += power_of_two
 
             # Subtract the value so far from the dividend

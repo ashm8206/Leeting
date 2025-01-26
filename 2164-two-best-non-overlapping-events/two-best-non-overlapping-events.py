@@ -1,9 +1,49 @@
 import heapq
 class Solution:
     def maxTwoEvents(self, events: List[List[int]]) -> int:
+
+        maxProfit = 0
+        maxVal = 0
+
+        events.sort(key = lambda x: x[0])
+
+        n = len(events)
+
+        pq = []
+        for i in range(n):
+            start, end, curr_profit = events[i]
+
+            while pq and  pq[0][0] < start:
+                _, val = heapq.heappop(pq)
+                maxVal = max(maxVal,val)
+            
+            maxProfit = max(maxProfit, curr_profit + maxVal)
+
+            heapq.heappush(pq, (end, curr_profit))
+
+            # while pq and pq[0][0] < start: 
+            #     # noOverlap
+            #     _, val = heapq.heappop(pq)
+            #     maxVal = max(val, maxVal)
+            
+            # maxSum = max(maxSum, curr_profit + maxVal)
+            # # keep the overlapping in a queue
+            # heapq.heappush(pq, (end, curr_profit))
+
+        return maxProfit
+
+
+
+
+
+        # LIS - Like Pattern
+        # Keep all overlapping intervals in a Heap
+        # for each new curr interval, 
+            # check if non-overlapping with all overlapping options in heap
+            # if Non-overlapping, get the maxVal they contribute
         
         events.sort()
-        
+
         maxProfit = 0
         maxVal = 0 
 

@@ -10,6 +10,7 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+
         
         if not root:
             return root
@@ -21,12 +22,10 @@ class Solution:
         while queue:
             length = len(queue)
 
-            # print(length)
             for i in range(length):
                 
                 node = queue.popleft()
 
-                # print(node.val)
                 
                 if node.left:
                     queue.append(node.left)
@@ -34,14 +33,9 @@ class Solution:
                 if node.right:
                     queue.append(node.right)
 
-                if  i < length - 1:
+                if  i < length - 1: #0...n-2
                     next_node = queue[0]
                 
                     node.next = next_node
-                #     node = node.next
-            # node.next = None
-
-            
-        
         return root
 

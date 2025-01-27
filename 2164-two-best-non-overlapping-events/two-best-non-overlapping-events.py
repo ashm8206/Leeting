@@ -32,6 +32,17 @@ class Solution:
 
         return maxProfit
 
+        '''
+        By processing events in order of start time and maintaining a min heap of end times, we can efficiently find non-overlapping events.
+For each event, we:
+
+    1. Remove all completed events (events that end before current event starts) from heap
+2. Keep track of maximum profit seen from any completed event (maxVal)
+3. Try combining current event's profit with best completed event's profit
+4. Add current event to heap for future consideration
+
+        '''
+
 
 
 

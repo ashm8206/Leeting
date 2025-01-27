@@ -10,16 +10,17 @@ class Solution:
             if (i,j) in dp:
                 return dp[(i,j)]
             
-            if i < len(s) and (s[i]==p[j] or p[j]=="?"):
+            match = i < len(s) and (s[i]==p[j] or p[j]=="?")
+
+            if match:
                 dp[(i,j)] = dfs(i+1,j+1)
-            
+
             elif p[j]=="*":
                
-                dp[(i,j)]  =  dfs(i, j+1) or ( i < len(s) and dfs(i+1, j))
+                dp[(i,j)]  =  dfs(i, j+1) or ( i < len(s) and dfs(i+1, j))             
             else:
                 dp[(i,j)]= False
-                # if it  doesnt match return False
-
+            
             return  dp[(i,j)]
     
         return dfs(0,0)

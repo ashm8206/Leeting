@@ -1,13 +1,12 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        # if (
-        #     endWord not in wordList
-        #     or beginWord not in wordList
-        #     or not endWord
-        #     or not beginWord
-        #     or not wordList
-        # ):
-        #     return 0
+        if (
+            endWord not in wordList
+            or not endWord
+            or not beginWord
+            or not wordList
+        ):
+            return 0
 
         L = len(beginWord)
         
@@ -22,18 +21,15 @@ class Solution:
         q = deque()
         q.append((beginWord, 1))
 
-        print(q)
         while q:
             curr_word, level = q.popleft()
 
             visited.add(curr_word)
 
-            
             if curr_word == endWord:
                 return level
 
-            
-           
+
             for i in range(L):
                 key = curr_word[:i]+"*"+curr_word[i+1:]
                 if key in all_comb:

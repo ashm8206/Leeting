@@ -7,14 +7,14 @@ class AutocompleteSystem:
 
     def __init__(self, sentences: List[str], times: List[int]):
         self.root = TrieNode()
+
         for sentence, count in zip(sentences, times):
             self.add_sentence(sentence,count)
         
         self.curr_sentence = [] # typed sentence storing
         self.curr_node = self.root # curr_node
-        # These above two have to be "objects" to store state
-
         self.dead = TrieNode() 
+        # stop search if one prefix not found
 
     def add_sentence(self, sentence, count):
 
@@ -23,33 +23,36 @@ class AutocompleteSystem:
             if c not in node.children:
                 node.children[c] = TrieNode()
             node = node.children[c]
-            # node.sentences.append((-count, sentence))
             node.sentences[sentence] += count 
-            # node.sentences[sentence] += count # this is -ve for the heap
     
     def input(self, c: str) -> List[str]:
 
         if c == "#":
-            # Returns an empty array []  
-            # stores the inputted sentence in the system.
-
+    
             curr_sentence = "".join(self.curr_sentence)
             self.add_sentence(curr_sentence, 1)
             self.curr_sentence = [] # typed sentence storing
             self.curr_node = self.root
             self.dead = TrieNode() 
             return []
+        else:
+            self.curr_sentence.append(c)
+            if c in self.curr_node.children:
+                self.curr_node = self.curr_node.children[c]
+                res = sorted(self.curr_node.sentences.items(), key=(lambda x: (-x[1],x[0])))[:3]
+                res = [ k for k, v in res]
+                return res
+            else:
+                self.curr_node = self.dead
+                return []
         
-        self.curr_sentence.append(c)
-        if c not in self.curr_node.children:
-            self.curr_node = self.dead
-            # don't find anything else, assign dead node, return
-            return []
         
-        self.curr_node = self.curr_node.children[c]
-        items = [(-val, key) for key, val in self.curr_node.sentences.items()]
-        ans = heapq.nsmallest(3, items)
-        return [key for count, key in ans]
+       
+        
+        # self.curr_node = self.curr_node.children[c]
+        # items = [(-val, key) for key, val in self.curr_node.sentences.items()]
+        # ans = heapq.nsmallest(3, items)
+        # return [key for count, key in ans]
 
 
 

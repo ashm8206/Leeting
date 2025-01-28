@@ -36,7 +36,7 @@ class Solution:
                 for next_word in all_comb[key]:
                     if next_word not in visited:
                         q.append((next_word, level+1))
-                all_comb[key] = [] # speed up lookup
+                # all_comb[key] = [] # speed up lookup
     
         return 0
 

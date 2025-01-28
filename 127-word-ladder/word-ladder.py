@@ -32,11 +32,11 @@ class Solution:
 
             for i in range(L):
                 key = curr_word[:i]+"*"+curr_word[i+1:]
-                if key in all_comb:
-                    for next_word in all_comb[key]:
-                        if next_word not in visited:
-                            q.append((next_word, level+1))
-                    all_comb[key] = []
+                # if key in all_comb:
+                for next_word in all_comb[key]:
+                    if next_word not in visited:
+                        q.append((next_word, level+1))
+                all_comb[key] = [] # speed up lookup
     
         return 0
 

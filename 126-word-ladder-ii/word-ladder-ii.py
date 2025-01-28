@@ -15,29 +15,31 @@ class Solution:
 
         queue = deque([beginWord])
         visited = {beginWord: 1}
-        parent_list = defaultdict(set)
+        reverse_adj = defaultdict(set)
         ans_path = []
       
         
         while queue:
-            word = queue.popleft()
-            if word == endWord:             
+            curr_word = queue.popleft()
+            if curr_word == endWord:             
                 break
-            for i in range(len(word)):
-                key = word[:i]+"*"+word[i+1:]
+            for i in range(len(curr_word)):
+                key = curr_word[:i]+"*"+curr_word[i+1:]
 
                 for next_word in wordDict[key]:
                     if next_word not in visited:
-                        visited[next_word] = visited[word] + 1
+                        visited[next_word] = visited[curr_word] + 1
+                        # increase the distance to nei by  root + 1
                         queue.append(next_word)
-                        parent_list[next_word].add(word)
-                    elif visited[next_word] > visited[word]:
-                        parent_list[next_word].add(word)
+                        reverse_adj[next_word].add(curr_word)
+                    elif visited[next_word] > visited[curr_word]:
+                        # shortest distance available from curr_word
+                        reverse_adj[next_word].add(curr_word)
         
         def dfs(word, path):
             if word == beginWord:
                 ans_path.append(path[::-1])
-            for next_word in parent_list[word]:
+            for next_word in reverse_adj[word]:
                 dfs(next_word, path+[next_word])
                 # path.append(next_word)
                 # dfs(next_word, path)

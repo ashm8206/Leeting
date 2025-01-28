@@ -7,8 +7,9 @@ class Solution:
     ) -> list[list[str]]:
 
         wordDict = defaultdict(set)
+
         for word in wordList:
-            if word != beginWord:
+            # if word != beginWord:
                 for i in range(len(word)):
                         wordDict[word[:i] + "*" + word[i+1:]].add(word)
         queue = deque([beginWord])

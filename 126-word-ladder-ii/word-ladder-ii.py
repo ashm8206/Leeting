@@ -38,9 +38,10 @@ class Solution:
             if word == beginWord:
                 ans_path.append(path[::-1])
             for next_word in parent_list[word]:
-                path.append(next_word)
-                dfs(next_word, path)
-                path.pop()
+                dfs(next_word, path+[next_word])
+                # path.append(next_word)
+                # dfs(next_word, path)
+                # path.pop()
         
         dfs(endWord, [endWord])
         return ans_path

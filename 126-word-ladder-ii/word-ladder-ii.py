@@ -6,100 +6,108 @@ class Solution:
         self, beginWord: str, endWord: str, wordList: list[str]
     ) -> list[list[str]]:
 
-        # 1. Create adjacency list
-        def adjacencyList():
+        wordDict = defaultdict(set)
+        for word in wordList:
+            if word != beginWord:
+                for i in range(len(word)):
+                        wordDict[word[:i] + "*" + word[i+1:]].add(word)
+        queue = deque([beginWord])
+        visited = {beginWord: 1}
+        parent_list = defaultdict(set)
+        ans_path = []
+        # print(wordDict)
+        
+        while queue:
+            word = queue.popleft()
+            if word == endWord:             
+                break
+            for i in range(len(word)):
+                for next_word in wordDict[word[:i] + "*" + word[i+1:]]:
+                    if next_word not in visited:
+                        visited[next_word] = visited[word] + 1
+                        queue.append(next_word)
+                        parent_list[next_word].add(word)
+                    elif visited[next_word] > visited[word]:
+                        parent_list[next_word].add(word)
+        
+        def dfs(word, path):
+            if word == beginWord:
+                ans_path.append(path[::-1])
+            for next_word in parent_list[word]:
+                dfs(next_word, path+[next_word])
+        
+        dfs(endWord, [endWord])
+        return ans_path
 
-            adj = defaultdict(list)
-            for word in wordList:
-                for i, _ in enumerate(word):
-                    pattern = word[:i] + "*" + word[i + 1 :]
-                    adj[pattern].append(word)
-            return adj
+        # # 1. Create adjacency list
+        # def adjacencyList():
 
-        # 2. Create reversed adjacency list
-        def bfs(adj):
+        #     adj = defaultdict(list)
+        #     for word in wordList:
+        #         for i, _ in enumerate(word):
+        #             pattern = word[:i] + "*" + word[i + 1 :]
+        #             adj[pattern].append(word)
+        #     return adj
 
-            reversedAdj = defaultdict(list)
+        # # 2. Create reversed adjacency list
+        # def bfs(adj):
 
-            # Initialize the queue
-            queue = deque([beginWord])
+        #     reversedAdj = defaultdict(list)
+        #     queue = deque([beginWord])
+        #     visited = set([beginWord])
 
-            visited = set([beginWord])
+        #     while queue:
 
-            # while q:
-            #     curr_word = q.popleft()
+        #         visitedCurrentLevel = set()
 
-            #     visited.add(curr_word)
+        #         # Iterate through all words in Queue
+        #         for _ in range(len(queue)):
 
-            #     if curr_word == endWord:
-            #         break
+        #             word = queue.popleft()
+        #             for i, _ in enumerate(word):
 
+        #                 pattern = word[:i] + "*" + word[i + 1 :]
 
-            #     for i in range(L):
-            #         key = curr_word[:i]+"*"+curr_word[i+1:]
-            #         if key in adj:
-            #             for next_word in adj[key]:
-            #                 reversedAdj[next_word].append(curr_word)
-            #                 if next_word not in visited:
-            #                     q.append(next_word)
-            # return reversedAdj
+        #                 for nextWord in adj[pattern]:
+        #                     if nextWord not in visited:
+        #                         reversedAdj[nextWord].append(word)
 
-            while queue:
+        #                         if nextWord not in visitedCurrentLevel:
 
-                visitedCurrentLevel = set()
-                n = len(queue)
+        #                             # Add such word to the queue
+        #                             queue.append(nextWord)
+        #                             # Mark such word as visited
+        #                             visitedCurrentLevel.add(nextWord)
 
-                # Iterate through all words in Queue
-                for _ in range(n):
+        #         # Once we done with a level, add all words visited at this level to the visited set
+        #         visited.update(visitedCurrentLevel)
 
-                    
-                    word = queue.popleft()
-                    for i, _ in enumerate(word):
-
-                        pattern = word[:i] + "*" + word[i + 1 :]
-
-                        for nextWord in adj[pattern]:
-                            if nextWord not in visited:
-
-                                reversedAdj[nextWord].append(word)
-
-                                if nextWord not in visitedCurrentLevel:
-
-                                    # Add such word to the queue
-                                    queue.append(nextWord)
-
-                                    # Mark such word as visited
-                                    visitedCurrentLevel.add(nextWord)
-
-                # Once we done with a level, add all words visited at this level to the visited set
-                visited.update(visitedCurrentLevel)
-
-                if endWord in visited:
-                    break
-            return reversedAdj
+        #         if endWord in visited:
+        #             break
+        #     return reversedAdj
 
             
-        def dfs(reversedAdj, res, path):
+        # def dfs(reversedAdj, res, path):
 
-            # If the first word in a path is beginWord, we have succesfully constructed a path
-            if path[0] == beginWord:
+        #     # If the first word in a path is beginWord, we have succesfully constructed a path
+        #     if path[0] == beginWord:
 
-                # Add such path to the result
-                res.append(list(path))
+        #         # Add such path to the result
+        #         res.append(list(path))
 
-                return res
+        #         return res
 
-            word = path[0]
+        #     word = path[0]
 
-            for nextWord in reversedAdj[word]:
-                path.appendleft(nextWord)
-                dfs(reversedAdj, res, path)
-                path.popleft()
-            return res
+        #     for nextWord in reversedAdj[word]:
+        #         path.appendleft(nextWord)
+        #         dfs(reversedAdj, res, path)
+        #         path.popleft()
+        #     return res
 
-        # Do all three steps
-        adj = adjacencyList()
-        reversedAdj = bfs(adj)
-        res = dfs(reversedAdj, [], deque([endWord]))
+        # # Do all three steps
+        # adj = adjacencyList()
+        # reversedAdj = bfs(adj)
+        # res = dfs(reversedAdj, [], deque([endWord]))
 
-        return res
+        # return res

@@ -12,18 +12,21 @@ class Solution:
             # if word != beginWord:
                 for i in range(len(word)):
                         wordDict[word[:i] + "*" + word[i+1:]].add(word)
+
         queue = deque([beginWord])
         visited = {beginWord: 1}
         parent_list = defaultdict(set)
         ans_path = []
-        # print(wordDict)
+      
         
         while queue:
             word = queue.popleft()
             if word == endWord:             
                 break
             for i in range(len(word)):
-                for next_word in wordDict[word[:i] + "*" + word[i+1:]]:
+                key = word[:i]+"*"+word[i+1:]
+
+                for next_word in wordDict[key]:
                     if next_word not in visited:
                         visited[next_word] = visited[word] + 1
                         queue.append(next_word)
@@ -35,7 +38,9 @@ class Solution:
             if word == beginWord:
                 ans_path.append(path[::-1])
             for next_word in parent_list[word]:
-                dfs(next_word, path+[next_word])
+                path.append(next_word)
+                dfs(next_word, path)
+                path.pop()
         
         dfs(endWord, [endWord])
         return ans_path

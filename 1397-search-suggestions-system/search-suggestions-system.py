@@ -38,6 +38,9 @@ class Solution:
             else:
                 curr.children = {}
                 res.append([])
+        # searching for prefix
+        #  m, mo, mou --> repeative 
+        # search once
         return res
    
 

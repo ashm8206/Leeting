@@ -9,64 +9,60 @@ class Solution:
         # 1. Create adjacency list
         def adjacencyList():
 
-            # Initialize the adjacency list
             adj = defaultdict(list)
-
-            # Iterate through all words
             for word in wordList:
-
-                # Iterate through all characters in a word
                 for i, _ in enumerate(word):
-
-                    # Create the pattern
                     pattern = word[:i] + "*" + word[i + 1 :]
-
-                    # Add a word into the adjacency list based on its pattern
                     adj[pattern].append(word)
-
             return adj
 
         # 2. Create reversed adjacency list
         def bfs(adj):
 
-            # Initialize the reversed adjacency list
             reversedAdj = defaultdict(list)
 
             # Initialize the queue
             queue = deque([beginWord])
 
-            # Initialize a set to keep track of used words at previous level
             visited = set([beginWord])
+
+            # while q:
+            #     curr_word = q.popleft()
+
+            #     visited.add(curr_word)
+
+            #     if curr_word == endWord:
+            #         break
+
+
+            #     for i in range(L):
+            #         key = curr_word[:i]+"*"+curr_word[i+1:]
+            #         if key in adj:
+            #             for next_word in adj[key]:
+            #                 reversedAdj[next_word].append(curr_word)
+            #                 if next_word not in visited:
+            #                     q.append(next_word)
+            # return reversedAdj
 
             while queue:
 
-                # Initialize a set to keep track of used words at the current level
                 visitedCurrentLevel = set()
-
-                # Get the number of words at this level
                 n = len(queue)
 
-                # Iterate through all words
+                # Iterate through all words in Queue
                 for _ in range(n):
 
-                    # Pop a word from the front of the queue
+                    
                     word = queue.popleft()
-
-                    # Generate pattern based on the current word
                     for i, _ in enumerate(word):
 
                         pattern = word[:i] + "*" + word[i + 1 :]
 
-                        # Itereate through all next words
                         for nextWord in adj[pattern]:
-
-                            # If the next word hasn't been used in previous levels
                             if nextWord not in visited:
 
-                                # Add such word to the reversed adjacency list
                                 reversedAdj[nextWord].append(word)
 
-                                # If the next word hasn't been used in the current level
                                 if nextWord not in visitedCurrentLevel:
 
                                     # Add such word to the queue
@@ -78,13 +74,11 @@ class Solution:
                 # Once we done with a level, add all words visited at this level to the visited set
                 visited.update(visitedCurrentLevel)
 
-                # If we visited the endWord, end the search
                 if endWord in visited:
                     break
-
             return reversedAdj
 
-        # 3. Construct paths based on the reversed adjacency list using DFS
+            
         def dfs(reversedAdj, res, path):
 
             # If the first word in a path is beginWord, we have succesfully constructed a path
@@ -95,22 +89,12 @@ class Solution:
 
                 return res
 
-            # Else, get the first word in a path
             word = path[0]
 
-            # Find next words using the reversed adjacency list
             for nextWord in reversedAdj[word]:
-
-                # Add such next word to the path
                 path.appendleft(nextWord)
-
-                # Recursively go to the next word
                 dfs(reversedAdj, res, path)
-
-                # Remove such next word from the path
                 path.popleft()
-
-            # Return the result
             return res
 
         # Do all three steps

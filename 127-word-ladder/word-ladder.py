@@ -16,7 +16,7 @@ class Solution:
             for i in range(L):
 
                 all_comb[word[:i]+"*"+word[i+1:]].append(word)
-        
+        # print(all_comb)
         visited = set()
         q = deque()
         q.append((beginWord, 1))
@@ -36,7 +36,7 @@ class Solution:
                     for next_word in all_comb[key]:
                         if next_word not in visited:
                             q.append((next_word, level+1))
-                    all_comb[key] = []
+                    # all_comb[key] = []
     
         return 0
 

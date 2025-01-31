@@ -1,8 +1,24 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
 
-        n = len(nums)
-        res = 0
+    
+        hmap = {0: 1}
+        count = 0
+        curr_sum = 0
+
+        for num in nums:
+            curr_sum += num
+            diff =  curr_sum - k
+            
+            if diff in hmap:
+                count +=  hmap.get(diff, 0)
+            hmap[curr_sum] = hmap.get(curr_sum, 0)  + 1
+        return count
+
+
+        
+        # n = len(nums)
+        # res = 0
         # Worst case is O(n^3)
         # 1 outer start index of subarray
         #    1 inner end index of subarray
@@ -23,7 +39,7 @@ class Solution:
         # Prefix sum Trick to find Sum Between all ranges  O(N) 
         # sum[j+1] - sum[i] = uptil jth index
 
-        prefixSum = [0]*(n+1) # n+1 becuz sum[0] = 0  sum uptil 
+        # prefixSum = [0]*(n+1) # n+1 becuz sum[0] = 0  sum uptil 
         # sum[1] = sum[1] - sum[0] # sum uptil 0 in main array 
 
         # for i in range(1,n+1):
@@ -41,6 +57,8 @@ class Solution:
 
         # The number of the times the previous sum has occured that many times we can form the array
 
+        #  Most Optimized
+        
         hmap = {0:1} # hmap of prefix sum seen so sofar, with their counts
         curr_sum = 0
         diff = 0 # two sum

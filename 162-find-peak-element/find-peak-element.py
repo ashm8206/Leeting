@@ -8,17 +8,22 @@ class Solution:
 
         #  the greedy strategy is to go toward the greater numbers
 
-        
+        l = 0
+        r = len(nums) - 1
+        while l < r:
+            mid = (l + r) // 2
+            if nums[mid] > nums[mid + 1]:
+                r = mid
+            else:
+                l = mid + 1
+        return l
 
         n = len(nums)
-
-        if n==1:
-            return 0
 
         l = 0 
         r = n - 1
 
-        while l <=r :
+        while l <=r : # this will handle 1 element case
             mid = (l+r)//2
 
             if mid+1 < n and nums[mid] <= nums[mid+1]:
@@ -29,7 +34,7 @@ class Solution:
                 # arr[mid] > arr[mid+1] and arr[mid] > arr[mid-1]
                 return mid
         
-        # check the edges 
+        # check the edges, and return the index
         if nums[0] > nums[1]:
             return  0
         elif nums[n-1] > nums[n-2]:

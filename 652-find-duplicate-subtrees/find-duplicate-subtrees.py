@@ -7,14 +7,12 @@
 class Solution:
     def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
 
-        def getid(root):
-            if root:
-                id = treeid[root.val, getid(root.left), getid(root.right)]
-                trees[id].append(root)
-                return id
+        def traversal(root):
+            if not root: return "null"
+            struct = "%s,%s,%s" % (str(root.val), traversal(root.left), traversal(root.right))
+            nodes[struct].append(root)
+            return struct
         
-        trees = collections.defaultdict(list)
-        treeid = collections.defaultdict()
-        treeid.default_factory = treeid.__len__
-        getid(root)
-        return [roots[0] for roots in trees.values() if roots[1:]]
+        nodes = collections.defaultdict(list)
+        traversal(root)
+        return [nodes[struct][0] for struct, v in nodes.items() if nodes[struct][1:]]

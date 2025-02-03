@@ -44,5 +44,7 @@ class Solution:
 
             dq.append(i)
             res.append(nums[dq[0]])
-     
+        
+        # n-k+1 = num of windows
+        # windows start from ?  k-1
         return res[k-1:] 

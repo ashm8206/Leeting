@@ -34,8 +34,6 @@ class Trie:
                 ch = next(iter(curr.children))
                 result.append(ch)
                 curr = curr.children[ch]
-            # else:
-            #     break
         return "".join(result)
             
 

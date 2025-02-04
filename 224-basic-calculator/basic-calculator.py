@@ -2,56 +2,112 @@ class Solution:
     def calculate(self, s: str) -> int:
 
         stack = []
+        curr_num = 0
+        last_num = 0 
+        result = 0
 
-        result = 0 # why do we need this ?
-        last_num = 0 # why do we need this ?
+        prev_op = "+"
+        s+= "+" # evaluate result when we see next op
+        for ch in digit:
+            if ch.isdigit():
+                curr_num = curr_num * 10 + int(ch)
 
-        curr_num = 0 
-        prev_oper = "+" # why do we need this ?
-        s+="+"
+            elif ch == "(":
+                stack.append(result) # op1
+                stack.append(last_num) # op2
+                stack.append(prev_op) #operation
 
-        for c in s:
-            # if c == " ":
-            #     continue
-            
-            if c.isdigit():
-                curr_num = curr_num * 10 + int(c)
-            
-            elif c == "(":
-                stack.append(result)
-                stack.append(last_num)
-                stack.append(prev_oper)
-
-                result = 0
-                last_num = 0
-                prev_oper = "+"
-            
-            elif c in ")+-*/":
-
-                if c == "-":
-                    result+=last_num
+            elif ch in ")+-/*":
+                
+                if prev_op == "-":
+                    result+= last_num
                     last_num = -curr_num
-
-                elif c== "+":
-                    result+=last_num
+                   
+                elif prev_op == "+":
+                    result+= last_num
                     last_num = curr_num
-                elif c=="*":
-
+                elif prev_op == "*":
+                   
                     last_num *= curr_num
                 else:
-                    last_num = last_num / int(c) # why dont we add to result ?
+                    last_num = last_num / int(curr_num)
 
-
-                if c == ")":  # why is this separate from the previous elif
-                    cur_num = result + last_num
-                    prev_operation = stack.pop()
+                if ch ==")":
+                    curr_num = result + last_num
+                    prev_op = stack.pop()
                     last_num = stack.pop()
                     result = stack.pop()
                 else:
-                    cur_num = 0
-                    prev_oper = c
-        
+                    prev_op = c
+                    curr_num = 0
         return result + last_num
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # stack = []
+
+        # result = 0 # why do we need this ?
+        # last_num = 0 # why do we need this ?
+
+        # curr_num = 0 
+        # prev_oper = "+" # why do we need this ?
+        # s+="+"
+
+        # for c in s:
+        #     # if c == " ":
+        #     #     continue
+            
+        #     if c.isdigit():
+        #         curr_num = curr_num * 10 + int(c)
+            
+        #     elif c == "(":
+        #         stack.append(result)
+        #         stack.append(last_num) # why do we need last number?
+        #         stack.append(prev_oper)
+
+        #         result = 0  
+        #         last_num = 0
+        #         prev_oper = "+"
+            
+        #     elif c in ")+-*/":
+
+        #         if c == "-":
+        #             result+=last_num
+        #             last_num = -curr_num
+
+        #         elif c== "+":
+        #             result+=last_num
+        #             last_num = curr_num
+        #         elif c=="*":
+
+        #             last_num *= curr_num
+        #         else:
+        #             last_num = last_num / int(c) # why dont we add to result ?
+
+
+        #         if c == ")":  # why is this separate from the previous elif
+        #             cur_num = result + last_num
+        #             prev_operation = stack.pop()
+        #             last_num = stack.pop()
+        #             result = stack.pop()
+        #         else:
+        #             cur_num = 0
+        #             prev_oper = c
+        
+        # return result + last_num
                 
                 
 

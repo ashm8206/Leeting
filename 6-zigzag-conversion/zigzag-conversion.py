@@ -1,30 +1,50 @@
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
 
-        if numRows == 1:
+        if numRows == 1 or numRows >= len(s):
             return s
+        
+        lists = [[] for _ in range(numRows)]
+        count = 0
+        direction = 0
+        
+        for char in s:
+            lists[count].append(char)
 
-        increment = 2*(numRows-1)
-        # go numRow-1 steps down and again Go Up
-        # Neetcode https://www.youtube.com/watch?v=Q2Tw6gcVEwc
-        ans = [""]*numRows
+            if count == 0:
+                direction = 1
+            elif count == numRows - 1:
+                direction = -1
 
-        n = len(s)
+            count += direction
+        # print(lists)
+        result = "".join("".join(row) for row in lists)
+        return result
 
-        for curr_row in range(numRows):
+        # if numRows == 1:
+        #     return s
+
+        # increment = 2*(numRows-1)
+        # # go numRow-1 steps down and again Go Up
+        # # Neetcode https://www.youtube.com/watch?v=Q2Tw6gcVEwc
+        # ans = [""]*numRows
+
+        # n = len(s)
+
+        # for curr_row in range(numRows):
             
-            for i in range(curr_row, len(s), increment):
-                ans[curr_row]+=s[i]
+        #     for i in range(curr_row, len(s), increment):
+        #         ans[curr_row]+=s[i]
 
-                if curr_row > 0 and curr_row < numRows-1:
-                    # If its in Middle Row
-                    # i+increment ( increment/section steps from Curr index - 2*currRow)
-                    # -  2*curr_row every time
-                    if (i+increment-2*curr_row) < len(s):
-                        ans[curr_row] += s[i+increment-2*curr_row]
+        #         if curr_row > 0 and curr_row < numRows-1:
+        #             # If its in Middle Row
+        #             # i+increment ( increment/section steps from Curr index - 2*currRow)
+        #             # -  2*curr_row every time
+        #             if (i+increment-2*curr_row) < len(s):
+        #                 ans[curr_row] += s[i+increment-2*curr_row]
         
 
-        return "".join(ans)
+        # return "".join(ans)
 
         # P0    A4    H8     N12
         # A1 P3 L5 S7 I9 I11 G13

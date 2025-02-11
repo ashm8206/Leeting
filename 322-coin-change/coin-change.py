@@ -1,51 +1,62 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         # # Memoization
-        memo = {}
 
-        def dfs(amount):
+       
+        memo = {}
+        
+        def dfs(i, amount):
+            # Base cases
             if amount == 0:
                 return 0
-            if amount in memo:
-                return memo[amount]
+            if i >= len(coins):
+                return float('inf')
             
-            res = 1e9
-            for coin in coins:
-                if amount - coin >= 0:
-                    res = min(res, 1 + dfs(amount - coin))
+            # Check if state already computed
+            if (i, amount) in memo:
+                return memo[(i, amount)]
             
-            memo[amount] = res
-            return res
+            # Skip current coin
+            min_coins = dfs(i + 1, amount)
+            
+            # Include current coin if possible
+            if amount - coins[i] >= 0 :
+                min_coins = min(min_coins, 1 + dfs(i, amount - coins[i]))
+                
+            memo[(i, amount)] = min_coins
+            return min_coins
         
-        minCoins = dfs(amount)
-        return -1 if minCoins >= 1e9 else minCoins
+        result = dfs(0, amount)
+        return result if result != float('inf') else -1
+            
+            
         
 
 
-        # min_cost = float('inf')
-        # memo = {}
+        min_cost = float('inf')
+        memo = {}
 
-        # def helper(rem):
+        def helper(rem):
           
             
-        #     # if rem < 0:
-        #     #     return -1
-        #     if rem == 0:
-        #         return 0
-        #     if rem in memo:
-        #         return memo[rem]
-        #     # At Each Subproblem, 
-        #     # we want to Initialize a big Number as Min_cost
+            # if rem < 0:
+            #     return -1
+            if rem == 0:
+                return 0
+            if rem in memo:
+                return memo[rem]
+            # At Each Subproblem, 
+            # we want to Initialize a big Number as Min_cost
 
-        #     min_cost = float('inf')
-        #     for coin in coins:
-        #         if rem-coin >= 0:
-        #             res = helper(rem-coin)
-        #             if res!=-1:
-        #                 min_cost = min(min_cost,res+1)
-        #     memo[rem] = min_cost if min_cost != float('inf') else -1
-        #     return memo[rem]
-        # return helper(amount)
+            min_cost = float('inf')
+            for coin in coins:
+                if rem-coin >= 0:
+                    res = helper(rem-coin)
+                    if res!=-1:
+                        min_cost = min(min_cost,res+1)
+            memo[rem] = min_cost if min_cost != float('inf') else -1
+            return memo[rem]
+        return helper(amount)
 
         # # Tabulation
         # MAX = amount+1

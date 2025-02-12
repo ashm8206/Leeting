@@ -6,7 +6,7 @@ class Solution:
         def dfs(i, amount):
             if amount == 0:
                 return 1
-            
+            # Ensures this invalid path isnt choosen
             if i >= len(coins):
                 return 0
 

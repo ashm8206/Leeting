@@ -1,33 +1,54 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        # # Memoization
+        # # # Memoization
 
-       
         memo = {}
-        
+
         def dfs(i, amount):
-            # Base cases
             if amount == 0:
                 return 0
-            if i >= len(coins):
-                return float('inf')
             
-            # Check if state already computed
+            if i >= len(coins):
+                return float("inf")
+            
             if (i, amount) in memo:
                 return memo[(i, amount)]
             
-            # Skip current coin
-            min_coins = dfs(i + 1, amount)
-            
-            # Include current coin if possible
-            if amount - coins[i] >= 0 :
-                min_coins = min(min_coins, 1 + dfs(i, amount - coins[i]))
-                
-            memo[(i, amount)] = min_coins
-            return min_coins
+            res = dfs(i+1,amount)
+            if amount - coins[i] >= 0:
+                res = min(res, 1 + dfs(i, amount-coins[i]))
+            memo[(i,amount)] = res
+            return memo[(i,amount)]
+
+        ans = dfs(0,amount)
+        return -1 if ans== float("inf") else ans
+
+       
+        # memo = {}
         
-        result = dfs(0, amount)
-        return result if result != float('inf') else -1
+        # def dfs(i, amount):
+        #     if amount == 0:
+        #         return 0
+            
+        #     if i >= len(coins):
+        #         return float('inf')
+            
+        #     # Check if state already computed
+        #     if (i, amount) in memo:
+        #         return memo[(i, amount)]
+            
+        #     # Skip current coin
+        #     min_coins = dfs(i + 1, amount)
+            
+        #     # Include current coin if possible
+        #     if amount - coins[i] >= 0 :
+        #         min_coins = min(min_coins, 1 + dfs(i, amount - coins[i]))
+                
+        #     memo[(i, amount)] = min_coins
+        #     return min_coins
+        
+        # result = dfs(0, amount)
+        # return result if result != float('inf') else -1
             
             
         

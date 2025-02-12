@@ -3,32 +3,23 @@ class Solution:
     
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
 
-        # top Down
-
-        count = 0
         n = len(nums)
-
         memo = {}
+        def dfs(i, target):
 
-        def helper(running_sum, idx):
-            nonlocal count
-            
-            if idx == n:
-                return 1 if running_sum==target else 0
+            if i ==n:
+                return 1 if target==0 else 0
 
-            if (running_sum, idx) in memo:
-                return memo[(running_sum, idx)]
-            
-            memo[(running_sum, idx)] = (
-                helper(running_sum + nums[idx], idx+1) 
-                + helper(running_sum - nums[idx] , idx+1)
-            )
-            return memo[(running_sum, idx)]
+            if (i,target) in memo:
+                return memo[(i,target)]
 
-        # for loop is not not for tradition combinations
-        # we only want Combindations of len(N) start from idx 0... end N
-        # Each idx has two option, take / don't take
-        return helper(0, 0)
+            res = dfs(i+1, target-nums[i])
+            res+= dfs(i+1, target+nums[i])
+
+            memo[(i,target)] = res
+
+            return memo[(i,target)]
+        return dfs(0,target)
 
         # bottom up T: O(n* Sum(nums)) S: O(n*m)
         # can be reduced to O(N) space, with just previous row.

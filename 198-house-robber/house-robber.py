@@ -1,19 +1,17 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        
-
         n = len(nums)
-        dp = [0]*(n+1)
+        if n < 2:
+            return nums[0]
+        dp = [0]* n
+        dp[0] = nums[0]
+        dp[1] = max(nums[1] + 0, nums[0])
         
-        dp[0] = 0
-        dp[1] = nums[0]
-    
+        for i in range(2, n):
+            dp[i] = max(nums[i]+dp[i-2], dp[i-1])
+        
+        return dp[-1]
 
-        # [1,2,3,1] --> 
-        # take 1 or take 2 with 0 
-        # take 2 or take 3+1
-        for i in range(2,n+1):
-            dp[i] = max(nums[i-1]+dp[i-2], dp[i-1])
         
         # choice 1 either rob from house i and add maxRobScore i-2 house
         # choice 2 rob from previous house to i 

@@ -3,6 +3,7 @@ class Solution:
         n = len(nums)
         if n < 2:
             return nums[0]
+            
         dp = [0]* n
         dp[0] = nums[0]
         dp[1] = max(nums[1] + 0, nums[0])

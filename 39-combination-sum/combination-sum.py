@@ -1,13 +1,15 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:      # THEY HAVE MADE SURE THERE ARE NO DUPLICATES
         res = []
+
+        n = len(candidates)
         
-        def backtrack(slate,currSum, start):
+        def backtrack(slate, currSum, start):
             if currSum == 0:
                 res.append(slate[:])
                 return
 
-            for i in range(start, len(candidates)):
+            for i in range(start, n):
                 if currSum - candidates[i]  >= 0:
                     # constraints
                     
@@ -15,7 +17,7 @@ class Solution:
                     backtrack(slate, currSum - candidates[i], i) #---> base Case
                     slate.pop()
 
-        backtrack([],target, 0)
+        backtrack([], target, 0)
 
         # we are only adding start cuz,
         #  We don;t want duplicate ans tupples

@@ -34,6 +34,10 @@ class Solution:
             if nums[runner]==0:
                 nums[zeroPtr],nums[runner] = nums[runner], nums[zeroPtr]
                 zeroPtr+=1
+
+                # zeroPtr will not be 0, and not 2 as 2 is swapped, so it will point to starting of 1
+                # twoPtr could be pointing at anything
+
                 runner+=1
 
             elif nums[runner]==2:
@@ -49,8 +53,7 @@ class Solution:
                 #  # <-- zeroPtr : 0
                 # twoPtr ---> : 2
 
-                # zeroPtr will not be 0, and not 2 as 2 is swapped, so it will point to starting of 1
-                # twoPtr could be pointing at anything
+                
 
             else:
                 # encounters 1 so increment.

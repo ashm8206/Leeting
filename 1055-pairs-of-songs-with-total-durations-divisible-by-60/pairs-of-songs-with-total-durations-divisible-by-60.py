@@ -16,8 +16,9 @@ class Solution:
         # return count
 
     # Mix of two Sum, +  Number of Good Pairs 
-    # (a+b)%60 i.e both are divisble by 60 R1 = 0
-    # or their pair divisble sum = 60 
+    # (a+b)%60 i.e 
+        # 1. both are divisble by 60 R1 = 0
+        # 2. or their pair divisble sum = 60 
     # i.e a%60  + b%60 = 60
 
         hmap = {}
@@ -33,5 +34,3 @@ class Solution:
 
             hmap[key] = hmap.get(key,0) + 1
         return count
-            
-        

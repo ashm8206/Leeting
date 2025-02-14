@@ -23,18 +23,39 @@ class Solution:
 
         
 
-        stack = s.split(" ")
+        # stack = s.split(" ")
 
-        for k, word in enumerate(stack):
-            i = 0
-            j = len(word)-1
-            ls = list(word)
-            while i < j:
-                ls[i], ls[j] = ls[j], ls[i]
-                i+=1
-                j-=1
-            stack[k] = "".join(ls)
-        return " ".join(stack)
+        # for k, word in enumerate(stack):
+        #     i = 0
+        #     j = len(word)-1
+        #     ls = list(word)
+        #     while i < j:
+        #         ls[i], ls[j] = ls[j], ls[i]
+        #         i+=1
+        #         j-=1
+        #     stack[k] = "".join(ls)
+        # return " ".join(stack)
+
+        # Method II
+        ls = list(s)
+    
+        lastSpaceIdx = -1
+        n = len(ls)
+        
+        for i in range(n+1):
+            
+            if i==n or ls[i]==" ":
+                
+                s = lastSpaceIdx + 1
+                e = i-1 
+                while s < e:
+                    ls[s], ls[e] = ls[e], ls[s]
+                    s+=1
+                    e-=1
+                lastSpaceIdx = i
+        return "".join(ls)
+    
+    
 
         # start_idx = 0
         # end_idx=0

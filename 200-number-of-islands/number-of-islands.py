@@ -1,84 +1,70 @@
-from collections import deque
 class Solution:
-
     def numIslands(self, grid: List[List[str]]) -> int:
-        seen = set()
 
-        N = len(grid)
-        M = len(grid[0])
-        count = 0
-
-        # DFS : O(M * N), O min(M,N)
-        def dfs(i,j):
-
-            if i<0 or i>=N or j<0 or j>=M or (i,j) in seen:
-                return
-
-            if grid[i][j]=="1":
-                seen.add((i,j))
-                dfs(i-1,j)
-                dfs(i+1,j)
-                dfs(i,j-1)
-                dfs(i,j+1)
-
-        # queue = deque()
-        # def bfs(r,c):
+        m = len(grid)
+        n = len(grid[0])
         
-        #     while queue:
-        #         r, c = queue.popleft()
 
-        #         for nr, nc in [(r+1,c), (r-1,c), (r,c+1), (r,c-1)]:
-        #             if 0<= nr < N and 0 <= nc < M and grid[nr][nc] == '1' and (nr,nc) not in seen:
-        #                 queue.append((nr,nc))
-        #                 seen.add((nr,nc))
+        def dfs(i,j):
+           
+            if i < 0 or i >= m or  j < 0 or j >= n or grid[i][j]!="1" or (i,j) in seen:
+                return 
+            # watch out
 
+            # watch out for seen
+            
+            seen.add((i,j))
+            for nr, nc in [(i-1,j),(i+1,j), (i,j+1), (i,j-1)]:
+                # if 0 <= nr < m and 0<=nc < n and grid[nr][nc]=="1" and (nr,nc) not in seen:
+                # watch out
 
-
-        for i in range(N):
-            for j in range(M):
+                    dfs(nr,nc)
+                    
+                    
+        seen = set()
+        count = 0
+        for i in range(m):
+            for j in range(n):
                 if grid[i][j]=="1" and (i,j) not in seen:
                     dfs(i,j)
-                    # seen.add((i,j))
-                    # queue.append((i,j))
-                    # bfs(i,j)
-                    count += 1
+                    count+=1
+           
         return count
 
 
-        # BFS : O(M * N), O min(M,N)
 
-        # def bfs():
 
-        #     queue = deque()
-        #     for i in range(n):
-        #         for j in range(m):
-        #             if grid[i][j]=="1" and (i,j) not in seen:
-        #                 nonlocal count
-        #                 count += 1
-        #                 queue.append(i*m + j)
-        #                 seen.add((i,j))
-        #             while queue:
-        #                 idx = queue.popleft()
-        #                 row = idx // m
-        #                 col = idx % m
 
-        #                 if row-1 >=0 and grid[row-1][col]=='1' and (row-1,col) not in seen:
-        #                     queue.append((row-1)*m + col)
-        #                     seen.add((row-1,col))
 
-        #                 if col-1 >=0 and grid[row][col-1]=='1' and (row,col-1) not in seen:
-        #                     queue.append(row*m + (col - 1))
-        #                     seen.add((row,col-1))
-        #                 if row+1 < n and grid[row+1][col]=='1' and (row+1,col) not in seen:
-        #                     queue.append((row+1)*m + col)
-        #                     seen.add((row+1,col))
 
-        #                 if col+1 < m and grid[row][col+1]=='1' and (row,col+1) not in seen :
-        #                     queue.append(row*m + (col +1))
-        #                     seen.add((row,col+1))
-        #     return count
-        
-        # return bfs()
-                    
+
+
+
 
         
+        # M = len(grid)
+        # N = len(grid[0])
+        # seen = set()
+
+        
+        # def dfs(i,j):
+
+        #     if i < 0 or i >=M or j < 0 or j >=N or (i,j) in seen:
+        #         return
+            
+        #     if grid[i][j]== "1":
+        #         seen.add((i,j))
+        #         dfs(i+1,j)
+        #         dfs(i-1,j)
+        #         dfs(i,j-1)
+        #         dfs(i,j+1)
+        #     return 
+        
+
+        # count = 0
+        # for i in range(M):
+        #     for j in range(N):
+        #         if grid[i][j]== "1" and (i,j) not in seen:
+        #             dfs(i,j)
+        #             count+=1
+        # return count

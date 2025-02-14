@@ -22,16 +22,16 @@ class Solution:
         # return maxDpLen
         
         #  Method II
-        n = len(nums)
-        tail = [nums[0]]
+        sub = []
+        for num in nums:
+            i = bisect_left(sub, num)
 
-        for i in range(1, n):
-            if nums[i] <= tail[-1]:
-                # we need to restart the inc seq.
-                insert_idx = bisect.bisect_left(tail, nums[i])
-
-                tail[insert_idx] = nums[i]
+            # If num is greater than any element in sub
+            if i == len(sub):
+                sub.append(num)
+            
+            # Otherwise, replace the first element in sub greater than or equal to num
             else:
-                tail.append(nums[i])
-        
-        return len(tail)
+                sub[i] = num
+       
+        return len(sub)

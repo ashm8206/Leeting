@@ -1,7 +1,26 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
+        hmap = {0: 1}
+        count = 0
+        curr_sum = 0
+        for num in nums:
+            curr_sum += num
+            diff = curr_sum - k
+            # sum1 ... sum2==[sum2-sum1 = k]
+            # sum2 - k = sum1
+            
+            count += hmap.get(diff,0)
+            hmap[curr_sum] = hmap.get(curr_sum,0) + 1
+        return count
+
 
     
+        
+        
+        
+        
+        
+        
         hmap = {0: 1}
         count = 0
         curr_sum = 0

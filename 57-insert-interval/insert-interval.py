@@ -1,6 +1,36 @@
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
 
+            # Linear Scan
+
+            n = len(intervals)
+            if n == 0:
+                return [newInterval]
+            
+            i = 0
+            res = []
+
+            # # Case 1: No overlapping before merging intervals
+            #  curr_end < new_start
+            while i < n and intervals[i][1] < newInterval[0]:
+                res.append(intervals[i])
+                i += 1
+            # curr_start <= new_end
+            # Case 2: Overlapping and merging intervals
+            # s2 <= e1
+            while i < n and  intervals[i][0] <= newInterval[1]:
+                
+                newInterval[0] = min(newInterval[0], intervals[i][0])
+                newInterval[1] = max(newInterval[1], intervals[i][1])
+                i += 1
+            res.append(newInterval)
+
+            while i < n:
+                res.append(intervals[i])
+                i += 1
+
+            return res
+
             # # Line Sweep:
             # count = 0
             # events =  []  # or SortedList
@@ -31,38 +61,7 @@ class Solution:
             # return res
                 
 
-            # Linear Scan
-
-            n = len(intervals)
-            if n == 0:
-                return [newInterval]
             
-            i = 0
-            res = []
-
-            # # Case 1: No overlapping before merging intervals
-            #  e1 < s2
-            while i < n and intervals[i][1] < newInterval[0]:
-                res.append(intervals[i])
-                i += 1
-
-            # Case 2: Overlapping and merging intervals
-            # [1,5]
-            while i < n and  intervals[i][0] <= newInterval[1]:
-                
-                newInterval[0] = min(newInterval[0], intervals[i][0])
-                newInterval[1] = max(newInterval[1], intervals[i][1])
-                i += 1
-            res.append(newInterval)
-
-            
-        
-
-            while i < n:
-                res.append(intervals[i])
-                i += 1
-
-            return res
 
             
             # # Case 3: No overlapping after merging newInterval

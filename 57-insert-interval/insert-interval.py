@@ -10,14 +10,15 @@ class Solution:
             i = 0
             res = []
 
-            # # Case 1: No overlapping before merging intervals
+            # # Case 1: add all the intervals ending before newInterval starts
             #  curr_end < new_start
             while i < n and intervals[i][1] < newInterval[0]:
                 res.append(intervals[i])
                 i += 1
-            # curr_start <= new_end
-            # Case 2: Overlapping and merging intervals
-            # s2 <= e1
+            
+            # Case 2: Intervals ending at/after new_interval Start
+            # check if they are overlapping iwth new _interval
+            #  s2 <= e1
             while i < n and  intervals[i][0] <= newInterval[1]:
                 
                 newInterval[0] = min(newInterval[0], intervals[i][0])
@@ -25,6 +26,7 @@ class Solution:
                 i += 1
             res.append(newInterval)
 
+            # add rest
             while i < n:
                 res.append(intervals[i])
                 i += 1

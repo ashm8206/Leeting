@@ -1,7 +1,7 @@
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
 
-
+  
         # Initialize binary search bounds
         left = 0
         right = len(arr) - k
@@ -9,8 +9,13 @@ class Solution:
         # Binary search against the criteria described
         while left < right:
             mid = (left + right) // 2
+
+            # x - arr[mid]: How far x is above arr[mid]
+            # arr[mid + k] - x: How far arr[mid + k] is above x
             if x - arr[mid] > arr[mid + k] - x:
-                left = mid + 1
+                left = mid + 1 # K is closer to right
+
+                # The given condition x - arr[mid] > arr[mid + k] - x assumes x lies between arr[mid] and arr[mid + k],
             else:
                 right = mid
 

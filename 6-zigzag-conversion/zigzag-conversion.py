@@ -5,21 +5,23 @@ class Solution:
             return s
         
         lists = [[] for _ in range(numRows)]
-        count = 0
-        direction = 0
+        row_idx = 0
+        direction = 1
         
         for char in s:
-            lists[count].append(char)
+            lists[row_idx].append(char)
 
-            if count == 0:
+            if row_idx == 0:
                 direction = 1
-            elif count == numRows - 1:
+            elif row_idx == numRows - 1:
                 direction = -1
 
-            count += direction
+            row_idx += direction
+        
         # print(lists)
-        result = "".join("".join(row) for row in lists)
-        return result
+        return "".join(["".join(row) for row in lists])
+        # result = "".join("".join(row) for row in lists)
+        # return result
 
         # if numRows == 1:
         #     return s

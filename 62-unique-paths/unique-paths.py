@@ -40,8 +40,10 @@ class Solution:
         for row in range(m):
             for col in range(n):
                 if row > 0:
+                    # Top
                     dp[row][col] += dp[row-1][col] 
                 if col > 0:
+                    # Left to right
                     dp[row][col] += dp[row][col-1]
         return dp[m-1][n-1] 
 

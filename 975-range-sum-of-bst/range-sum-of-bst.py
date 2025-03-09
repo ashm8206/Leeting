@@ -27,18 +27,32 @@ class Solution:
 
         # return res
 
-        #  Method II
-
-        def dfs(node):
+        def dfs(root):
             nonlocal ans
-            if node:
-                if low <= node.val <= high:
-                    ans += node.val
-                if low < node.val:
-                    dfs(node.left)
-                if node.val < high:
-                    dfs(node.right)
-
+            if not root:
+                return 
+            if low <= root.val <= high:
+                    ans += root.val
+            if low < root.val:
+                dfs(root.left)
+            if root.val < high:
+                dfs(root.right)
         ans = 0
         dfs(root)
         return ans
+
+        #  Method II
+
+        # def dfs(node):
+        #     nonlocal ans
+        #     if node:
+        #         if low <= node.val <= high:
+        #             ans += node.val
+        #         if low < node.val:
+        #             dfs(node.left)
+        #         if node.val < high:
+        #             dfs(node.right)
+
+        # ans = 0
+        # dfs(root)
+        # return ans

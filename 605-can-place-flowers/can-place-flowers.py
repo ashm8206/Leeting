@@ -4,7 +4,6 @@ class Solution:
         # [  x,1 x,x,x,1]
 
         bedLen = len(flowerbed)
-        count = 0
 
         for i in range(bedLen):
             if flowerbed[i]==0:
@@ -14,6 +13,23 @@ class Solution:
 
                 if emptyLeft and emptyRight:
                     flowerbed[i]=1
-                    count+=1
+                    if n > 0:
+                        n-=1
+                    if n==0:
+                        return True
+        return n==0
 
-        return count>=n
+        # Method II
+#         Instead of using that super long 'if condition'. Its better to add 0 at the start and end of the list.
+# Makes it cleaner and easier to understand!
+        s = len(flowerbed)
+        bed = [0] + flowerbed + [0]
+        
+        for i in range(1, s+1):
+            if bed[i] == bed[i-1] == bed[i+1] == 0:
+                bed[i] = 1
+                n -= 1
+            
+            if n <= 0: return True
+        
+        return False

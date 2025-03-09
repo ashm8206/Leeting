@@ -48,18 +48,17 @@ class Solution:
 
         total = 0
 
-        def helper(nestedList, level):
-            nonlocal total
-            for nextInt in nestedList:
-                if nextInt.isInteger():
-                    total+= (nextInt.getInteger() * level)
-                else:
-                    helper(nextInt.getList(),level + 1)
-        helper(nestedList, 1)
-        return total
+        # def helper(nestedList, level):
+        #     nonlocal total
+        #     for nextInt in nestedList:
+        #         if nextInt.isInteger():
+        #             total+= (nextInt.getInteger() * level)
+        #         else:
+        #             helper(nextInt.getList(),level + 1)
+        # helper(nestedList, 1)
+        # return total
 
-        
-        
+
 
         ans = 0
         depth = 1
@@ -67,13 +66,15 @@ class Solution:
 
         while queue: 
             size = len(queue)
-            for i in range(size):
+            for i in range(size): # only process upto intial size
 
                 x = queue.popleft()
 
-                if x.isInteger(): ans += depth * x.getInteger()
+                if x.isInteger(): 
+                    ans += depth * x.getInteger()
 
-                else: queue.extend(x.getList())
+                else: 
+                    queue.extend(x.getList())
                 
             if queue:
                 depth+=1

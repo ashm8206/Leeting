@@ -4,6 +4,7 @@ class Solution:
 
         if numRows >=2:
             res = [[1],[1,1]]
+            
             prev = res[-1]
             for i in range(2, numRows):
                 curr = [1]

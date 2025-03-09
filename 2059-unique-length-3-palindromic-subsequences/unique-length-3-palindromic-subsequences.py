@@ -4,22 +4,30 @@ class Solution:
 
         first_index = [-1]*26
         last_index = [-1]*26
+
         n = len(s)
         for i in range(n):
-            if first_index[ord(s[i]) - ord("a")]==-1:
-                first_index[ord(s[i]) - ord("a")] = i
+            curr = ord(s[i]) - ord("a")
+            if first_index[curr]==-1:
+                first_index[curr] = i
 
-            if last_index[ord(s[n-i-1]) - ord("a")]==-1:
-                last_index[ord(s[n-i-1]) - ord("a")] = n-i-1
+            # interesting
+            last_index[curr] = i # updates every iteration
+            # if its same, its same, 
+            
         res = 0
-        for i in range(26):
-            
-            if first_index[i]!= last_index[i]:
-                # they are distinct occurence, not just 1 occurrence
-                res += len(set(s[first_index[i]+1:last_index[i]]))
-                # count how many distinct chars between these two indices?
+        for j in range(26):
+
+            if  first_index[j]!=last_index[j]: # atleast 2 occurences
+                
+                # How many distinct characters between two ocuurence?
+                # these can all be the middle char
+                res += len(set(s[first_index[j]+1:last_index[j]]))
         return res
-            
+
+
+
+
         # treat J as the Middle character
         # iterate every char in 26 chars to find first_idx[char] < charMid < last_idx[char]
         # unique_3_len = 0

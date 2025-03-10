@@ -10,21 +10,45 @@ class Solution:
 
         prevNode = None
 
-        def helper(node):
-            nonlocal minDiff, prevNode
+        # Recursive O(n), O(n)
+
+        # def helper(node):
+        #     nonlocal minDiff, prevNode
             
             
-            if node is None:
-                return
-            helper(node.left)
+        #     if node is None:
+        #         return
+        #     helper(node.left)
+        #     if prevNode is not None:
+        #         minDiff = min(minDiff, (node.val - prevNode.val))
+
+        #     prevNode = node
+        #     helper(node.right)
+
+        # helper(root)
+        # return minDiff
+
+        # Iterative
+        stack = []
+        curr = root
+        inorder = []
+
+        while stack or curr:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            
+            node = stack.pop()
+            inorder.append(node.val)
             if prevNode is not None:
                 minDiff = min(minDiff, (node.val - prevNode.val))
-
             prevNode = node
-            helper(node.right)
-
-        helper(root)
+            
+            curr = node
+            curr = curr.right
+        # print(inorder)
         return minDiff
+
 
             
 

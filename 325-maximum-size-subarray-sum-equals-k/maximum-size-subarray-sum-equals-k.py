@@ -23,21 +23,24 @@ class Solution:
         for i in range(n):
             curr_sum += nums[i]
 
-            # if curr_sum == k:
-            #     maxLen  = max(maxLen, i+1)
-                # maxLen = i+1
-
             if curr_sum - k in hmap.keys():
                 maxLen = max(maxLen, i-hmap[curr_sum - k])
             
             if curr_sum not in hmap.keys():
                 # seeing for the first time
-                hmap[curr_sum] = i  # Don't place it in every iteration
+                hmap[curr_sum] = i  
+                # Don't place it in every iteration
+                # we want maximium size
 
-            # print(curr_sum, curr_sum-k, maxLen)
-    
         return maxLen
-        # 1,-4, 1 = 
+
+        #  if sum[i]−sum[j]=k, 
+        #  the sum of elements lying between indices i and j is k.
+
+        # If prefixSum - k exists in indices, that means there is a subarray with sum k ending at the current i. 
+        # The length will be i - indices[prefixSum - k] --> dont include  
+        # start index
+       
         
         
 

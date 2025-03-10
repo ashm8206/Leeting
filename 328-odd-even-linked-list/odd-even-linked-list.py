@@ -11,8 +11,12 @@ class Solution:
         odd = head
         even = head.next
         evenHead = even
-    
+        # better to use even:
+        # will ensure odd.next [ will always be present]
 
+        # odd and odd.next :  
+        # with odd.next outside loop, is problem
+        # odd can becomes None : Even Inputs!
         while even and even.next:
 
             odd.next = even.next
@@ -20,7 +24,7 @@ class Solution:
 
             even.next = odd.next
             even = even.next
-
+        
         odd.next = evenHead
         return head
 

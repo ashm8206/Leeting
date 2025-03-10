@@ -13,8 +13,10 @@ class Solution:
         while l < r:
             mid = (l + r) // 2
             if nums[mid] > nums[mid + 1]:
+                # go where the greater element is
                 r = mid
             else:
+                # = doesnt tell us anything
                 l = mid + 1
         return l
 

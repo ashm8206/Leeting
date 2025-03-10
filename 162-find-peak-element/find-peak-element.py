@@ -20,6 +20,8 @@ class Solution:
                 l = mid + 1
         return l
 
+        
+
         n = len(nums)
 
         l = 0 

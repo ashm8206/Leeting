@@ -7,32 +7,33 @@ class Solution:
         if target == 0:
             # no removal required, return empty subarray
             return 0
-        # we need to remove a subarray that equals target
+        # we need to remove a subarray that equals target, viz remainder
 
-        mod_map = {0:-1} # mod map that stores indexes
+        mod_map = {0:-1} # Length, store index
         n = len(nums)
-        min_len = n 
-        # curr_sumj - curr_sumi % p == target
-        # curr_sumj - target % p = curr_sumj
+        minLen = n 
+
+
+        # (curr_sumj - curr_sumi) % p == target
+        #  curr_sumi%p  = (curr_sumj - target) % p
+        # curr_sumi%p  = (curr_sumj - target + p) % p --> [0..p-1]
+        # add p to ensure positive result
+        
 
         curr_sum = 0
         for i in range(n):
-            curr_sum = (curr_sum + nums[i])%p
+            curr_sum+= nums[i]
+            curr_sumj =  curr_sum%p
             # find the complement
-            needed = (curr_sum - target + p ) % p
-            # pt1. curr_sum
-            # diff = target-curr_sum
-            # if diff in array
-            # cache curr_sum:
+            needed = (curr_sumj - target + p )% p
 
-            # pt2. adding P chat GPT:
-
-            # pt3. subarray divisble by target
 
             if needed in mod_map:
-                min_len = min(min_len, i - mod_map[needed]) 
-                # subarray[neededIdx: i] not including i
+                minLen = min(minLen, i - mod_map[needed]) 
+                # subarray[neededIdx: i] not including neededIdx
+                # sums to the target 
 
-            mod_map[curr_sum] = i
+            # smallest_indx, so update mod everytime
+            mod_map[curr_sumj] = i
 
-        return -1 if min_len == n else min_len
+        return -1 if minLen == n else minLen

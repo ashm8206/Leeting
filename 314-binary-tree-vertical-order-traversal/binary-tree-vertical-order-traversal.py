@@ -14,8 +14,8 @@ class Solution:
 
         q = deque()
         q.append((root,0)) #01st col
-        maxCol = -2**31 - 1
-        minCol = 2**31 + 1
+        maxCol = float("-inf")
+        minCol = float("inf")
 
         while q:
             node, col = q.popleft()
@@ -30,7 +30,8 @@ class Solution:
             
 
             maxCol = max(maxCol, col)
-            minCol = min(minCol, col)
+            minCol = min(minCol, col) 
+            # next loop will find it for col-1 and col+1
 
         res = []
         for cIdx in range(minCol, maxCol+1):

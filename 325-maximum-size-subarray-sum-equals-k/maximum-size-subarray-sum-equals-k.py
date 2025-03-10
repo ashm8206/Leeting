@@ -28,6 +28,18 @@ class Solution:
                 maxLen = max(maxLen, i-hmap[diff])
                 # between hmap[diff] = idx ..... i : (idx,i] 
                 # not including idx, array_sum == k
+                # Why?
+                # prefix_sum[:i] uptil i= curr_sum
+                # we get this in O(1)
+                # j = hmap[curr_sum - k]
+
+                # prefix[:j] uptil j = curr_sum - k
+                # 0...........j........ i
+                #   curr_sum-k   
+                # ............curr_sum......
+                # sumi - sumj = curr_sum - [curr_sum - k] =  k 
+                # R-L : exlue 1 index, in this case its J
+                # sum[j+1...i]  = k)
             
             if curr_sum not in hmap.keys():
                 # seeing for the first time

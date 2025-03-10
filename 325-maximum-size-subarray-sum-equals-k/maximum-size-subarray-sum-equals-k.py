@@ -22,9 +22,12 @@ class Solution:
 
         for i in range(n):
             curr_sum += nums[i]
+            diff = curr_sum - k
 
-            if curr_sum - k in hmap.keys():
-                maxLen = max(maxLen, i-hmap[curr_sum - k])
+            if diff in hmap.keys():
+                maxLen = max(maxLen, i-hmap[diff])
+                # between hmap[diff] = idx ..... i : (idx,i] 
+                # not including idx, array_sum == k
             
             if curr_sum not in hmap.keys():
                 # seeing for the first time

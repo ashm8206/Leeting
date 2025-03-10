@@ -27,10 +27,11 @@ class Solution:
 
     def findMiddle(self, head:Optional[ListNode]) -> [ListNode]:
         slow, fast = head, head
-        while fast.next and fast.next.next:
+
+        while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-        return slow.next
+        return slow
         
         # slow, fast = head, head
         # # if odd len then middle node remain attached to first half

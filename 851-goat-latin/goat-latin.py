@@ -9,9 +9,9 @@ class Solution:
                 continue
 
             if word[0] in vowels:
-                res.append(word + "ma")
+                res.append(word + "ma" + i*"a")
             else:
-                res.append(word[1:] + word[0] + "ma" )
-            res[-1] += i * "a"
+                res.append(word[1:] + word[0] + "ma" +  i*"a")
+            # res[-1] += i * "a"
         return " ".join(res)
             

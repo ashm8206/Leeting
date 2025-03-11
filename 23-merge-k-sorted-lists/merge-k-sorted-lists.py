@@ -9,8 +9,8 @@ class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
 
         pq =[]
-        n = len(lists)
-        for i in range(n):
+        k = len(lists)
+        for i in range(k): 
             if lists[i]:
                 heapq.heappush(pq, (lists[i].val, i))
                 lists[i] = lists[i].next
@@ -18,7 +18,6 @@ class Solution:
         prevHead = ListNode(-1)
         curr = prevHead
         while pq:
-            # print(pq) 
             minVal, idx = heapq.heappop(pq)
 
             curr.next = ListNode(minVal)

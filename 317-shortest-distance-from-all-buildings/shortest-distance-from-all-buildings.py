@@ -28,6 +28,7 @@ class Solution:
         total_buildings = 0
 
         distance = collections.defaultdict(list)
+        # K: [(empty r, emptyc): [1,..n]] # n == total number of buildings
         
         for i in range(m):
             for j in range(n):
@@ -41,7 +42,7 @@ class Solution:
             for j in range(n):
                 if grid[i][j] == 0:
                     if (i, j) in distance and len(distance[(i, j)]) == total_buildings:
-                        #print(dist[i][j])
+            
                         minimum = min(minimum, sum(distance[(i, j)]))
         return minimum if minimum != float('inf') else -1
 

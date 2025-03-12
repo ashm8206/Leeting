@@ -26,11 +26,14 @@ class RandomizedCollection:
         """
         if not self.dict[val]: 
             return False
-        last_element, remove_one_idx = self.list[-1], self.dict[val].pop()
-        self.list[remove_one_idx] = last_element
-        self.dict[last_element].add(remove_one_idx)
+        last_element, val_idx = self.list[-1], self.dict[val].pop()
+        
+        self.list[val_idx] = last_element
+        self.dict[last_element].add(val_idx)
         # ?
-        self.dict[last_element].discard(len(self.list) - 1)
+        last_element_idx = len(self.list) - 1
+        # discard is safer than remove
+        self.dict[last_element].discard(last_element_idx)
 
         self.list.pop()
         return True

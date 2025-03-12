@@ -7,49 +7,37 @@ class HitCounter:
     - getHits(): O(log n) time complexity, where n is the number of unique timestamps
     - Space complexity: O(n) where n is the number of unique timestamps
     """
+
     def __init__(self):
-        # List of [timestamp, cumulative_count] pairs
-        self.hits = [[0, 0]]
-        
+        self.timestamps = []
+        self.l = 0
+
     def hit(self, timestamp: int) -> None:
-        # If hit at same timestamp, update the count
-        if self.hits[-1][0] == timestamp:
-            self.hits[-1][1] += 1
-        else:
-            # Add new timestamp with count incremented by 1
-            self.hits.append([timestamp, self.hits[-1][1] + 1])
-            
+        self.timestamps.append(timestamp)
+        self.l += 1
+        
     def getHits(self, timestamp: int) -> int:
-        # Find the position for current timestamp
-        current_idx = self.binary_search(timestamp)
-        # Find the position for timestamp - 300 (5 minutes ago)
-        past_idx = self.binary_search(timestamp - 300)
-        
-        # Return the difference in cumulative counts
-        return self.hits[current_idx][1] - self.hits[past_idx][1]
-    
-    def binary_search(self, target: int) -> int:
-        left, right = 0, len(self.hits)
-        
-        # Find the insertion point
-        while left < right:
-            mid = (left + right) // 2
-            if self.hits[mid][0] <= target:
-                left = mid + 1
+
+        # You have to find number of hits in range:
+        # [timestamp-300 + 1, timestamp]
+
+        left = 0
+        right = self.l-1
+        target = timestamp - 300
+        # right most binary search
+        while left <= right:
+            m = (left + right) // 2
+            if self.timestamps[m] <= target:
+                left = m + 1
             else:
-                right = mid
-                
-        # Adjust to get the timestamp that's <= target
-        idx = left - 1 if left > 0 else 0
-        
-        # If we've gone past the target, go back one step
-        if idx < len(self.hits) and self.hits[idx][0] > target:
-            idx = max(0, idx - 1)
-            
-        return idx
-        
+                right = m - 1
 
-
+        return self.l - left        
+        
+# Your HitCounter object will be instantiated and called as such:
+# obj = HitCounter()
+# obj.hit(timestamp)
+# param_2 = obj.getHits(timestamp)
         
 
 

@@ -1,63 +1,63 @@
-class ListNode:
+class Node:
     def __init__(self, key, val):
-        self.key = key
-        self.val = val
-        self.next = None
         self.prev = None
-
+        self.next = None
+        self.val = val
+        self.key = key
 class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.dic = defaultdict(int)
-        self.head = ListNode(-1,-1)
-        self.tail = ListNode(-1,-1)
+        self.dic = {}
+        self.tail = Node(-1, -1)
+        self.head = Node(-1, -1)
         self.head.next = self.tail
         self.tail.prev = self.head
-
-        # we will use the dictonary for return value and checking capacity
-        # we doubly linkedList for removing quickly.
-        # It doesn't matter if their values are not updated. (Dic and Linkedlist)
+        
 
     def get(self, key: int) -> int:
         if key not in self.dic:
             return -1
-
         node = self.dic[key]
-        self.remove(node) # Remove where it is 
-        self.add(node) # Move to to the end
+        self.remove(node) # in LRU
+        self.add(node) # # in LRU
         return node.val
+        
 
     def put(self, key: int, value: int) -> None:
+
+        # Remove old Node : Key
         if key in self.dic:
             old_node = self.dic[key]
             self.remove(old_node)
-
-        node = ListNode(key, value)
-        self.dic[key] = node # Add Key, to Dictionary of keys/Nodes
-        self.add(node) # add Node
-
-        if len(self.dic) > self.capacity:
-            node_to_delete = self.head.next
-            self.remove(node_to_delete)
-            del self.dic[node_to_delete.key]
-
-    def add(self, node): # add at the End
-        previous_end = self.tail.prev
-        previous_end.next = node
-        node.prev = previous_end
-        node.next = self.tail
-        self.tail.prev = node
-
-    def remove(self, node): # Remove Node wherever it is
-        node.prev.next = node.next
-        node.next.prev = node.prev
-            
-
         
-            
+        # ["LRUCache","put","put","put","put","get","get"]
+        # [[2],[2,1],[1,1],[2,3],[4,1],[1],[2]]
+
     
+        node =  Node(key, value)
+        self.dic[key] = node
+        self.add(node)
         
+        if len(self.dic) > self.capacity:
+            lru_node = self.head.next
+            lru_key = lru_node.key
+            self.remove(lru_node)
+            del self.dic[lru_key]
+        # print([(v.key, v.val)for k, v in self.dic.items()])
+
+    def remove(self, node):
+        node.next.prev = node.prev
+        node.prev.next = node.next
+        node.next = None
+        node.prev = None
+    
+    def add(self, node):
+       last_node = self.tail.prev
+       last_node.next = node
+       node.prev = last_node
+       node.next = self.tail
+       self.tail.prev = node
         
 
 

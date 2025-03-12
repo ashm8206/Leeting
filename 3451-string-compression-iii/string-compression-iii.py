@@ -8,7 +8,7 @@ class Solution:
             if word[i]==ch and cnt < 9:
                 cnt+=1
             else:
-                comp+= str(cnt) + ch
+                comp+= str(cnt) + ch # this is connstant
                 ch = word[i]
                 cnt = 1
         comp+= str(cnt) + ch

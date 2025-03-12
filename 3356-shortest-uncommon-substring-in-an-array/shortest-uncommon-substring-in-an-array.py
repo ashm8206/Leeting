@@ -5,7 +5,7 @@ class Solution:
 
         n = len(arr)
         ans = [""]*n
-        all_subtr = defaultdict(list)
+        all_subtr = defaultdict(set)
         seen = set()
 
         for i in range(n):
@@ -14,51 +14,24 @@ class Solution:
             for s in range(word_len):
                 for e in range(s+1,word_len+1):
                     substr = word[s:e]
-                    if (i, substr) not in seen:
-                        all_subtr[substr].append(i)
-                        seen.add((i, substr))
+                    # if (i, substr) not in seen:
+                    all_subtr[substr].add(i)
+                        # seen.add((i, substr))
         
-        # print(all_subtr)
         
         for subtr, indices_list in all_subtr.items():
             if len(indices_list)==1:
                 # get the word index it belongs to
-                idx = indices_list[0]
+                idx = next(iter(indices_list))
 
-                if not ans[idx] or len(subtr) < len(ans[idx]) or len(subtr)== len(ans[idx]) and subtr < ans[idx]:
+                if not ans[idx] or len(subtr) < len(ans[idx]) or (len(subtr)== len(ans[idx]) and subtr < ans[idx]):
                     ans[idx] = subtr
         return ans
+        #TC:  N * S^2
+        #SC: N*S^2
 
 
-
-        # n = len(arr)
-        # ans = [""] * n
-        # all_substrings = defaultdict(list)
-        # # allsubstrings from  each word in the array 
-        # # and where they came from
-
-
-        # # Collect all substrings for each string in arr
-        # for i in range(n):
-        #     s = arr[i]
-        #     length = len(s)
-        #     seen = set()
-        #     for start in range(length):
-        #         for end in range(start + 1, length + 1):
-        #             substring = s[start:end]
-        #             if substring not in seen:
-        #                 all_substrings[substring].append(i)
-        #                 seen.add(substring)
-
-        # # Find the shortest unique substring for each string
-        # for substr, indices in all_substrings.items():
-        #     if len(indices) == 1:  # Unique to one string
-        #         idx = indices[0]
-        #         if not ans[idx] or (len(substr) < len(ans[idx]) or 
-        #                             (len(substr) == len(ans[idx]) and substr < ans[idx])):
-        #             ans[idx] = substr
-
-        # return ans
+       
 
 # class TrieNode:
 #     def __init__(self):

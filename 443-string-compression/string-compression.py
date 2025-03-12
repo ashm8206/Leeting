@@ -16,7 +16,7 @@ class Solution:
                         left += 1
                 count = 1
 
-        return left
+        return left # +1 the index, which is what they asked for
 
 
         # slow = 0

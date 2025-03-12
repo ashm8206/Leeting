@@ -23,19 +23,20 @@ class RandomizedSet():
         """
         Removes a value from the set. Returns true if the set contained the specified element.
         """
-        if val in self.dict:
-            # move the last element to the place idx of the element to delete
-            last_element, idx = self.list[-1], self.dict[val]
-            self.list[idx] = last_element
-            self.dict[last_element] = idx
+        if val not in self.dict:
+            return False
 
-            # delete the last element. from list
-            self.list.pop()
-            # delete val from dict
-            del self.dict[val]
-            return True
-        return False
+        # move the last element to the place idx of the element to delete
+        last_element, idx = self.list[-1], self.dict[val]
+        self.list[idx] = last_element
+        self.dict[last_element] = idx
 
+        # delete the last element. from list
+        self.list.pop()
+        # delete val from dict
+        del self.dict[val]
+        return True
+        
     def getRandom(self) -> int:
         """
         Get a random element from the set.

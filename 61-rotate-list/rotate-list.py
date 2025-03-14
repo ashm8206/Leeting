@@ -16,7 +16,7 @@ class Solution:
             old_tail = old_tail.next
             n+=1
 
-        if k%n==0:
+        if k%n==0: # edge case
             return head
 
         old_tail.next = head

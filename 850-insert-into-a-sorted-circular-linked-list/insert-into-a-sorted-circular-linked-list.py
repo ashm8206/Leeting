@@ -22,10 +22,10 @@ class Solution:
             # Case1: 1 <- Node(2) <- 3
             if curr.val <= node.val <= curr.next.val: # and 
                 break
-            # case: 3 -> 1
-            #  curr < node.val  or node.val  < curr.next.val
-            #  curr > curr.next
-            if curr.val > curr.next.val and (curr.val < node.val or node.val < curr.next.val):
+            # case: 3 -> 1 = Link Position
+            #  3 > 1 and 3 -> 4 -> 1 or  3 -> 0 --> 1
+            #  curr > curr.next.val
+            if curr.val > curr.next.val and (curr.val <= node.val or node.val <= curr.next.val):
                 break
             
             curr = curr.next

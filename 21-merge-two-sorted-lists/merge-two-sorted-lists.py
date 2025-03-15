@@ -18,15 +18,41 @@ class Solution:
         #     list2.next = self.mergeTwoLists(list1, list2.next)
         #     return list2
 
-        # Iterative
+        # Iterative # Method I
 
         curr = new_head = ListNode(0)
         l1 = list1
         l2 = list2
         while l1 or l2:
-            if l2 is None or (l1 and l1.val < l2.val):
-                curr.next, l1 = l1, l1.next
+            if (l2 is None) or (l1 and l1.val <= l2.val):
+                curr.next = l1
+                l1 = l1.next
             else:
-                curr.next, l2 = l2, l2.next
+                # l2 is Not None and  l2 >= l1
+                curr.next = l2
+                l2 = l2.next
             curr = curr.next
+
         return new_head.next
+
+        #  Method II
+
+    def mergeTwoLists(self, l1, l2):
+        # maintain an unchanging reference to node ahead of the return node.
+        prehead = ListNode(-1)
+
+        prev = prehead
+        while l1 and l2:
+            if l1.val <= l2.val:
+                prev.next = l1
+                l1 = l1.next
+            else:
+                prev.next = l2
+                l2 = l2.next
+            prev = prev.next
+
+        # At least one of l1 and l2 can still have nodes at this point, so connect
+        # the non-null list to the end of the merged list.
+        prev.next = l1 if l1 is not None else l2
+
+        return prehead.next

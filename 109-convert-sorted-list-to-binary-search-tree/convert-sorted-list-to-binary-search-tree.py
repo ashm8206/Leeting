@@ -15,7 +15,6 @@ class Solution:
         def findMiddle(root):
             if root is None or root.next is None:
                 return None, root, None
-                # return root
 
             left = head
             slow = head
@@ -27,6 +26,7 @@ class Solution:
                 fast = fast.next.next
 
             if prev:
+                # so that you can send left
                 prev.next = None
             
             # unlink slow   
@@ -34,7 +34,7 @@ class Solution:
             slow.next = None
             
             return left, slow, right
-            # return slow
+  
   
 
         if head is None:
@@ -46,16 +46,7 @@ class Solution:
         node.right = self.sortedListToBST(right)
         return node
         
-        # mid = findMiddle(head)
-        # node = TreeNode(mid.val)
-
-        # if head == mid:
-        #     return node
         
-        # node.left = self.sortedListToBST(head)
-        # node.right = self.sortedListToBST(mid.next)
-        # return node
-            
 
 
             

@@ -93,6 +93,8 @@ class Solution:
             return node
 
         return convert(0, size - 1)
+        #  TC: O(N)
+        #  Spac: Log(N)
 
         
         

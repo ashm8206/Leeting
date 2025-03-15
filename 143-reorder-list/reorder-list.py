@@ -48,17 +48,11 @@ class Solution:
         curr = prehead
         while l1 or l2:
             if l1:
-                curr.next = l1
-                l1 = l1.next
+                curr.next, l1 = l1, l1.next
                 curr = curr.next
-            else:
-                curr.next = None
-                l1 = None
-            if l2:
-                curr.next = l2
-                l2 = l2.next
+            if l2: # one and then the other. # no else
+                curr.next, l2 = l2, l2.next
                 curr = curr.next
-            else:
-                curr.next = None
-                l2 = None
+
         return prehead.next
+        

@@ -14,10 +14,10 @@ class Solution:
         
         def findMiddle(root):
             if root is None or root.next is None:
-                # return None, root, None
-                return root
+                return None, root, None
+                # return root
 
-            # left = head
+            left = head
             slow = head
             fast = head
             prev = None
@@ -30,24 +30,31 @@ class Solution:
                 prev.next = None
             
             # unlink slow   
-            # right = slow.next
-            # slow.next = None
+            right = slow.next
+            slow.next = None
             
-            # return left, slow, right
-            return slow
-            
+            return left, slow, right
+            # return slow
+  
+
         if head is None:
             return head
         
-        mid = findMiddle(head)
+        left, mid, right = findMiddle(head)
         node = TreeNode(mid.val)
-
-        if head == mid:
-            return node
-        
-        node.left = self.sortedListToBST(head)
-        node.right = self.sortedListToBST(mid.next)
+        node.left = self.sortedListToBST(left)
+        node.right = self.sortedListToBST(right)
         return node
+        
+        # mid = findMiddle(head)
+        # node = TreeNode(mid.val)
+
+        # if head == mid:
+        #     return node
+        
+        # node.left = self.sortedListToBST(head)
+        # node.right = self.sortedListToBST(mid.next)
+        # return node
             
 
 

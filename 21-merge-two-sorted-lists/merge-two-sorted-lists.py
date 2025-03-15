@@ -19,31 +19,14 @@ class Solution:
         #     return list2
 
         # Iterative
-        p1 = list1
-        p2 = list2
-        prehead = ListNode(-1)
 
-        prev = prehead
-
-        while p1 or p2:
-
-            if p1 is None:
-                prev.next = p2
-                p2 = None
-            
-            elif p2 is None:
-                prev.next = p1
-                p1 = None
-
-            elif p1.val <= p2.val:
-                prev.next = p1
-                p1 = p1.next
+        curr = new_head = ListNode(0)
+        l1 = list1
+        l2 = list2
+        while l1 or l2:
+            if l2 is None or (l1 and l1.val < l2.val):
+                curr.next, l1 = l1, l1.next
             else:
-                prev.next = p2
-                p2 = p2.next
-                
-            prev = prev.next
-
-       
-
-        return prehead.next
+                curr.next, l2 = l2, l2.next
+            curr = curr.next
+        return new_head.next

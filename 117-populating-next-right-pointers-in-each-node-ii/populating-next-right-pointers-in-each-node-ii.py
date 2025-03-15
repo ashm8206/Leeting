@@ -11,37 +11,29 @@ class Node:
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
         
+        # white board will help
         if not root:
             return None
-        
-        
-        dummy = Node(-1)
-        head = root
+
+        head = root # changes each level
+        dummy = Node(-1) # ptrs to next level
 
         while head:
-            curr  = head
-            prev = dummy #dummy = -1
-
+            curr = head
+            post = dummy
             while curr:
                 if curr.left:
-                    prev.next = curr.left
-                    prev = prev.next
+                    post.next = curr.left
+                    post = post.next
                 if curr.right:
-                    prev.next = curr.right
-                    prev = prev.next
+                    post.next = curr.right
+                    post = post.next
 
-                curr = curr.next
+                curr = curr.next 
+                # curr level already linked, move to the next one
             head = dummy.next
-            # dummy.next =  pts to start of next level
-            # at each level prev.next 
-            #      = first present node in next level
-            dummy.next = None
-            #unlink this
+            
+            dummy.next = None #Unlink to re-purpose this dummy node.
         return root
         
-
-
-                
-        
-
-        
+      

@@ -19,10 +19,13 @@ class Solution:
         curr = head
 
         while curr.next!=head:
-            if curr.val <= node.val <= curr.next.val:
+            # Case1: 1 <- Node(2) <- 3
+            if curr.val <= node.val <= curr.next.val: # and 
                 break
             # case: 3 -> 1
-            if curr.val > curr.next.val and (node.val > curr.val or node.val < curr.next.val):
+            #  curr < node.val  or node.val  < curr.next.val
+            #  curr > curr.next
+            if curr.val > curr.next.val and (curr.val < node.val or node.val < curr.next.val):
                 break
             
             curr = curr.next

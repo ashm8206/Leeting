@@ -33,42 +33,31 @@ class Solution:
             fast = fast.next.next
         return slow
         
-        # slow, fast = head, head
-        # # if odd len then middle node remain attached to first half
-        # while fast.next and fast.next.next:
-    
-        #     # Mid pt to comapre
-        #     slow = slow.next
-        #     fast = fast.next.next
-        # return slow
-        
-
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        # Find Middle
+        # Find Middle, 
+        #  Middle attached to L2 and L1
+        #     Makes both L1 and L2 of equal len for Both odd and even Total lens
+
         # Reverse second half in place
-        # start comparing
+        # start comparing with the L1
 
         if head is None or head.next is None:
             return True
 
         mid = self.findMiddle(head)
-        l2 = self.reverse(mid)
+
         l1 = head
-
-
-    
-        # l1, l2 = head, self.reverse(mid.next) # reversed second lst
+        l2 = self.reverse(mid)
         
 
-        while l2 is not None:
-        
+        while l2: 
+            # same as while l1 and l2:  --> len(l1) == len(l2)
+            # remeber findmiddle, 
+            # keeps middle attached to l1  and reverses (l2 including middle)
             if l1.val!=l2.val:
                 return False
-
             l1=l1.next
             l2=l2.next
-
-        # mid.next = self.reverse(mid.next)
         return True
 
         

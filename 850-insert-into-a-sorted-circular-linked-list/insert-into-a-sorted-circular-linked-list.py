@@ -9,8 +9,9 @@ class Node:
 class Solution:
     def insert(self, head: 'Optional[Node]', insertVal: int) -> 'Node':
 
+        node = Node(insertVal)
         if head is None :
-            head = Node(insertVal)
+            head = node
             head.next = head
             return head
 
@@ -18,27 +19,16 @@ class Solution:
         curr = head
 
         while curr.next!=head:
-            if  curr.val <= curr.next.val:
-                # 3,|-4-| 5,  1. First casee
-                if curr.val <= insertVal and insertVal<=curr.next.val:
-                    break
-            else:
-                # curr.val > curr.next.val
-
-                # 3, 5,  6| 0 1. First casee
-
-                if curr.val <= insertVal or insertVal<=curr.next.val:
-                    break
-
+            if curr.val <= node.val <= curr.next.val:
+                break
+            # case: 3 -> 1
+            if curr.val > curr.next.val and (node.val > curr.val or node.val < curr.next.val):
+                break
+            
             curr = curr.next
 
-        # newNodenext = curr.next
-        # curr.next = Node(insertVal, newNodenext)
-        ''' OR '''
-        newNodeNext = curr.next
-        newNode = Node(insertVal)
-        curr.next = newNode
-        newNode.next = newNodeNext
+        # insert node
+        node.next = curr.next
+        curr.next = node
 
         return head
-        

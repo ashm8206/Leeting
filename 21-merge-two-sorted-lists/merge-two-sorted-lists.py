@@ -24,6 +24,7 @@ class Solution:
         l1 = list1
         l2 = list2
         while l1 or l2:
+            # when do we add L1 ?
             if (l2 is None) or (l1 and l1.val <= l2.val):
                 curr.next = l1
                 l1 = l1.next

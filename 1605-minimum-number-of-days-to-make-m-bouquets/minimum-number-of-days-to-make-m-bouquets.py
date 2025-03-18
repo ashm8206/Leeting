@@ -14,6 +14,7 @@ class Solution:
                     cnt_boq +=1
                     flower_streak = 0
             return cnt_boq >= m
+            # you want to make atleast m bouquets
                 
         l = 1
         r = max(bloomDay)

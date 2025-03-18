@@ -32,14 +32,11 @@ class Solution:
 
         for pile in piles:
             hour_spent += math.ceil(pile / k_candidate)
-            # hour_spent += #math.ceil(int(pile)/k_candidate)
             # total_hours += pile_hr
-        
-        if hour_spent <= h:
-            return True
-        return False
-    
-    #Let n be the length of the input array piles and m be the maximum number of bananas in a single pile from piles.
+        return hour_spent<=h
+
 
 #Time complexity: O(n⋅logm)
+#Let n be the length of the input array piles and m be the maximum number of bananas in a single pile from piles.
+
 

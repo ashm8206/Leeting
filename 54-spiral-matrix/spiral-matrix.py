@@ -30,10 +30,10 @@ class Solution:
                 # Traverse upwards.
                 for row in range(down - 1, up, -1):
                     result.append(matrix[row][left])
-
-            left += 1
-            right -= 1
             up += 1
+            left += 1
+
+            right -= 1
             down -= 1
 
         return result

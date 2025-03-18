@@ -9,19 +9,28 @@ class Solution:
         left = 1
         right = max(quantities)
 
-        # Perform binary search until the boundaries converge
+        # Left Most Binary Search
         while left < right:
-            middle = (left + right) // 2
-            if self.can_distribute(middle, quantities, n):
+            mid = (left + right) // 2
+            if self.can_distribute(mid, quantities, n):
                 # Try for a smaller maximum
-                right = middle
+                right = mid
             else:
                 # Increase the minimum possible maximum
-                left = middle + 1
+                left = mid + 1
 
         return left
     
     def can_distribute(self, x: int, quantities: List[int], n: int) -> bool:
+
+       
+
+        # Method I
+        total_stores = 0
+        for qty in quantities:
+            total_stores += math.ceil(qty/x)
+        
+        return total_stores<=n
 
         # j = 0 
         # pointer to the first not fully distributed product
@@ -41,15 +50,6 @@ class Solution:
         #         remaining-=x
         # return j==len(quantities)
 
-
-        # Method II
-        total_stores = 0
-        for qty in quantities:
-            total_stores += math.ceil(qty/x)
-        
-        if total_stores<=n:
-            return True
-        return False
 
 
 

@@ -3,10 +3,9 @@ class Solution:
        
         # Greedy approach
         # -inf [1, 2, 3, 1] -inf
-
-        # A peak element is an element that is strictly greater than its neighbors
-
+        # A peak element is an element that is strictly greater than itneighbors
         #  the greedy strategy is to go toward the greater numbers
+        
 
         l = 0
         r = len(nums) - 1

@@ -29,6 +29,11 @@ class Solution:
             for num in nums:
            
                 number_of_bags = math.ceil(num / max_balls_in_bag)
+                # 24 // 6 = 4 bags 
+                # how many halfs? Log(n):
+                # 24 
+                # : 12 : 12
+                #   6:6 : 6:6
                 operations = number_of_bags - 1
                 total_operations += operations
 

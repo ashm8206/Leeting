@@ -31,7 +31,8 @@ class Solution:
         hour_spent = 0
 
         for pile in piles:
-            hour_spent += math.ceil(int(pile)/k_candidate)
+            hour_spent += math.ceil(pile / k_candidate)
+            # hour_spent += #math.ceil(int(pile)/k_candidate)
             # total_hours += pile_hr
         
         if hour_spent <= h:

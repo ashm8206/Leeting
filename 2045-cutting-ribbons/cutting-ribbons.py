@@ -6,16 +6,17 @@ class Solution:
         # # [3,4,5,9]
         #    T T T F
 
-        def isPossible(ans, ribbons, k):
+        def isPossible(cand, ribbons, k):
             count_cuts = 0
             for val in ribbons:
-                count_cuts += val // ans
-            print(count_cuts >=k)
+                count_cuts += (val // cand)
+            
             return count_cuts >=k
 
-        # ribbons.sort()
+    
+        # rightmost Binary search
 
-        left = 0
+        left = 0 # or perform NO cuts at all
         right = max(ribbons)
 
         while left < right:

@@ -18,10 +18,13 @@ class Solution:
         
         # helper(root)
 
+
+        # Method II - stack
+
         if not root:
             return res
 
-        stack = [root]
+        stack = [root] #  keep state of what to pop next
 
         while stack:
             root = stack.pop()

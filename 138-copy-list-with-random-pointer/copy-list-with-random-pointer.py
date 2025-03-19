@@ -17,7 +17,7 @@ class Solution:
 
         # A-->A'-->B-->B'
         while curr:
-            new_node = Node(curr.val, None, None)
+            new_node = Node(curr.val)
             new_node.next = curr.next
             curr.next = new_node
             curr = new_node.next
@@ -30,18 +30,18 @@ class Solution:
                 curr.next.random = curr.random.next
             curr = curr.next.next
 
-        ptrA = head
-        ptrB = head.next
+        odd = head
+        even = head.next
         newHead = head.next
-        # dummy = Node(-1)
-        # dummy.next = head.next
-
-        while ptrA.next and ptrB.next:
-            ptrA.next = ptrB.next
-            ptrA = ptrA.next
-
-            ptrB.next = ptrA.next
-            ptrB = ptrB.next
+     
+        # A-->A'-->B-->B'
+        
+        while even and even.next:
+            odd.next = even.next
+            odd = odd.next
+            
+            even.next = odd.next
+            even = even.next
            
         return newHead
 

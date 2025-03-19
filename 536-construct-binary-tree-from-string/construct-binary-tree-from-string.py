@@ -7,12 +7,12 @@
 class Solution:
     def str2tree(self, s: str) -> Optional[TreeNode]:
 
-        # Iterative:
+        # # Iterative:
         i = 0
         n = len(s)
         stack = []
         while i < n:
-
+            # process digits
             if s[i]=="-" or s[i].isdigit():
                 curr = s[i]
                 i+=1
@@ -23,24 +23,23 @@ class Solution:
                  
 
                 node = TreeNode(int(curr))
-
+                
                 if stack:
                     parent = stack[-1]
                     if parent.left is None:
                         parent.left = node
                     else:
                         parent.right = node
+
                 stack.append(node)
-                # print(i)
+                # print(stack)
 
             elif s[i]=="(":
                 i+=1
-
             else:
-                stack.pop() # pop this level
                 i+=1
-        
-        return stack[0] if stack and n > 0 else None
+                stack.pop() # pop this level
+        return stack[0] if stack  else None
         
 
 

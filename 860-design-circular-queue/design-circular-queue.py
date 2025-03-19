@@ -1,7 +1,7 @@
 class MyCircularQueue:
 
     def __init__(self, k: int):
-        self.q=[]
+        self.q= deque()
         self.k=k
 
     def enQueue(self, value: int) -> bool:
@@ -13,7 +13,7 @@ class MyCircularQueue:
 
     def deQueue(self) -> bool:
         if self.q:
-            self.q.pop(0)
+            self.q.popleft()
             self.k+=1
             return True
         return False

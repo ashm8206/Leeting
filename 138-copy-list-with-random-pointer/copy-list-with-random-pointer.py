@@ -30,11 +30,13 @@ class Solution:
                 curr.next.random = curr.random.next
             curr = curr.next.next
 
+
         odd = head
         even = head.next
-        newHead = head.next
+        evenHead = head.next
      
         # A-->A'-->B-->B'
+        #https://leetcode.com/problems/odd-even-linked-list/
         
         while even and even.next:
             odd.next = even.next
@@ -43,7 +45,7 @@ class Solution:
             even.next = odd.next
             even = even.next
            
-        return newHead
+        return evenHead
 
 
     

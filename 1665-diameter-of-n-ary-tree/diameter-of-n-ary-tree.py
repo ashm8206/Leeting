@@ -31,14 +31,14 @@ class Solution:
 
             if root is None:
                 return 0
-            res = [0] # all child diameter, add 0 to catch empty child
-            for child in root.children:
+            res = [0,0] # all child diameter, add 0 to catch empty child
+            for child in root.children: 
                 res.append(helper(child))
             
             max_child, second_max = get_top_2_max(res)
 
-            if second_max!=float("-inf"):
-                diameter = max(diameter, max_child + second_max)
+            # if second_max!=float("-inf"):
+            diameter = max(diameter, max_child + second_max)
 
             return 1 + max_child #(use the max path)
 

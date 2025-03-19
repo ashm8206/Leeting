@@ -48,7 +48,7 @@ class Solution:
             if level==k:
                 if curr:
                     res.append(curr.val)
-                continue
+                # continue
             # for nei in adjSet[curr]:
             for nei in graph[curr]:
                 if nei not in visited:

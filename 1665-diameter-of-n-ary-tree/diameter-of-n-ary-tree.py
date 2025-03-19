@@ -13,6 +13,19 @@ class Solution:
         :rtype: int
         """
         diameter = 0
+
+        def get_top_2_max(nums):
+            first_max= float(-inf)
+            second_max = float(-inf)
+
+            for num in nums:
+                if num >= first_max:
+                    second_max = first_max
+                    first_max = num
+                elif num > second_max and num <= first_max:
+                    second_max = num
+            return first_max, second_max
+
         def helper(root):
             nonlocal diameter
 
@@ -22,17 +35,17 @@ class Solution:
             for child in root.children:
                 res.append(helper(child))
             
-            res.sort()
-            max_child = res[-1]
-            if len(res) >=2:
-                second_max = res[-2]
+            max_child, second_max = get_top_2_max(res)
+
+            if second_max!=float("-inf"):
                 diameter = max(diameter, max_child + second_max)
 
             return 1 + max_child #(use the max path)
 
         helper(root)
-
         return diameter
+
+        
 
 
             

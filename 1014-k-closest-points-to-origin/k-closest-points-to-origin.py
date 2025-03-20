@@ -4,6 +4,32 @@ import math
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
         
+        distances = collections.defaultdict(int)
+        maxDistance = 0
+        
+        for [x,y] in points:
+            distance = (x**2 + y**2)
+            maxDistance = max(distance, maxDistance)
+            distances[(x,y)] = distance
+        
+        buckets = [[] for _ in range(maxDistance+1)]
+        
+        for point in distances:
+            buckets[distances[point]].append(point)
+        
+        result = []
+        
+        for i in range(maxDistance+1):
+            if buckets[i]:
+                result += buckets[i]
+                if len(result) >= k:
+                    return result[:k]
+        
+        return result[:k]
+
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        
         # heap = []
         
         

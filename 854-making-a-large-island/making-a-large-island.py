@@ -7,20 +7,21 @@ class Solution:
 
         # 2. for every r,c grid[r][c] == 0
         #    1. get colors of neigbors in  a set 
-        #    2. Add the sizes of distinct color to area
+        #    2. Add the sizes of distinct color to area 
 
         # 3. maxmize res:
         #    res  = max(res, 1+area)
     
        
-        if not grid or not grid[0]:
-            return 0
+        # if not grid or not grid[0]:
+        #     return 0
     
         rows, cols = len(grid), len(grid[0])
         
         # DFS to paint each connected component with a unique color
         def paint(i, j, color):
             if i < 0 or j < 0 or i >= rows or j >= cols or grid[i][j] != 1:
+                # OOB or 0 or some other color --> cant paint
                 return 0
                 
             grid[i][j] = color
@@ -45,7 +46,7 @@ class Solution:
                     neighbors = set()
                     for ni, nj in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
                         if 0 <= ni < rows and 0 <= nj < cols and grid[ni][nj] > 1:
-                            neighbors.add(grid[ni][nj])
+                            neighbors.add(grid[ni][nj]) # add color
                     
                     # New island size = 1 (the cell itself) + sum of connected islands
                     size = 1 + sum(island_sizes[color] for color in neighbors)

@@ -16,6 +16,7 @@ class MedianFinder:
         n = self.size
         if n % 2 == 1:
             return self.arr[n//2]
+        # ^ accessing :  O(log n)
         return (self.arr[n//2] + self.arr[n//2-1]) / 2
     
     # https://leetcode.com/problems/find-median-from-data-stream/solutions/1330646/c-java-python-minheap-maxheap-solution-picture-explain-clean-concise/?envType=company&envId=facebook&favoriteSlug=facebook-six-months

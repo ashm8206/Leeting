@@ -46,10 +46,9 @@ class Solution:
 
         A, B = nums1, nums2
         total = len(nums1) + len(nums2)
-        half = total // 2
+        half = total // 2 # round down
 
         # get the smaller array in A
-
         if len(B) < len(A):
             A, B = B, A
 
@@ -58,10 +57,12 @@ class Solution:
         while True: # this is done as median is ensured
 
             i = (l + r) // 2  # A
-            j = half - i - 2  # B #
+            j = half - i - 2  # B  -1 -1 # for i and j indexes
            
-            Aleft = A[i] if i >= 0 else float("-infinity")
+            Aleft = A[i] if i >= 0 else float("-infinity") 
             Aright = A[i + 1] if (i + 1) < len(A) else float("infinity")
+            # Aleft, as big as possible
+            # Aright as small as possible
 
             Bleft = B[j] if j >= 0 else float("-infinity")
             Bright = B[j + 1] if (j + 1) < len(B) else float("infinity")
@@ -74,6 +75,6 @@ class Solution:
                 # even
                 return (max(Aleft, Bleft) + min(Aright, Bright)) / 2
             elif Aleft > Bright:
-                r = i - 1
+                r = i - 1 # too many elements in ALeft lets reduce
             else:
                 l = i + 1

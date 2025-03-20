@@ -2,17 +2,23 @@ from heapq import *
 class MedianFinder:
 
     def __init__(self):
-        self.arr = SortedList()
+        self.arr = SortedList() 
+        # Self-balancing Binary Search Trees (like an AVL Tree)
+        # Multiset
+        self.size = 0
 
     def addNum(self, num: int) -> None:
         self.arr.add(num)
+        self.size+=1
 
     def findMedian(self) -> float:
-        n = len(self.arr)
+        # n = len(self.arr)
+        n = self.size
         if n % 2 == 1:
             return self.arr[n//2]
         return (self.arr[n//2] + self.arr[n//2-1]) / 2
-
+    
+    # https://leetcode.com/problems/find-median-from-data-stream/solutions/1330646/c-java-python-minheap-maxheap-solution-picture-explain-clean-concise/?envType=company&envId=facebook&favoriteSlug=facebook-six-months
     # def __init__(self):
     #     """
     #     initialize your data structure here.

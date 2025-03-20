@@ -1,5 +1,43 @@
 class Solution:
     def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+
+        stack = []
+        ans = [0]*n
+
+        for log in logs:
+            processId, status, timestamp = log.split(':')
+            if status =="start":
+                stack.append((int(processId),int(timestamp)))
+            else:
+                processId , timestamp_start = stack.pop() 
+                timeSpent = int(timestamp) - timestamp_start + 1
+                ans[processId]+= timeSpent
+
+                if stack:
+                    nextProcess, _ = stack[-1]
+                    ans[nextProcess] -= timeSpent
+        return ans
+
+
+# For each log:
+
+# If it's a "start" log, it pushes the process ID and timestamp onto the stack.
+# If it's an end log, it pops the most recent process from the stack (which should be the corresponding start log for the current process).
+
+
+# When processing an end log, it:
+
+# Calculates the time spent by this process (end timestamp - start timestamp + 1).
+# Adds this time to the total time for this process in the ans array.
+# If there's another process still running (on the stack), it subtracts the time spent from that parent process's total time.
+
+                    
+
+
+
+
+
+
         # list [idx] time
         # delta  # time other processes were running
         #------------------6
@@ -45,7 +83,7 @@ class Solution:
                 stack.append([processIdStart,timestamp])
             else:
                 processId , timestamp_start = stack.pop() 
-                print(processIdStart,processId)
+                # print(processIdStart,processId)
                 # any process can end
                 timeSpent = int(timestamp) - int(timestamp_start) + 1
                 result[int(processId)] += timeSpent  # add 1 for inclusive start

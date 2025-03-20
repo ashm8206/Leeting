@@ -6,49 +6,72 @@
 #         self.right = None
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        
+    def __init__(self):
         self.ans = None
 
-        def helper(root, p, q): 
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
 
+        def helper(root):
             if not root:
-                return None, None
+                return False
 
-            pseen, qseen = False, False
+            left = helper(root.left)
+            right = helper(root.right)
 
-            if root==p:
-                pseen = True
+            # If the current node is one of p or q
+            mid = root == p or root == q
             
-            if root == q:
-                qseen = True
 
-            pLeft, qLeft = helper(root.left, p, q)
-            pRight, qRight = helper(root.right, p, q)
-
-            if pLeft or pRight:
-                pseen = True
+            if mid + left + right >=2 : # split
+                self.ans = root
             
-            if qLeft or qRight:
-                qseen = True
+            return left or right  or mid # one of them comes before case II
+        
+        helper(root)
+        return self.ans
+
+        # Method II
+        # self.ans = None
+
+        # def helper(root, p, q): 
+
+        #     if not root:
+        #         return None, None
+
+        #     pseen, qseen = False, False
+
+        #     if root==p:
+        #         pseen = True
+            
+        #     if root == q:
+        #         qseen = True
+
+        #     pLeft, qLeft = helper(root.left, p, q)
+        #     pRight, qRight = helper(root.right, p, q)
+
+        #     if pLeft or pRight:
+        #         pseen = True
+            
+        #     if qLeft or qRight:
+        #         qseen = True
 
             
-            # we can combine them^^
+        #     # we can combine them^^
 
-            # if pLeft or pRight or root == p:
-            #     pseen = True
+        #     # if pLeft or pRight or root == p:
+        #     #     pseen = True
             
-            # if qLeft or qRight or root == q:
-            #     qseen = True
+        #     # if qLeft or qRight or root == q:
+        #     #     qseen = True
 
 
-            if pseen and qseen:
-                if self.ans is None:
-                    self.ans = root
+        #     if pseen and qseen:
+        #         if self.ans is None:
+        #             self.ans = root
             
-            return pseen, qseen
+        #     return pseen, qseen
     
-        helper(root, p, q)
+        # helper(root, p, q)
         
         return self.ans
 

@@ -29,16 +29,16 @@ class Solution:
 
         # BUKCET SORT
 
-        # bucket = [[] for _ in range(len(nums) + 1)]
-        # count = Counter(nums).items()  
-        # for num, freq in count: 
-        #     bucket[freq].append(num) 
+        bucket = [[] for _ in range(len(nums) + 1)]
+        count = Counter(nums).items()  
+        for num, freq in count: 
+            bucket[freq].append(num) 
         
-        # flat_list = []
-        # for sublist in bucket:
-        #     flat_list.extend(sublist)
+        flat_list = []
+        for sublist in bucket:
+            flat_list.extend(sublist)
 
-        # return flat_list[::-1][:k]
+        return flat_list[::-1][:k]
 
 
         if k == len(nums):

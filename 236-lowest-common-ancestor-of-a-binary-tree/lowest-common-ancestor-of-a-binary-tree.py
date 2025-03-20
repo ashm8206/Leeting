@@ -10,19 +10,21 @@ class Solution:
 
         
         # # Method I
-        # if not root:
-        #     return None
+        if not root:
+            return None
 
-        # if p == root or q == root:
-        #     return root # if we find either first, they are the LCA
+        if p == root or q == root:
+            return root # if we find either first, they are the LCA
 
-        # left = self.lowestCommonAncestor(root.left, p, q)
-        # right = self.lowestCommonAncestor(root.right, p, q)
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
 
-        # if left and right: # split
-        #     return root
+        if left and right: # split
+            return root
         
-        # return left or right # one of them comes before case II
+        return left or right # one of them comes before case II
+
+        
 
 
         # Method II

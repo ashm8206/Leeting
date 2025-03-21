@@ -1,58 +1,42 @@
 class Solution:
     def countAndSay(self, n: int) -> str:
 
-        # Recursive
-        def rle(s):
-            count = 1
-            ret = []
-            n = len(s)-1
-            for i in range(0,n+1):
-                if i<n and s[i] == s[i+1]:
-                    count += 1
-                else:
-                    ret.append(str(count))
-                    ret.append(s[i])
-                    count = 1
-            return "".join(ret) 
-        
-        if n == 1:
+        # https://leetcode.com/problems/count-and-say/solutions/6356766/best-solution-for-arrays-in-c-python-and-java-100-working/
+        if n==1: 
             return "1"
-        return rle(self.countAndSay(n-1))
 
-        # Iterative
-        # def getRunLen(rle_str):
+        s = "1"
+        for _ in range(n-1):
+            ans = []
+            i = 0
+            slen = len(s)
+            while i < slen:
+                count = 1
+                while i+1 < slen and s[i+1]==s[i]:
+                    count+=1
+                    i+=1
+                ans.append(str(count)+s[i])
+                i+=1
+            s = "".join(ans)
+        return s 
 
-            #  Method I
-            # rle_str = deque(list(rle_str))
-            # # rle_str = list(rle_str)
-            # stack = []
-            
-            # while rle_str:
-            #     var = rle_str.popleft()
-            #     # var = rle_str.pop(0)
-            #     if stack and stack[-1][0] == var:
-            #         stack[-1][1]+=1
-            #     else:
-            #         stack.append([var, 1])
-        #     # RLE = "".join( str(y) + x  for x, y in stack)
-
-        #     stack = []
-        #     n = len(rle_str)
-        #     cnt = 1
-        #     for i in range(0, n):
-        #         if i < n-1 and rle_str[i]==rle_str[i+1]:
-        #             cnt+=1
+        # # Recursive
+        # def rle(s):
+        #     count = 1
+        #     ret = []
+        #     n = len(s)-1
+        #     for i in range(0,n+1):
+        #         if i<n and s[i] == s[i+1]:
+        #             count += 1
         #         else:
-        #             stack.append(str(cnt))
-        #             stack.append(rle_str[i])
-        #             cnt = 1
-            
-        #     return "".join(stack)
+        #             ret.append(str(count))
+        #             ret.append(s[i])
+        #             count = 1
+        #     return "".join(ret) 
+        
+        # if n == 1:
+        #     return "1"
+        # return rle(self.countAndSay(n-1)) 
 
-        # RLE = '1'
-        # while n > 1:
-        #     RLE = getRunLen(RLE)
-        #     n-=1 
-        # return RLE
-
+        
         

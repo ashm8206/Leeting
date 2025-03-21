@@ -2,26 +2,22 @@ class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
 
 
-        hmap = set(nums)
+        longest_streak = 0
+        num_set = set(nums)
+        # this avoids including numbers part of other sequences
+        for num in num_set: 
+            
+            if num - 1 not in num_set: # potential head
+                current_num = num
+                current_streak = 1
 
-        longest_sec = 0
-        curr_seq = 0
-        n = len(nums)
+                while current_num + 1 in num_set:
+                    current_num += 1
+                    current_streak += 1
 
-        # add another seen sofar set, to avoid duplicate heads
-        seen_so_far = set()
-        for i in range(n):
-            prev = nums[i] - 1
-            if prev not in hmap and nums[i] not in seen_so_far:
-                nextNum = nums[i]+ 1
-                curr_seq = 1
-                seen_so_far.add(nums[i])
-                while nextNum in hmap:
-                    seen_so_far.add(nextNum)
-                    curr_seq+=1
-                    nextNum +=1
-                longest_sec = max(longest_sec,curr_seq)
-        return longest_sec
+                longest_streak = max(longest_streak, current_streak)
+
+        return longest_streak
 
         
 

@@ -9,16 +9,12 @@ class Solution:
 
         # print(directories)
         for dr in directories:
-            if dr == '..':
+            if dr == '.' or dr=='':
+                continue
+            elif dr == '..':
                 if stack:
                     stack.pop()
-                # else:
-                    # return "/"
-                    #  but that would be wrong, if you still have directories
-                    #  to process after going to the root.
 
-            elif dr == '.' or dr=='':
-                continue
             else:
                 # "..." is valid
                 # any directory name

@@ -20,7 +20,7 @@ class Solution:
         j = r
         result = min(r, n-1-l) 
         while i <= l and j < n:
-            while i<=l and arr[i] <= arr[j]:
+            if arr[i] <= arr[j]:
                 result = min(result, j-i-1)
                 i+=1
             else:

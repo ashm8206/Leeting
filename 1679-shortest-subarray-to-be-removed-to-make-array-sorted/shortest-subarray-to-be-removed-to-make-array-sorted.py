@@ -13,11 +13,12 @@ class Solution:
             return 0
 
         #find rightbound
-        while r>= l  and arr[r-1] <= arr[r]:
+        while  l<=r  and arr[r-1] <= arr[r]:
             r-=1
 
         i = 0
         j = r
+        print(l, j)
         result = min(r, n-1-l) 
         while i <= l and j < n:
             if arr[i] <= arr[j]:

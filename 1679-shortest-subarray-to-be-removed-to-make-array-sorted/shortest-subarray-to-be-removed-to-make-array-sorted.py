@@ -13,7 +13,7 @@ class Solution:
             return 0
 
         #find rightbound
-        while  l<=r  and arr[r-1] <= arr[r]:
+        while  l < r  and arr[r-1] <= arr[r]:
             r-=1
 
         i = 0

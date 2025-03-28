@@ -16,7 +16,8 @@ class Solution:
                     # sorted so we can eliminate this half
                     l = mid+1
             
-            elif arr[mid] <= arr[r]:
+            else:
+                # arr[mid] <= arr[r]:
                 ans = min(ans,arr[mid])
 
                 if arr[mid]==arr[r]:

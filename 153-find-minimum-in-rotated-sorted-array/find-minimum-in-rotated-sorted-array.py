@@ -13,7 +13,8 @@ class Solution:
                 ans = min(ans,nums[l])
                 l = mid+1
             
-            elif nums[mid] <= nums[r]:
+            else:
+                # nums[mid] <= nums[r]:
                 ans = min(ans,nums[mid])
                 r = mid - 1
         return ans

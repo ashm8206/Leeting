@@ -8,17 +8,19 @@ class Solution:
         while l <= r:
             mid = (l+r)//2
         
-            if arr[l] < arr[mid]:
+            if arr[l] <= arr[mid]:
                 ans = min(ans,arr[l])
-                l = mid+1
+                if arr[l]==arr[mid]:
+                    l = l+1
+                else:
+                    # sorted so we can eliminate this half
+                    l = mid+1
             
-            elif arr[mid] < arr[r]:
+            elif arr[mid] <= arr[r]:
                 ans = min(ans,arr[mid])
-                r = mid - 1
-            elif arr[l]==arr[mid]:
-                ans = min(ans,arr[l])
-                l = l+1
-            elif arr[mid]==arr[r]:
-                ans = min(ans,arr[mid])
-                r = r-1
+
+                if arr[mid]==arr[r]:
+                    r = r - 1
+                else:
+                    r = mid - 1
         return ans

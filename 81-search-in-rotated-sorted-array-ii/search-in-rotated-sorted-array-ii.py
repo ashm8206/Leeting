@@ -13,20 +13,23 @@ class Solution:
             if nums[m]==target:
                 return True
             
-            if nums[l] < nums[m]:
-                if nums[l] <= target < nums[m]:
+            if nums[l] <= nums[m]:
+                if nums[l] == nums[m]:
+                    l+=1
+                elif nums[l] <= target < nums[m]:
                     r = m-1
                 else:
                     l = m+1
-            elif nums[l] > nums[m]:
+       
+            else:
                 # the other half is sorted
-                if  nums[m] < target <= nums[r]:
+                if nums[m] == nums[r]:
+                    r -=1
+                elif  nums[m] < target <= nums[r]:
                     l = m + 1
                 else:
                     r = m - 1
-            else:
-                # they are equal, cant el
-                l +=1
+          
         return False
 
         # lo, hi = 0, len(nums)

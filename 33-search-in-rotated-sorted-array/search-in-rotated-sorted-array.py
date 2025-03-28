@@ -23,9 +23,7 @@ class Solution:
                 return mid
           
             if nums[l] <=  nums[mid]:
-                #nums[l]==nums[mid] it is considered sorted
-                # since numbers are distinct, this only happens incase left === mid
-                #  try test case  : [3,1]
+                
                 if nums[l] <= target < nums[mid]:
                     r = mid - 1
                 else:

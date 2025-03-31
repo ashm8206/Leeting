@@ -28,8 +28,8 @@ class Solution:
         # Method I
         total_stores = 0
         for qty in quantities:
-            if x > 0:
-                total_stores += math.ceil(qty/x)
+            
+            total_stores += math.ceil(qty/x)
         
         return total_stores<=n
 

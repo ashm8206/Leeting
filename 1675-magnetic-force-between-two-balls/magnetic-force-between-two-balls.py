@@ -8,19 +8,19 @@ class Solution:
 
         # For example, if positions were [10, 1, 5, 8], without sorting, your algorithm would consider adjacent positions as 10→1, 1→5, 5→8, which doesn't represent their actual order on the number line.
 # 
-        def count(d):
+        def feasible(d):
             ans = 1
             curr = position[0]
             for i in range(1, n):
                 if position[i] - curr >= d:
                     ans += 1
                     curr = position[i]
-            return ans
+            return ans >=m
         
         l, r = 0, position[-1] - position[0]
         while l < r:
             mid = (l+r+1)//2
-            if count(mid) >= m:
+            if feasible(mid):
                 l = mid
             else:
                 r = mid - 1

@@ -7,7 +7,8 @@ class Solution:
                 sums+=  math.ceil(int(num)/ mid)
             return sums <=threshold
 
-        left, right = 1, max(nums)
+        left = 1
+        right = max(nums)
         while left < right:
             mid = left + (right - left) // 2
 

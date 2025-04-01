@@ -24,16 +24,26 @@ class Solution:
         # return helper(root,-2**32, 2**32)
 
 
-        def helper(root, leftSide, rightSide):
+        # def helper(root, leftSide, rightSide):
 
+        #     if not root:
+        #         return True
+            
+        #     if leftSide < root.val < rightSide:
+        #         return helper(root.left, leftSide, root.val) and helper(root.right, root.val ,rightSide)
+        #     return False
+
+        # return helper(root, -2**31-1, 2**31+1)
+
+        
+        def helper(root, left, right):
             if not root:
                 return True
-            
-            if leftSide < root.val < rightSide:
-                return helper(root.left, leftSide, root.val) and helper(root.right, root.val ,rightSide)
-            return False
-
-        return helper(root, -2**31-1, 2**31+1)
+            if root.val >= left or root.val <= right:
+                return False
+            return helper(root.left, root.val, right) and helper(root.right, left, root.val)
+        return helper(root, float("inf"), float("-inf"))
+        
 
     
             

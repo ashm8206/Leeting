@@ -10,7 +10,7 @@ class Solution:
             if k<=half:
                 return helper(n-1,k)
             elif k > half + 1:
-                res = helper(n-1, length -  (k-1) ) 
+                res = helper(n-1, length - (k-1) ) 
                 # k is 1-index, but deduct 0 index
 
                 # helper(n-1,val) # val has to be 1 indexed

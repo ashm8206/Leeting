@@ -7,10 +7,14 @@ class Solution:
             
             length = 2**n - 1
             half = length // 2 
-            if k <= half:
-                return helper(n-1, k)
+            if k<=half:
+                return helper(n-1,k)
             elif k > half + 1:
-                res = helper(n-1, 1 + length -  k)
+                res = helper(n-1, length -  (k-1) ) 
+                # k is 1-index, but deduct 0 index
+
+                # helper(n-1,val) # val has to be 1 indexed
+                
                 return "0" if res== "1" else  "1"
             else:
                 return "1" # at half + 1, center

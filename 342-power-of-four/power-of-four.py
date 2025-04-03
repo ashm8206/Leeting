@@ -1,17 +1,16 @@
 from math import log2
 class Solution:
     def isPowerOfFour(self, n: int) -> bool:
-        if n == 1:
+        if n <=0:  # if Quotient falls below 0  [ 0]
+            return False
+        elif n == 1:
             return True
-        elif n == 0:
+        elif n%4:
             return False
-        if n%4:
-            return False
- 
         return self.isPowerOfFour(n//4)
 
  
-        return n > 0 and log2(n) % 2 == 0
+        # return n > 0 and log2(n) % 2 == 0
 
 
 

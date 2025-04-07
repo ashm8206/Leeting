@@ -22,7 +22,17 @@ class Solution:
                     ans = max(ans, suffix_sum[i] - helper(i+x,max(x,m)))
                     #The recursive call helper(i + x, max(x, m)) represents the optimal play for Bob, who tries to minimize Alice's future gain.
 
-# The goal is to maximize the number of stones Alice collects, which is the sum of the stones from i to the end (suffix_sum[i]), minus the best possible outcome for Bob.
+                # Alice's stones = total remaining stones minus Bob's optimal stones
+                # total remaining stones is suffix[i]
+
+
+                # The next pile for bob is at index (i+x)
+                # Alice takes 1st x Pile
+                #  i i+1 , i+ 2...i+x - 1
+
+
+
+
 
             dp[(i,m)] = ans
             return dp[(i,m)]

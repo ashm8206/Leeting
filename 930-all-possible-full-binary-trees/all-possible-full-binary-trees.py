@@ -16,7 +16,7 @@ class Solution:
 
         def helper(n):
             # base case:
-            if n%2==0:
+            if n%2==0: # even, no full binary tree
                 return []
             if n==1:
                 return [TreeNode(0)]

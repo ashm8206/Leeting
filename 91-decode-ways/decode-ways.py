@@ -1,32 +1,31 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
-        # Recursion
-        # @lru_cache(maxsize=None)
-
+        
+        memo = {}
         n = len(s)
-        dp = {}
         def helper(index):
-            if index in dp:
-                return dp[index]
-            if index == n:
-                return 1
-                # if we reach n from index+1
 
-            if s[index]=="0":
-                # check any element for leading zeros
+            if index in memo:
+                return memo[index]
+            
+            if index < n and s[index]=="0":
                 return 0
             
-            if index == n-1:
-                # you reached here from two digit element
+            if index == n or index == n - 1: 
+                # n-1 --> 1 way only
                 return 1
             
-            ans = helper(index+1) # all single number counted except 0
-            if index + 1 < n and (s[index]=="1" or s[index] == "2" and s[index+1] in "0123456"):
-                ans+= helper(index+2)
-            dp[index] = ans
-            return ans
+            
 
+            ans = helper(index+1)
+            if int(s[index:index+2])<=26:
+                ans += helper(index+2)
+            memo[index] = ans
+            return ans
         return helper(0)
+        
+            
+            
 
         
         # DP Tabluation

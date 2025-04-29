@@ -39,10 +39,11 @@ class Solution:
         def helper(root, left, right):
             if not root:
                 return True
-            if root.val >= left or root.val <= right:
+            if root.val > left and root.val < right:
+                return helper(root.left, left, root.val) and helper(root.right, root.val, right)
+            else:
                 return False
-            return helper(root.left, root.val, right) and helper(root.right, left, root.val)
-        return helper(root, float("inf"), float("-inf"))
+        return helper(root, float("-inf"), float("inf"))
         
 
     

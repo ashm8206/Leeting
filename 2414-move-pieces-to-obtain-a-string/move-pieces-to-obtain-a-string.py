@@ -1,61 +1,30 @@
-class Solution(object):
-    def canChange(self, start, target):
-        """
-        :type start: str
-        :type target: str
-        :rtype: bool
-        """
+class Solution:
+    def canChange(self, start: str, target: str) -> bool:
+        i = 0
+        j = 0
         n = len(start)
-        start_idx = 0
-        target_idx = 0
 
-        # if ( start.count("L")!=target.count("L") 
-        # or start.count("R")!=target.count("R")):
-        #     return False
-
-
-
-        while start_idx < n or target_idx < n:
         
-            while start_idx < n and start[start_idx] == '_':
-                start_idx+=1
-       
 
-            while target_idx < n and target[target_idx] == '_':
-                target_idx+=1
+        while i < n or j < n:
+            while i < n and start[i]=='_':
+                i+=1
+
+            while j < n and target[j]=='_':
+                j+=1
             
+            # if one string exhausted, both strings should be exhausted
+            if i == n or j == n:
+                return (i==n and j == n)
             
-            # if one exahusts, both have to exhaust
-
-            # why? 
-            #  Each iteration we are matching every no-blank pair
-
-            # if there are more L / R in one string, 
-            # One will exhaust before the other
-
-            #  if startL=targetL and startR=targetR
-            #  even in case of All blanks, i.e 0 Ls and Rs
-            # "__" == "__" They will exhaust together!!
-            
-            if start_idx == n or target_idx==n:
-                # print(start_idx, target_idx)
-                return (start_idx==n and target_idx==n)
-         
-            
-
-            # check is positions are valid and if the chars match
-
-            # RL__ , __LR
-
-            if (start[start_idx]!=target[target_idx] 
-                or target[target_idx]=="L" and start_idx < target_idx
-                or target[target_idx]=="R" and target_idx < start_idx 
-                ): 
-                
+            if start[i]!=target[j]:
                 return False
-            else:
-                start_idx  +=1
-                target_idx +=1
+            
+            if start[i]=='L' and i < j:
+                return False
+            elif start[i]=='R' and j < i: # start[i]=='R', and 
+                return False
+            
+            i+=1 # They can move
+            j+=1 # They can move
         return True
-    
-        

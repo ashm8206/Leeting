@@ -5,24 +5,22 @@ class Solution {
         
         int maxCount = 0;
         String ans = "";
-        Map<String, List<String>> wordCountMap = new HashMap<>();
+        // Map<String, List<String>> wordCountMap = new HashMap<>();
+        Map<String, Integer> wordCountMap = new HashMap<>();
         
         int n = messages.length;
 
         for(int i = 0; i < n; i ++) {
-            List<String> msg_list = Arrays.asList(messages[i].split(" "));
+            // List<String> msg_list = Arrays.asList(messages[i].split(" "));
+            // wordCountMap.computeIfAbsent(senders[i], k -> new ArrayList<>())
+            // .addAll(msg_list);
+            // int totalWords = wordCountMap.getOrDefault(senders[i], new ArrayList<>()).size();
 
-            wordCountMap.computeIfAbsent(senders[i], k -> new ArrayList<>())
-            .addAll(msg_list);
+            int currWords = messages[i].split(" ").length;
+            int totalWords = wordCountMap.merge(senders[i], currWords, Integer::sum);
 
-            
-            int currCount = wordCountMap.getOrDefault(senders[i], new ArrayList<>()).size();
-
-            if (maxCount < currCount) {
-                maxCount = currCount;
-                ans = senders[i];
-            }
-            else if (maxCount == currCount && senders[i].compareTo(ans) > 0) {
+            if (maxCount < totalWords || (maxCount == totalWords && senders[i].compareTo(ans) > 0)) {
+                maxCount = totalWords;
                 ans = senders[i];
             }
         }      

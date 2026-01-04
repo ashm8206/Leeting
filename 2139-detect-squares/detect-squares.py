@@ -2,13 +2,16 @@ class DetectSquares:
 
     def __init__(self):
         self.coord_freq = defaultdict(int)
-        self.y_coord = defaultdict(list)
+        # self.y_coord = defaultdict(list)
+        self.y_coord = defaultdict(set)
         
 
     def add(self, point: List[int]) -> None:
         x, y = point
         self.coord_freq[(x,y)]+=1
-        self.y_coord[y].append((x,y))
+        self.y_coord[y].add((x,y))
+        # self.y_coord[y].append((x,y))
+        # print(self.y_coord)
 
     def count(self, point: List[int]) -> int:
         count = 0
@@ -16,7 +19,7 @@ class DetectSquares:
         point1 = (point[0], point[1])
         if ny in self.y_coord:
             
-            for x,  _ in self.y_coord[ny]:
+            for x, y in self.y_coord[ny]:
                
                 side = abs(nx - x)
 
@@ -27,19 +30,26 @@ class DetectSquares:
 
                 point2 = (nx, ny + side)
                 point3 =  (x, ny + side)
-                # point4 =  (x, y)
+                point4 =  (x, y)
                 
                 if ((point2 in self.coord_freq) and (point3 in self.coord_freq)):
+                    # count+=(self.coord_freq[point2] * 
+                    #  self.coord_freq[point3])
+
                     count+=(self.coord_freq[point2] * 
-                     self.coord_freq[point3])
+                     self.coord_freq[point3] *
+                     self.coord_freq[point4])
             
                 
                 point2_ = (nx, ny - side)
                 point3_ =  (x, ny - side)
 
                 if ((point2_ in self.coord_freq) and (point3_ in self.coord_freq)):
-                    count+= (self.coord_freq[point2_] * 
-                     self.coord_freq[point3_])
+                    # count+= (self.coord_freq[point2_] * 
+                    #  self.coord_freq[point3_])
+                    count+=(self.coord_freq[point2_] * 
+                     self.coord_freq[point3_] *
+                     self.coord_freq[point4])
         return count
         
 

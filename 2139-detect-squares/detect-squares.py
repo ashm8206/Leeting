@@ -4,6 +4,8 @@ class DetectSquares:
         self.coord_freq = defaultdict(int)
         # self.y_coord = defaultdict(list)
         self.y_coord = defaultdict(set)
+        # if its a set, you need to account for freq of base pt
+        # if its a list. then the 2nd iteration/ 3rd iteration will capture it
         
 
     def add(self, point: List[int]) -> None:

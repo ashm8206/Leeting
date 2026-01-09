@@ -16,6 +16,7 @@ class Solution:
             while prod>=k:
                 prod /= nums[left]
                 left+=1
+                
             # count of subarrays between [l...r]
             ans+= right-left+1
         return ans

@@ -3,16 +3,20 @@ from collections import defaultdict
 class Solution:
     def maxFrequencyElements(self, nums: List[int]) -> int:
         hmap = defaultdict(int)
-        FreqCount = defaultdict(int)
-
         maxFreq = 0
+        ans = 0
         for num in nums:
             hmap[num]+=1
-            maxFreq = max(maxFreq,hmap[num])
+            freq = hmap[num]
 
-        ans = 0
-        for k, v in hmap.items():
-            if v == maxFreq:
-                ans+=maxFreq
+            if freq > maxFreq:
+                maxFreq = freq
+                ans = freq
+            elif freq == maxFreq:
+                ans += freq
         return ans
-        
+                
+
+
+
+       

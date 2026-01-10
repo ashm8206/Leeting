@@ -42,7 +42,11 @@ class Solution:
 
         n = len(nums)
         res = [1] * (n+1)
+        # suffix = [1] * (n+1)
 
+        # for i in range(n-1, -1, -1):
+        #     suffix[i] = suffix[i+1] * nums[i]
+        
         for i in range(n):
             res[i+1] = res[i] * nums[i]
 
@@ -50,19 +54,9 @@ class Solution:
         for j in range(n-1,-1,-1):
             res[j] *= R
             R *= nums[j]
-        print(res)
+
         return res[:-1]
-    
-        # Simpler 
-        # n = len(nums)
-        # prefixSum = [1]*n
-        # suffixSum = [1]*n
 
-        # for i in range(1,n):
-        #     prefixSum[i] = prefixSum[i-1] * nums[i-1]
-        #     suffixSum[n-i-1] = suffixSum[n-i] * nums[n-i]
-
-        # return [ x*y for x, y in zip(prefixSum, suffixSum)]
         
 
 

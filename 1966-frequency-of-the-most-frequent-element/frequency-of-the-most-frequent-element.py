@@ -1,5 +1,22 @@
 class Solution:
     def maxFrequency(self, nums: List[int], k: int) -> int:
+        # https://www.youtube.com/watch?v=e0AFPpKcjw0
+
+        # Why sort ?
+        # We have to select an element 
+        # go backwards and find the closest element
+
+        # How back can we go ? 
+        #  freqEl * windolen = sumEle(nums[l:r+1]) + k
+
+
+
+
+
+
+
+
+
         nums.sort()
         maxLen = 0
         L = 0

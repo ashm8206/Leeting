@@ -1,14 +1,14 @@
 class Solution:
     def takeCharacters(self, s: str, k: int) -> int:
         
-        counter = [0]*3
+        counter = Counter(s)
 
-        for c in s:
-            counter[ord(c) - ord("a")] += 1
-
-        for i in range(3):
-            if counter[i] < k:
+        for key, count in counter.items():
+            if count < k:
                 return -1
+
+        if len(counter) < 3 and k!=0:
+            return -1
         
 
         hmap = defaultdict(int)
@@ -21,9 +21,9 @@ class Solution:
             hmap[s[r]] +=1
 
             while (l <= r and (
-                counter[0] - hmap['a'] < k
-                or counter[1] - hmap['b'] < k
-                or counter[2] - hmap['c'] < k
+                counter['a'] - hmap['a'] < k
+                or counter['b'] - hmap['b'] < k
+                or counter['c'] - hmap['c'] < k
             )):
                 hmap[s[l]]-=1
                 l+=1

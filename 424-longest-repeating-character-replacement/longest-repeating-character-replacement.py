@@ -19,6 +19,12 @@ class Solution:
                 l+=1
                 if hmap[s[l]] == 0:
                     del hmap[s[l]]
+                 
+                # If we dont decrement most common on hmap[s[l]]
+                # the overestimation doesnt hurt our max answer
+
+                #  a smaller most common will actually put us closely in this condition
+                # (r - l + 1) - maxCommon <=k
             maxLen = max(maxLen, r-l+1) # valid window
         return maxLen
             

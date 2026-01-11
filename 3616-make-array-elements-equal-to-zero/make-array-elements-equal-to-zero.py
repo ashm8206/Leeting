@@ -17,6 +17,7 @@ class Solution:
                 elif abs(left - total) == 1:
                     # go in 1 direction
                     countValid+=1
+                # else: abs(left - total) > 1 : is invalid state dont count
         
         return countValid
 

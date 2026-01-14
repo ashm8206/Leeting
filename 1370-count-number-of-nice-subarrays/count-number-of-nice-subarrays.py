@@ -1,5 +1,34 @@
+from collections import defaultdict
 class Solution:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
+
+        ''' 
+        WHY ITS NOT VANILLA Sliding window:
+
+        - When oddCount < k → expanding helps
+        - When oddCount > k → shrinking helps
+        - When oddCount == k → expanding breaks it, shrinking breaks it
+        '''  # NO single monotonic rule we can use greedily
+
+        def atMost(nums, k):
+            l = 0
+            oddCount = 0
+            count = 0
+
+            for r in range(len(nums)):
+                oddCount += nums[r] % 2
+
+                while oddCount > k:
+                    oddCount -= nums[l] % 2
+                    l += 1
+
+                count += r - l + 1
+
+            return count
+        return atMost(nums, k) - atMost(nums, k-1)
+
+
+
         prefixMap = {0:1}
         count = 0
 
@@ -20,7 +49,7 @@ class Solution:
         
         for num in nums:
             
-            curr_sum+= num%2
+            curr_sum+= num%2 # odd the 1, even 0
             
             if curr_sum - k  in prefixMap:
                 count+= prefixMap[curr_sum - k ]

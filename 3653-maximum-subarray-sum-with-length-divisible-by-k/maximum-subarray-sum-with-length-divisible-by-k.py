@@ -19,20 +19,18 @@ class Solution:
 
         n = len(nums)
         prefix = 0
-        minPrefix = [float("inf")] * k
-        minPrefix[0] = 0
-        ans = float("-inf")
-
-        for i in range(n):
-            prefix+=nums[i]
-
-            jmod = (i+1)%k
-            ans = max(ans, prefix - minPrefix[jmod])
-            
-            minPrefix[jmod] = min(prefix, minPrefix[jmod])
-            # print(ans, minPrefix)
-
-        return ans
-
+        res = float('-inf')
+        # Store minimum prefix sum for each mod value
+        min_prefix = {0: 0}  # prefix sum 0 at "index -1"
+        
+        for i, num in enumerate(nums):
+            prefix += num
+            mod = (i + 1) % k
+            if mod not in min_prefix:
+                min_prefix[mod] = prefix
+            else:
+                res = max(res, prefix - min_prefix[mod])
+                min_prefix[mod] = min(min_prefix[mod], prefix)
+        return res
 
         

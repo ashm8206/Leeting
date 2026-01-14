@@ -10,22 +10,51 @@ class Solution:
         - When oddCount == k → expanding breaks it, shrinking breaks it
         '''  # NO single monotonic rule we can use greedily
 
-        def atMost(nums, k):
-            l = 0
-            oddCount = 0
-            count = 0
+        # def atMost(nums, k):
+        #     l = 0
+        #     oddCount = 0
+        #     count = 0
 
-            for r in range(len(nums)):
-                oddCount += nums[r] % 2
+        #     for r in range(len(nums)):
+        #         oddCount += nums[r] % 2
 
-                while oddCount > k:
-                    oddCount -= nums[l] % 2
-                    l += 1
+        #         while oddCount > k:
+        #             oddCount -= nums[l] % 2
+        #             l += 1
 
-                count += r - l + 1
+        #         count += r - l + 1
 
-            return count
-        return atMost(nums, k) - atMost(nums, k-1)
+        #     return count
+        # return atMost(nums, k) - atMost(nums, k-1)
+
+
+
+        # def numberOfSubarrays(nums, k):
+        l_far = 0
+        l_near = 0
+        oddCount = 0
+        res = 0
+
+        for r in range(len(nums)):
+            # Expand window
+            if nums[r] % 2 == 1:
+                oddCount += 1
+
+            # If we exceed k odds, move l_far
+            while oddCount > k:
+                if nums[l_far] % 2 == 1:
+                    oddCount -= 1
+                l_far += 1
+                l_near = l_far   # reset l_near when we lose an odd
+
+            # If we have exactly k odds, shrink l_near over evens
+            if oddCount == k:
+                while nums[l_near] % 2 == 0:
+                    l_near += 1
+                res += (l_near - l_far + 1)
+
+        return res
+
 
 
 

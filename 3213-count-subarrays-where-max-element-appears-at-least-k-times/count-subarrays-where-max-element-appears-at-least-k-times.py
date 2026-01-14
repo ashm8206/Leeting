@@ -14,18 +14,22 @@ class Solution:
             if nums[R] == maxElement:
                 max_cnt+=1
             
-            while max_cnt >= k:
-
-              
+            while max_cnt == k:
                 if nums[L] == maxElement:
                     max_cnt -=1
-                L = L + 1 # valid window 
+                L += 1
                 
             # L is contain the Last index + 1 point where the cndition was valid
-            # All subarray arrays till L (inclusive) can be starting index for subrray till now
-            # print(L, R)
-            ans += L
+            # All subarray arrays till L (inclusive) can be starting index 
+            # for subrray till now
+            
+            ans += L 
+            # technically the subarray ending at index i = i+1
+            # but the while loop has already increment L
+
         return ans
+        # ^^ The appoach is v. simialr to 992: EXACT K elements with 3 Ptrs
+        
 
         # method II
 

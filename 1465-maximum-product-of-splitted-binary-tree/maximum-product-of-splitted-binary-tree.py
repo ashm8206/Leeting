@@ -20,31 +20,38 @@ class Solution:
     # 4: One more VLR
         maxProd = 0
         MOD = 10**9 + 7
+        allSum = []
         def get_tree_sum(root):
             if root is None:
                 return 0
             left_sum = get_tree_sum(root.left)
             right_sum = get_tree_sum(root.right)
-
-            return root.val + left_sum + right_sum
+            total_substree_sum = root.val + left_sum + right_sum
+            allSum.append(total_substree_sum)
+            return total_substree_sum
         
         total_sum =  get_tree_sum(root)
 
-        def helper(root):
-            nonlocal maxProd, total_sum
-
-            if root is None:
-                return 0
-            
-            leftSum = helper(root.left)
-            rightSum = helper(root.right)
-
-            total_sub_tree_sum = (root.val + leftSum + rightSum)
-            product = (total_sub_tree_sum * (total_sum - total_sub_tree_sum))
-
-            maxProd = max(product, maxProd)
-
-            return total_sub_tree_sum
-
-        helper(root)
+        for subtree_sum in allSum:
+            maxProd = max(maxProd, (total_sum - subtree_sum) * subtree_sum)
+        
         return maxProd % MOD
+
+        # def helper(root):
+        #     nonlocal maxProd, total_sum
+
+        #     if root is None:
+        #         return 0
+            
+        #     leftSum = helper(root.left)
+        #     rightSum = helper(root.right)
+
+        #     total_sub_tree_sum = (root.val + leftSum + rightSum)
+        #     product = (total_sub_tree_sum * (total_sum - total_sub_tree_sum))
+
+        #     maxProd = max(product, maxProd)
+
+        #     return total_sub_tree_sum
+
+        # helper(root)
+        # return maxProd % MOD

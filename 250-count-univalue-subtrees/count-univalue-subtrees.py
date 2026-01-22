@@ -6,30 +6,68 @@
 #         self.right = right
 class Solution:
     def countUnivalSubtrees(self, root: Optional[TreeNode]) -> int:
-        count = 0 
 
-        def helper(root):
+        count = 0
+
+        def helper(node):
             nonlocal count
-            if not root:
+
+            if node is None:
                 return True
             
             
-            
-            left = helper(root.left)
-            right = helper(root.right)
+            l_unival = helper(node.left)
+            r_unival = helper(node.right)
 
-            if left and right:
-                if root.left and root.val!=root.left.val:
-                    return False
-                if root.right and root.val!=root.right.val:
+            if l_unival  and r_unival:
+
+                if node.left and node.left.val!=node.val:
                     return False
                 
-                count+=1
+                if node.right and node.right.val!=node.val:
+                    return False
+                
+                # node.left is None and/or Right is None
+                # exists and node.left == node.right
+                count+=1 
                 return True
-
-            return False
-
-        
+            else:
+                # cant be unival subtree
+                return False
+      
+          
         helper(root)
         return count
+
+
+            #  1 single child
+            #  2 children
+        # count = 0
+
+        # def helper(root):
+        #     nonlocal count
+
+        #     if not root:
+        #         return True
+            
+        #     l_unival = helper(root.left)
+        #     r_unival = helper(root.right)
+
+        #     if l_unival and r_unival:
+        #         # check if parent ==lc and parent==rc 
+        #         # or rc is none or lc id none
+        #         if root.left and root.left.val != root.val:
+        #             return False
+        #         if root.right and root.right.val != root.val:
+        #             return False
+                
+        #         count+=1
+        #         return True
+        #     else:
+        #         # cant be unival subtree
+        #         return False
+        # helper(root)
+        # return count
+                
+
             

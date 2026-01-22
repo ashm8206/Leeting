@@ -9,6 +9,8 @@ class Solution:
         
         path = []
 
+        # Inorder on BST is sorted
+
         def inorder(root):
             if not root:
                 return

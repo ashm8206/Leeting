@@ -9,41 +9,84 @@ class Node:
 
 class Solution:
     def treeToDoublyList(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        
 
-            def helper(curr):
-                nonlocal H, prev
-                if not curr:
-                    return
-                
-                helper(curr.left)
+        if not root:
+            return root
 
-                if prev:
-                    prev.right = curr
-                    curr.left = prev
-                else:
-                    H = curr # this is what we return
+        def helper(curr, first, prev):
+            if not curr:
+                return first, prev
+            
+            # 1. Process left subtree
+            # Passes current tracking nodes, returns updated ones from left side
+            first, prev = helper(curr.left, first, prev)
 
-                prev = curr
+            # 2. Process current node
+            if not prev:
+                # This is the leftmost node, the head of our list
+                first = curr
+            else:
+                # Link current node with the previous node
+                curr.left = prev
+                prev.right = curr
+            
+            # Update prev to be the current node for the next step
+            prev = curr
 
-                helper(curr.right) # Like saying curr.next
+            # 3. Process right subtree
+            # Returns the final state of first and prev for this entire branch
+            return helper(curr.right, first, prev)
+
+        # Initial call with first and prev as None
+        firstNode, lastNode = helper(root, None, None)
+
+        # 4. Close the circular loop
+        firstNode.left = lastNode
+        lastNode.right = firstNode
+
+        return firstNode
 
 
-            if not root:
-                return root
-            H, prev = None, None
-            # H --> way deeep down, so we need a ref for it qst time we see it
-            # T --> prev
-            # root --> currr
 
-            helper(root)
 
-            # prev pts to
-            H.left = prev 
-            prev.right = H
-            # circular doubly linkedlist
 
-            return H
 
+
+        # firstNode = None
+        # prev = None
+
+        # def helper(curr):
+        
+        #     nonlocal firstNode, prev
+
+        #     if not curr:
+        #         return curr
+            
+        #     helper(curr.left) # set he first node
+
+        #     if not prev:
+        #         firstNode = curr
+        #     else:
+        #         curr.left = prev
+        #         prev.right = curr # curr.right will be set in the nex iteration
+
+        #     prev = curr
+        #     helper(curr.right)
+    
+        # if not root:
+        #     return root
+        
+        # helper(root)
+
+        # firstNode.left = prev
+        # prev.right = firstNode
+
+        # return firstNode
+
+
+
+          
 
 
 

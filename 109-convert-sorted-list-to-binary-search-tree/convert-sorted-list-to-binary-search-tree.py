@@ -10,50 +10,39 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    # def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
         
 
-        # def findMiddle(root):
-        #     if root is None or root.next is None:
-        #         return root
+        def helper(head, tail):
+            if head == tail:
+                return None
 
-        #     slow = head
-        #     fast = head
-        #     prev = None
-        #     while fast and fast.next:
-        #         prev = slow
-        #         slow = slow.next
-        #         fast = fast.next.next
-
-        #     if prev:
-        #         #unlink lift
-        #         prev.next = None
             
-        #     return slow
+            slow, fast = head, head
 
+      
+            while fast!= tail and fast.next!=tail:
+                slow = slow.next
+                fast = fast.next.next
+            
+
+            root = TreeNode(slow.val) # slow is at mid
+            root.left = helper(head, slow)
+            root.right = helper(slow.next, tail)
+
+            return root
+        
+        if root is None:
+            return None
+    
+        return helper(head, None)
+         # # Taking the Middle most ensure balanced Property
+        # #TC:  ONLOGN : 
+        # #SC:  O(LogN)
           
   
 
-        
-        # if head is None:  # or head.next is None: return head of Type TREENODE
-        #     return None
-
-        # if head.next is None:
-        #     return TreeNode(head.val)
-        
-   
-        # mid =  findMiddle(head)
-        # node = TreeNode(mid.val)
-
-        # node.left = self.sortedListToBST(head)
-        # node.right = self.sortedListToBST(mid.next)
-        # return node
-
-        # # Taking the Middle most ensure balanced Property
-        # #TC:  ONLOGN : 
-        # #SC:  O(LogN)
-
-
+    
     def findSize(self, head: ListNode) -> int:
         ptr = head
         c = 0
@@ -77,12 +66,13 @@ class Solution:
         
             mid = (l + r) // 2
             
+            # you have to do INORDER cuz you cant access the MID like that!
             # recurse left
-            left = convert(l, mid - 1)
+            first = convert(l, mid - 1)
 
             # place
             node = TreeNode(head.val)
-            node.left = left
+            node.left = first
 
             # head will pt always need to pt to next node to place
             # hence made head Non-local

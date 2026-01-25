@@ -16,22 +16,19 @@ class Solution:
             while n:
                 if n%2 == 1:
                     ans = (ans * x)%MOD
+                # computes the sequence of squares: x^2, x^4, x^8
                 x = (x * x ) % MOD
-                n //= 2
+                n //= 2 # -> Right shift
+
+            # This is Right shift
+            # initial n = 4, 100
+            # n//2 = n = 2,  10 
+            # n//2 = n = 1.  1
             return ans 
 
-            # ret = 1
-            # mul = x
-            # while n:
-            #     if n%2==1:
-            #         ret = ret * mul % MOD
-            #     mul = mul * mul % MOD
-            #     n = n // 2
-            # return ret
-        
-
-
-
+            # n % 2 == 1 is the same as n & 1 (Bitwise AND)
+            # n //= 2 is the same as n >>= 1 (Bitwise Right Shift)
+           
         return fastPower(5, (n + 1) // 2) * fastPower(4, n // 2) % MOD
 
 

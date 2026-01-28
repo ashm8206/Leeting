@@ -13,14 +13,22 @@ class Solution:
             
             if idx in memo:
                 return memo[idx]
-
-            found = False
-            for i in range(idx, n):
-                if s[idx:i+1] in wordDict:
-                    if helper(i+1):
-                        found = True
-            memo[idx] = found
+            
+            res = False
+            for end in range(idx, n):
+                curr_word = s[idx:end+1]
+                if curr_word in wordDict and helper(end+1):
+                    res = True
+                    
+            memo[idx] = res
             return memo[idx]
+        return helper(0)
+
+        # abcd
+        # a {bcd} 
+        #    b  cd
+        # ab {cd}
+        # abc {d}
 
         # def helper(start):
 
@@ -36,24 +44,24 @@ class Solution:
         # return helper(0)
 
 
-        def helper(start):
+        # def helper(start):
 
-            if start >= n:
-                return True
+        #     if start >= n:
+        #         return True
 
-            if start in memo:
-                return memo[start]
+        #     if start in memo:
+        #         return memo[start]
 
-            for end in range(start+1, n+1):
-                curr_str = s[start:end] # end goes til n slice +1 in py
-                if curr_str in wordDict:
-                    if helper(end):
-                        memo[start] = True
-                        return True
-            memo[start] = False
-            return False
-        helper(0)
-        return memo[0]
+        #     for end in range(start+1, n+1):
+        #         curr_str = s[start:end] # end goes til n slice +1 in py
+        #         if curr_str in wordDict:
+        #             if helper(end):
+        #                 memo[start] = True
+        #                 return True
+        #     memo[start] = False
+        #     return False
+        # return helper(0)
+        # return memo[0]
 
 
        

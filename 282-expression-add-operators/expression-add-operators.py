@@ -2,23 +2,29 @@ class Solution:
     def addOperators(self, num: str, target: int) -> List[str]:
 
         s = num
-        @lru_cache()
-        def backtrack(i, path, resultSoFar, prevNum):
-            if i == len(s):
-                if resultSoFar == target:
-                    ans.append(path)
+        n = len(num)
+        # @lru_cache()
+        def backtrack(i, slate, currSum, prevNum):
+            if i == n:
+                if currSum == target:
+                    ans.append("".join(slate[:]))
                 return
-
-            for j in range(i, len(s)):
-                if j > i and s[i] == '0': break  # Skip leading zero number
+            # 123
+            #1, 12, 123
+            for j in range(i, n):
+                if j > i and s[i] == '0': 
+                    break  # Skip leading zero number
+                    
                 num = int(s[i:j + 1])
                 if i == 0:
-                    backtrack(j + 1, path + str(num), resultSoFar + num, num)  # First num, pick it without adding any operator
+                    backtrack(j + 1, slate + [str(num)], currSum + num, num) 
                 else:
-                    backtrack(j + 1, path + "+" + str(num), resultSoFar + num, num)
-                    backtrack(j + 1, path + "-" + str(num), resultSoFar - num, -num)
-                    backtrack(j + 1, path + "*" + str(num), resultSoFar - prevNum + prevNum * num, prevNum * num)  # Can imagine with example: 1+2*3*4
+                    backtrack(j + 1, slate + ["+", str(num)], currSum + num, num)
+                    backtrack(j + 1, slate + ["-",  str(num)], currSum - num, -num)
+                    backtrack(j + 1, slate + ["*", str(num)], currSum - prevNum + prevNum * num, prevNum * num)  
+                    # resultSoFar - prevNum + prevNum * num
+                    # und previous and apply the higher precedence
 
         ans = []
-        backtrack(0, "", 0, 0)
+        backtrack(0, [], 0, 0)
         return ans

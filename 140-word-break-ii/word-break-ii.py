@@ -65,55 +65,60 @@ class Solution:
         
 
         # OPTION 1: EASIEST: BACKTRACKING
-        n = len(s)
-        res = []  
-        wordDict = set(wordDict)
+        # n = len(s)
+        # res = []  
+        # wordDict = set(wordDict)
 
 
-        # helper
-        def backtrack(start, slate):
-            if start == n:
-                res.append(" ".join(slate[:]))
-                return
+        # # helper
+        # def backtrack(start, slate):
+        #     if start == n:
+        #         res.append(" ".join(slate[:]))
+        #         return
 
 
-            for end in range(start, n):
-                curr_word = s[start:end+1]
-                if curr_word in wordDict:
-                    slate.append(curr_word)
-                    backtrack(end+1, slate)
-                    slate.pop()
+        #     for end in range(start, n):
+        #         curr_word = s[start:end+1]
+        #         if curr_word in wordDict:
+        #             slate.append(curr_word)
+        #             backtrack(end+1, slate)
+        #             slate.pop()
         
-        backtrack(0,[])
-        return res
+        # backtrack(0,[])
+        # return res
 
         # Option 3: Memoization
 
-        # res = []
-        # n = len(s)
-        # wordDict = set(wordDict)
+        
+        n = len(s)
+        wordDict = set(wordDict)
 
-        # memo = {} # Option 2
+        memo = {} # Option 2
 
-        # def helper(idx):
+        def helper(idx):
 
-        #     if idx == n:
-        #         return [""] # has to be this
+            if idx == n:
+                return [""] # has to be this
 
-        #     if idx in memo:
-        #         return memo[idx]
+            if idx in memo:
+                return memo[idx]
 
-        #     results = []
-        #     for i in range(idx,n):
-        #         current_word = s[idx:i+1]
-        #         if current_word in wordDict:
-        #             for next_word in helper(i+1):
-        #                 results.append(current_word + (
-        #                     " "+ next_word if next_word else ""
-        #                 ))
-        #     memo[idx] = results
-        #     return memo[idx]
+            results = []
+            for end in range(idx,n):
+                current_word = s[idx:end+1]
+                if current_word in wordDict:
+                    # list of strings (all valid breakdowns from idx)
+                    # There can be multiple break downs
+                    suffixes = helper(end+1)
+                    for suffix in suffixes:
+                        if suffix:
+                            results.append(current_word + " " + suffix)
+                        else: #[""]
+                            results.append(current_word)
+                    # if no valid suffixes, result is []
+            memo[idx] = results
+            return memo[idx]
 
-        # return helper(0)
+        return helper(0)
     
         

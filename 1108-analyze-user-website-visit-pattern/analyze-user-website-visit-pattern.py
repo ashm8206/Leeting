@@ -2,38 +2,24 @@ from collections import OrderedDict
 class Solution:
     def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -> List[str]:
         
+        # Hint : 
         
         # for each user store the websites they visited in order of least TS
 
         # for each user:
-            # generate the  3 len subsequence patterns (combination (next number)) from their visited Website
-
-            #  if Duplicate patterns are made for the same user, discard it from score!
-            #  Score : Max User with Pattern NOT  max number of Visits to pattern
+            # generate the  3 len subsequence/subset patterns 
 
             
-            # update the tuple Map
-            #  Maximize Score in variable
-            #  update answer also
 
         user_map = defaultdict(list)
         
+        # for user, ts, site in sorted(zip(username, timestamp, website)):
+        #     user_map[user].append((ts, site))
+
         for user, ts, site in sorted(zip(username, timestamp, website)):
-            user_map[user].append((ts, site))
+            user_map[user].append((site, ts))
 
-        # joe 1, home
-        #     2, about
-        #     3, career
-
-        # jam 1, map
-        # jam 2, car
-
-
-        # mary 7, home
-        # mary 8, home
-        #      9, about
-        #     10, career
-
+        
 
 
         pattern_score  = defaultdict(int)
@@ -69,7 +55,7 @@ class Solution:
                 
 
                 for end in range(idx, n):
-                    slate.append(websitesVisited[end][1])
+                    slate.append(websitesVisited[end][0])
                     getPattern(end+1, slate)
                     slate.pop()
 

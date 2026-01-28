@@ -3,30 +3,32 @@ class Solution:
     def mostVisitedPattern(self, username: List[str], timestamp: List[int], website: List[str]) -> List[str]:
         
         # Hint : 
+        # 1.We must sort and Store pattern visits in asce time
+        #   This is Important to make ordered visits
+
+        #2. If a user visited the same pattern twice, he contributes only 1 to the score of the pattern
+       
+
         
         # for each user store the websites they visited in order of least TS
 
         # for each user:
             # generate the  3 len subsequence/subset patterns 
+            # When pattern found
+            #.  update current_pattern_score,  update maxscore and ans
+        
 
             
 
         user_map = defaultdict(list)
         
-        # for user, ts, site in sorted(zip(username, timestamp, website)):
-        #     user_map[user].append((ts, site))
-
         for user, ts, site in sorted(zip(username, timestamp, website)):
-            user_map[user].append((site, ts))
+            user_map[user].append((ts, site))
 
-        
-
-
+    
         pattern_score  = defaultdict(int)
         maxScore = -10**9
         ans = tuple()
-
-   
 
         for user, websitesVisited in user_map.items():
             
@@ -55,7 +57,7 @@ class Solution:
                 
 
                 for end in range(idx, n):
-                    slate.append(websitesVisited[end][0])
+                    slate.append(websitesVisited[end][1])
                     getPattern(end+1, slate)
                     slate.pop()
 
@@ -63,35 +65,5 @@ class Solution:
             getPattern(0,[])
         return list(ans)
 
-    
 
 
-
-            
-        # return ans
-
-
-
-
-        # def getPattern(slate, index):
-        #         nonlocal ans, maxScore
-        #         if len(slate)==3:
-        #             pattern = tuple(slate[:])
-                    
-        #             if pattern not in visited:
-
-        #                 visited.add(pattern)
-        #                 pattern_score[pattern]+=1
-            
-        #                 if pattern_score[pattern] > maxScore:
-        #                     maxScore = pattern_score[pattern]
-        #                     ans = pattern 
-        #                 elif pattern_score[pattern] == maxScore:
-        #                     ans = min(ans, pattern)
-        #             return
-
-        #         for i in range(index, n):
-        #             slate.append(websitesVisited[i][1])
-        #             getPattern(slate, i+1)
-        #             slate.pop()
-        #     getPattern([],0)

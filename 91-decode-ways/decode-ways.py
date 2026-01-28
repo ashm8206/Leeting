@@ -1,28 +1,50 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
         
+        
         memo = {}
         n = len(s)
         def helper(index):
 
+            if index < n and s[index]=="0":
+                return 0
+
+            if index==n or index==n-1:
+                return 1
+
             if index in memo:
                 return memo[index]
             
-            if index < n and s[index]=="0":
-                return 0
-            
-            if index == n or index == n - 1: 
-                # n-1 --> 1 way only
-                return 1
-            
-            
-
             ans = helper(index+1)
-            if int(s[index:index+2])<=26:
-                ans += helper(index+2)
+            if 1<= int(s[index:index+2]) <= 26:
+                ans+= helper(index+2)
+
             memo[index] = ans
-            return ans
+            return ans 
         return helper(0)
+
+            
+        # memo = {}
+        # n = len(s)
+        # def helper(index):
+
+        #     if index in memo:
+        #         return memo[index]
+            
+        #     if index < n and s[index]=="0":
+        #         return 0
+            
+        #     if index == n or index == n - 1: 
+        #         # n-1 --> 1 way only
+        #         return 1
+        
+        #     ans = helper(index+1)
+
+        #     if int(s[index:index+2])<=26:
+        #         ans += helper(index+2)
+        #     memo[index] = ans
+        #     return ans
+        # return helper(0)
         
             
             

@@ -19,74 +19,73 @@ class Trie:
 class Solution:
     
     def wordBreak(self, s: str, wordDict: list) -> list:
-        n = len(s)
-        trie = Trie()
+    # #     n = len(s)
+    # #     trie = Trie()
         
-        # Insert all words from wordDict into the Trie
-        for word in wordDict:
-            trie.insert(word)
+    # #     # Insert all words from wordDict into the Trie
+    # #     for word in wordDict:
+    # #         trie.insert(word)
 
-        dp = {}
-        def dfs(s, start):
-            # End, return list containing empty string
-            if start == n:
-                return [""]
+    # #     dp = {}
+    # #     def dfs(s, start):
+    # #         # End, return list containing empty string
+    # #         if start == n:
+    # #             return [""]
             
     
-            if start in dp:
-                return dp[start]
+    # #         if start in dp:
+    # #             return dp[start]
 
-            ans = []
-            node = trie.root
-            current_prefix = ""
+    # #         ans = []
+    # #         node = trie.root
+    # #         current_prefix = ""
 
             
-            for i in range(start, n):
-                char = s[i]
-                # If char not not in the Trie, break the loop
-                if char not in node.children:
-                    break
+    # #         for i in range(start, n):
+    # #             char = s[i]
+    # #             # If char not not in the Trie, break the loop
+    # #             if char not in node.children:
+    # #                 break
 
-                node = node.children[char]
-                current_prefix += s[i]
+    # #             node = node.children[char]
+    # #             current_prefix += s[i]
 
-                # If we find a valid word (end of a word in the Trie)
-                if node.isEnd:
-                    rest = dfs(s, i + 1)
-                    for r in rest:
-                        ans.append(current_prefix + (" " if r else "") + r)
+    # #             # If we find a valid word (end of a word in the Trie)
+    # #             if node.isEnd:
+    # #                 rest = dfs(s, i + 1)
+    # #                 for r in rest:
+    # #                     ans.append(current_prefix + (" " if r else "") + r)
 
-            # Store the result for this start index in dp
-            dp[start] = ans
-            return ans
+    # #         # Store the result for this start index in dp
+    # #         dp[start] = ans
+    # #         return ans
 
 
-        return dfs(s,0)
+    #     return dfs(s,0)
         
 
         # OPTION 1: EASIEST: BACKTRACKING
-        # n = len(s)
-        # res = []
-        # wordDict = set(wordDict)
+        n = len(s)
+        res = []  
+        wordDict = set(wordDict)
 
 
-        # # helper
-        # def backtrack(slate, start):
-        #     if start >= n:
-        #         res.append(" ".join(slate[:]))
-        #         return
+        # helper
+        def backtrack(start, slate):
+            if start == n:
+                res.append(" ".join(slate[:]))
+                return
 
 
-        #     for end in range(start, n):
-        #         if s[start:end+1] in wordDict:
-        #             # print(s[start:end+1])
-        #             slate.append(s[start:end+1])
-        #             backtrack(slate, end+1)
-        #             slate.pop()
+            for end in range(start, n):
+                curr_word = s[start:end+1]
+                if curr_word in wordDict:
+                    slate.append(curr_word)
+                    backtrack(end+1, slate)
+                    slate.pop()
         
-        # backtrack([],0)
-        # return res
-
+        backtrack(0,[])
+        return res
 
         # Option 3: Memoization
 

@@ -19,7 +19,7 @@ class Solution:
                 curr_word = s[idx:end+1]
                 if curr_word in wordDict and helper(end+1):
                     res = True
-                    
+                    # break found valid path can stop
             memo[idx] = res
             return memo[idx]
         return helper(0)

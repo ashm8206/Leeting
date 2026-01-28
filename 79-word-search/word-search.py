@@ -56,8 +56,8 @@ class Solution:
 
             found = False
             for nr, nc in [(r+1,c), (r-1,c), (r,c-1), (r,c+1)]:
-                found = dfs(nr, nc, word[1:])
-                if found:
+                found = dfs(nr, nc, word[1:]) 
+                if found: # dont overwrite True
                     break
             visited.remove((r, c))
             return found

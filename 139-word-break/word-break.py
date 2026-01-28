@@ -20,6 +20,8 @@ class Solution:
                 if curr_word in wordDict and helper(end+1):
                     res = True
                     # break found valid path can stop
+
+                    # res = helper(end+1) overwrites it
             memo[idx] = res
             return memo[idx]
         return helper(0)

@@ -7,22 +7,21 @@ class Solution:
             return False
 
         memo = {}
-
-        def dfs(i, target):
-            if i >= len(nums):
-                return target == 0
-            
-            if target < 0:
-                return False
-
-            if (i,target) in memo:
-                return memo[(i,target)]
-            
-            memo[(i,target)] = dfs(i+1, target) or dfs(i+1, target-nums[i])
-            
-            return memo[(i,target)]
+        n = len(nums)
+        target = sum(nums)//2
         
-        return dfs(0, sum(nums)//2)
+        def dfs(i, curr_sum):
+            if i >= n:
+                return target == curr_sum
+            
+            if (i,curr_sum) in memo:
+                return memo[(i,curr_sum)]
+            
+            memo[(i,curr_sum)] = dfs(i+1, curr_sum) or dfs(i+1, curr_sum+nums[i])
+            
+            return memo[(i,curr_sum)]
+        
+        return dfs(0, 0)
 
 
 

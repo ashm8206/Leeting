@@ -54,10 +54,11 @@ class Solution:
                                 ans = min(ans, pattern)
                         
                     return
-                    
+
                 if idx == n:
                     return 
-                getPattern(idx+1, slate + [websitesVisited[idx][1]])
+                if len(slate) <= 2:
+                    getPattern(idx+1, slate + [websitesVisited[idx][1]])
                 getPattern(idx+1, slate)
 
                 # for end in range(idx, n):

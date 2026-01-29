@@ -26,6 +26,7 @@ class Solution:
         
         subset_sum = nums_sum // k
         nums.sort(reverse=True)
+        #Large numbers are harder to place because they have fewer valid positions. By trying them first, you detect impossible cases sooner.
         n = len(nums)
         
         if nums[0] > subset_sum:
@@ -47,9 +48,9 @@ class Solution:
                 if used[i]:
                     continue
                 
-                # Skip duplicates
-                if i > 0 and not used[i-1] and nums[i] == nums[i-1]:
-                    continue
+                # # Skip duplicates
+                # if i > 0 and not used[i-1] and nums[i] == nums[i-1]:
+                #     continue
                 
                 # Try taking this element for current bucket
                 if current_sum + nums[i] <= subset_sum:

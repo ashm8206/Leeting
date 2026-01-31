@@ -20,9 +20,12 @@ class Solution:
 
         # Method II
         '''
-        In order fix this, we don't just sort increasing in the first dimension - we also sort decreasing on the second dimension, so two envelopes that are equal in the first dimension can never be in the same increasing subsequence.
+        Sort by width ascending: Ensures when we process envelopes, all previous ones have smaller/equal width
+
+Sort by height descending when widths are equal: Prevents choosing multiple envelopes with the same width
         '''
-        envelopes.sort(key = lambda x: (x[0],-x[1]))
+        envelopes.sort(key = lambda x: (x[0], -x[1]))
+        print(envelopes)
         tail = [] # on 2nd dimension
         for i in range(n):
             idx = bisect_left(tail, envelopes[i][1])
@@ -30,6 +33,7 @@ class Solution:
                 tail.append(envelopes[i][1])
             else:
                 tail[idx] = envelopes[i][1]
+            # print(tail)
         return len(tail)
 
        

@@ -22,13 +22,20 @@ class Solution:
         # Get LIS from left to right and right to left
         left_lis = getLIS(nums)
         right_lis = getLIS(nums[::-1])[::-1]  # Reverse array for decreasing sequence
-    
+
+        print(left_lis, right_lis)
+
+       
         min_removals = float('inf')
         # Try each index as peak
         for i in range(1, n-1):  # Peak can't be at ends
-            # Only consider if both sides have increasing sequences
+            
             if left_lis[i] > 1 and right_lis[i] > 1:
-                total_length = left_lis[i] + right_lis[i] - 1  # -1 because peak is counted twice
+            # they have to have atleast 2 element including peak 
+            # both of them to form a mountain array with 3 elems
+            
+                total_length = left_lis[i] + right_lis[i] - 1  
+                # -1 because peak is counted twice
                 removals = n - total_length
                 min_removals = min(min_removals, removals)
                 

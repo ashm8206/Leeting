@@ -7,11 +7,10 @@ class Solution:
         dp = {}
 
         def helper(i,j):
-            if i == n:
-                return int(j == m)
+            if i == n or j == m:
+                return 1  if j==m else 0
             
-            if j== m:
-                return 1
+            
             if (i,j) in dp :
                 return dp[(i,j)]
 

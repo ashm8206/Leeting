@@ -29,17 +29,18 @@ class Solution:
                 j -= 1
 
             elif dp[i-1][j] >  dp[i][j-1]:
+                # in supersequnce, 
+                # we have to add the non-matching char
                 ans.append(str1[i-1])
                 i-=1
             
             else:
                 ans.append(str2[j - 1])
                 j -= 1
-        
-        # print(lcs[::-1])
+    
+      
         # Step 3: Reconstruct Shorttestcommon supersequnce
         
-    
         # Add remaining characters
         while i > 0:
             ans.append(str1[i - 1])

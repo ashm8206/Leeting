@@ -1,65 +1,35 @@
 class Solution:
     def isOneEditDistance(self, s: str, t: str) -> bool:
-        
+        # below is correct , but Memory Limit exceeded
         # dp = {}
-        m = len(s)
-        n = len(t)
-        # @lru_cache(maxsize = None)
+        # n = len(s)
+        # m = len(t)
+
         # def helper(i,j):
-
-        #     if i==m:
-        #         return n-j
-
-        #     if j==n:
-        #         return m-i
-
+        #     if i==n:
+        #         return m - j
+        #     if j==m:
+        #         return n - i
             
         #     if (i,j) in dp:
         #         return dp[(i,j)]
             
-        
         #     if s[i]==t[j]:
         #         dp[(i,j)] = helper(i+1,j+1)
-
         #     else:
-        #         insert =  helper(i,j+1)
-        #         delete =  helper(i+1,j)
-        #         replace = helper(i+1,j+1)
-        #         # print(insert, delete, replace)
-        #         dp[(i,j)] = 1 +  min(replace,min(insert,delete))
-
+        #         dp[(i,j)] = 1+ min(helper(i+1,j+1),min(helper(i+1,j), helper(i,j+1)))
         #     return dp[(i,j)]
+        # ans = helper(0,0)
+        # return ans == 1
+
+
+        # Can we skip recursion and bottom up DP altogter? 
+        # since its just 1-edit ?
+        
        
-        # return helper(0,0) == 1
 
-        # m = len(s)
-        # n = len(t)
-
-        # # Bottom Up
-        # dp = [[float("inf")for j in range(n+1)]for i in range(m+1)]
-
-        # for i in range(m+1):
-        #     dp[i][n] = m - i
-        
-        # for j in range(n+1):
-        #     dp[m][j] = n - j
-        
-        # for i in range(m-1, -1, -1):
-        #     for j in range(n-1, -1, -1):
-
-        #         if s[i]==t[j]:
-        #             dp[i][j] = dp[i+1][j+1]
-
-        #         else:
-                
-        #             insert =  dp[i][j+1]
-        #             delete =  dp[i+1][j]
-        #             replace =  dp[i+1][j+1]
-        #             dp[i][j] = 1 +  min(replace,min(insert,delete))
-        # # print(dp)
-        # return dp[0][0] == 1
-
-
+        m = len(s)
+        n = len(t)
         if abs(len(s) - len(t)) > 1 or s==t: return False
 
         i, j = 0, 0        # pointers to slide over the strings
@@ -69,5 +39,5 @@ class Solution:
             i += 1
             j += 1
 
-
+        # one edit, below should give the answer
         return s[i:] == t[j + 1:] or s[i + 1:] == t[j:] or s[i + 1:] == t[j + 1:]

@@ -7,19 +7,20 @@ class Solution:
         n = len(s)
 
         def helper(i, j):
-            if j < i  or i==j:
+            #  i <= j
+            #  i > j break
+            if i >=j:
                 # single numbered are palindromes
                 # if they cross each other return
                 return 0
 
-           
             if (i, j) in memo:
                 return memo[(i, j)]
                 
             if s[i] == s[j]:
                 memo[(i, j)] = helper(i + 1, j - 1)
             else:
-                # print(s[i],s[j], i, j, helper(i + 1, j), helper(i, j - 1))
+      
                 memo[(i, j)] = 1 + min(helper(i + 1, j), helper(i, j - 1))
 
             return memo[(i, j)]

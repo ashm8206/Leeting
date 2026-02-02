@@ -16,28 +16,36 @@ class Solution:
             
             match = i < m and (s[i] == p[j] or p[j] == ".")
 
+            #  p= a* s = aa
+            # check * before direct match
+            
             if (j + 1) < n and p[j + 1] == "*":
-                dp[(i,j)] = dfs(i, j+2) or (match and dfs(i + 1, j))
-            elif i < len(s) and match:
+                #  Pre-check if next char is "*"
+                # matches 0, so skip j and j + 1
+                # pass j + 2 as next valid
+
+                dp[(i,j)] = dfs(i, j+2) or ( # Match zero
+                    # Match 1 and mored
+                    match and dfs(i + 1, j)
+                )
+
+            elif match:
                 dp[(i,j)] = dfs(i+1,j+1)
             else:
-                dp[(i,j)] = False
-            return dp[(i,j)]
+                dp[(i,j)] =  False
             
-            # # use * only if prev is match
-            # # this condition can cause the pattern to keep growing
-            # # But we are only interested in  upto i < m
+           
 
             # if (j + 1) < n and p[j + 1] == "*":
             #     # j+1= "*", so start at j+2
-            #     dp[(i,j)] = dfs(i, j+2) or (match and dfs(i + 1, j))
+            #     dp[(i,j)] = dfs(i, j+2) 
+            # or 
+            #    (match and dfs(i + 1, j))
             #     # zero match or match 1 more of preceeding 
             #     # match current and send (i+1, j )  i+1 with same j
-            # elif match:
-            #     dp[(i,j)] =  dfs(i + 1, j + 1)
-            # else:
-            #     dp[(i,j)] = False
-            # return dp[(i,j)]
+           
+            
+            return dp[(i,j)]
         
         dfs(0,0)
         return dp[(0,0)]

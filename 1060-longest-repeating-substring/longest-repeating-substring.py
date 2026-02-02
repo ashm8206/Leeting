@@ -19,14 +19,16 @@ class Solution:
 
         n = len(s)
         prev = [0  for j in range(n+1) ]
+        curr = [0  for j in range(n+1) ]
 
         maxLen = 0
 
         for i in range(1, n+1):
-            curr = [0  for j in range(n+1) ]
             for j in range(1, n+1):
                 if s[i-1]==s[j-1] and i!=j:
                     curr[j] = 1 + prev[j-1]
                     maxLen = max(maxLen, curr[j])
-            prev = curr
+                else:
+                    curr[j] = 0
+            prev = curr[:]
         return maxLen

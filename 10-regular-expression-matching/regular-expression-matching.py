@@ -18,18 +18,15 @@ class Solution:
         for i in range(1, n+1):
             for j in range(1, m+1):
                 
-                match = s[i-1]==p[j-1] or p[j-1]=="."
-
-             
-                if match:
-                    dp[i][j] = dp[i-1][j-1]
-                
-                elif p[j-1] == "*":
+                if p[j-1] == "*":
                     
                     match_with_start = s[i-1]==p[j-2] or p[j-2]=="."
 
                     dp[i][j] = dp[i][j-2] or (match_with_start and dp[i-1][j])
                 
+                elif s[i-1]==p[j-1] or p[j-1]==".":
+
+                    dp[i][j] = dp[i-1][j-1]
                 else:
                     dp[i][j] = False
         

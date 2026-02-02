@@ -1,14 +1,31 @@
 class Solution:
     def countPalindromicSubsequences(self, s: str) -> int:
+        MOD = 10**9 + 7
+        
         @lru_cache(None)
-        def dp(left: int, rght: int, res = 0):
-
+        def dp(left, right):
+            if left >= right:
+                return 0
+            
+            count = 0
+            
             for ch in 'abcd':
-
-                l, r = s.find(ch,left,rght), s.rfind(ch,left,rght)
+                # Find first and last occurrence of ch in range [left, right)
+                first = s.find(ch, left, right)
+                last = s.rfind(ch, left, right)
                 
-                res+= 0 if l==-1 else 1 if l==r else dp(l+1,r)+2
-
-            return res %1_000_000_007
-
-        return dp(0,len(s))
+                if first == -1:
+                    # Character not found
+                    continue
+                elif first == last:
+                    # Found exactly once: single char palindrome
+                    count += 1
+                else:
+                    # Found multiple times: count inner + add "a" and "aa"
+                    # a - Palindorm
+                    #"aa" - 2nd palindrome
+                    count += dp(first + 1, last) + 2
+            
+            return count % MOD
+        
+        return dp(0, len(s))

@@ -2,8 +2,7 @@ class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         # 2*2 Mat
 
-        0 # 0, 1
-        1 # 1  2
+        # i+1,j or i, j+1
 
         # Recursion
         # def helper(m,n):
@@ -40,7 +39,7 @@ class Solution:
         for row in range(m):
             for col in range(n):
                 if row > 0:
-                    # Top
+                    # Top down
                     dp[row][col] += dp[row-1][col] 
                 if col > 0:
                     # Left to right

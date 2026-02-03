@@ -67,3 +67,18 @@ class Solution:
             triple_start_index += 1
         
         return best_triple_start
+
+
+# Level 1: Single
+#     "What is the best single window I've seen SO FAR?"
+#     Updates freely as it finds better windows
+
+# Level 2: Double  
+#     "What is the best (single + double) combination SO FAR?"
+#     Uses the BEST single seen so far + current double
+#     Only updates when this combination beats previous best
+
+# Level 3: Triple
+#     "What is the best (single + double + triple) combination?"
+#     Uses the BEST double combination seen so far + current triple
+#     Only updates when this combination beats previous best

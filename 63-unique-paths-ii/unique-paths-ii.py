@@ -11,16 +11,16 @@ class Solution:
             return 0
         else:
             # dp[n-1][m-1] = 1
-            prev= [0]* (m+1)
+            prev= [0]* (m)
            
-            prev[1] = 1
-            curr = [0]*(m+1)
+            prev[0] = 1
+            curr = [0]*(m)
 
-            for row in range(1, n+1):
+            for row in range(n):
+                curr = [0]*(m)
+                for col in range(m):
                 
-                for col in range(1, m+1):
-                
-                    if obstacleGrid[row-1][col-1] == 1:
+                    if obstacleGrid[row][col] == 1:
                         # dp[row][col] = 0
                         curr[col] = 0
 
@@ -29,8 +29,8 @@ class Solution:
                         curr[col] = (prev[col] +  curr[col-1])
                 prev = curr[:]
                
-            # print(prev, curr)
-            return prev[m]
+            print(prev, curr)
+            return prev[m-1]
 
 
         for row in range(n-1, -1, -1):

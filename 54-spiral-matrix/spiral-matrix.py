@@ -1,5 +1,57 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        n = len(matrix)
+        m = len(matrix[0])
+
+        total = n*m
+
+        left = 0
+        right = m - 1
+        top = 0
+        down = n-1
+        result = []
+        while total:
+            for j in range(left, right+1):
+                result.append(matrix[top][j])
+                total-=1
+            
+           
+            
+            for i in range(top+1, down+1):
+                result.append(matrix[i][right])
+                total-=1
+            
+            
+            # not the same row
+            if top!=down:
+                for j in range(right-1, left-1, -1):
+                    result.append(matrix[down][j])
+                    total-=1
+
+            # not the same column
+            if left!=right:
+                for i in range(down-1, top, -1):
+                    result.append(matrix[i][left])
+                    total-=1
+            
+            left+=1
+            right-=1
+            top+=1
+            down-=1
+
+            # print(result, top, down, left, right)
+        return result
+            
+            
+
+            
+
+
+
+
+
+
+
         result = []
         rows, columns = len(matrix), len(matrix[0])
         up = left = 0

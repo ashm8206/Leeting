@@ -13,47 +13,47 @@ class Solution:
         left, up = 0, 0
         right, down = n-1, m-1
 
-        while curr:
+        while left <= right and up <= down:
 
             for col in range(left, right+1):
                 if curr:
-                    result[row][col] = curr.val
+                    result[up][col] = curr.val
                     curr = curr.next
                 else:
                     break
-            
-            for row in range(up+1, down+1):
+            up+=1
+
+            for row in range(up, down+1):
                 if curr:
-                    result[row][col] = curr.val
+                    result[row][right] = curr.val
                     curr = curr.next
                 else:
                     break
-            
-            if up!=down:
+            right-=1
+
+            if up<=down:
                 # if row up and row down are not same, then it makes sense 
                 #  to L--> R
                 #  or R--> L
                 
-                for col in range(right-1, left-1, -1):
+                for col in range(right, left-1, -1):
                     if curr:
-                        result[row][col] = curr.val
+                        result[down][col] = curr.val
                         curr = curr.next
                     else:
                         break
+                down-=1
 
-            if left!=right:
-                
-                for row in range(down-1, up, -1):
+            if left<=right:
+                # up is already at right spot, -1 to include it
+
+                for row in range(down, up-1, -1):
                     if curr:
-                        result[row][col] = curr.val
+                        result[row][left] = curr.val
                         curr = curr.next
                     else:
                         break
-
-            left+=1
-            up+=1
-            down-=1
-            right-=1
+                left+=1
 
         return result
         

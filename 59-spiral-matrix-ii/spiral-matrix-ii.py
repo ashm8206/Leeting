@@ -5,37 +5,35 @@ class Solution:
         up, left = 0, 0
         down, right = n-1, n-1
 
-        i = 0
+        val = 0
         row, col = 0, 0 
-        while i < n**2:
+        # while i < n**2:
+
+        while left<=right and up <= down:
 
             for col in range(left, right+1):
-                result[row][col] = i+1
-                i+=1
-        
+                result[up][col] = val+1
+                val+=1
+            up+=1
 
-            for row in range(up+1, down+1):
-                result[row][col] = i+1
-                i+=1
+            for row in range(up, down+1):
+                result[row][right] = val+1
+                val+=1
+            right-=1
          
             
-            if up!=down:
-                # if row is diff, then it makes 
-                # sense to go L-->R and R-->L
-                for col in range(right-1, left-1, -1):
-                    result[row][col] = i+1
-                    i+=1
-            
+            if up<=down:
+                # rowStart <= rowEnd
+                for col in range(right, left-1, -1):
+                    result[down][col] = val+1
+                    val+=1
+                down-=1
 
-            if left!=right:
-                for row in range(down-1, up, -1):
-                    result[row][col] = i+1
-                    i+=1
-             
-            left +=1
-            up+=1
-            down-=1
-            right-=1
-
+            if left<=right:
+                
+                for row in range(down, up - 1, -1):
+                    result[row][left] = val+1
+                    val+=1
+                left+=1
         return result
             

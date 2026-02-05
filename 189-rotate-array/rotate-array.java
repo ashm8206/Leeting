@@ -6,8 +6,8 @@ class Solution {
             temp = nums[left];
             nums[left] = nums[right];
             nums[right] = temp;
-            left  += 1;
-            right -= 1;
+            left++;
+            right--;
 
         }
 
@@ -17,10 +17,15 @@ class Solution {
         int n = nums.length;
         k = k % n;
 
-        reverseArray(nums, 0, n - k -1);
-        reverseArray(nums, n - k, n-1);
-        reverseArray(nums, 0, n-1);
+        // reverseArray(nums, 0, n - k -1);
+        // reverseArray(nums, n - k, n-1);
+        // reverseArray(nums, 0, n-1);
 
+        reverseArray(nums, 0, n-1);
+        reverseArray(nums, 0, k-1);
+        reverseArray(nums, k, n-1);
+
+        
         // [1,2,3,4,5,6,7] 
         // [4,3,2,1] [0... n - k - 1]
         // [7, 6, 5] [n - k, n-1]

@@ -19,18 +19,32 @@ class Solution:
 
         jobs.sort(reverse=True) # optimization (1)
 
-        def is_possible(target, buckets, idx):
-            if idx == len(jobs):
-                return True
+        # def is_possible(target, buckets, idx):
+        #     if idx == len(jobs):
+        #         return True
 
+        #     for i in range(len(buckets)):
+        #         buckets[i] += jobs[idx]
+        #         if buckets[i] <= target and is_possible(target, buckets, idx+1):
+        #             return True
+        #         buckets[i] -= jobs[idx]
+        #         if buckets[i] == 0: # optimization (2)
+        #             break
+        #     return False  
+
+        def is_possible(target, buckets, idx):
+            if idx==len(jobs):
+                return True
+            
             for i in range(len(buckets)):
-                buckets[i] += jobs[idx]
+                buckets[i]+=jobs[idx]
                 if buckets[i] <= target and is_possible(target, buckets, idx+1):
                     return True
-                buckets[i] -= jobs[idx]
-                if buckets[i] == 0: # optimization (2)
+                
+                buckets[i]-=jobs[idx]
+                if buckets[i] == 0:
                     break
-            return False  
+            return False
         
         l = max(jobs)
         # Each worker gets the exactly 1 job

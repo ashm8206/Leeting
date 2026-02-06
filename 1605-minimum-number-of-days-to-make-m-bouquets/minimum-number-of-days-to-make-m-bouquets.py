@@ -1,31 +1,31 @@
 class Solution:
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
         
-        def feasible(max_days):
-            cnt_boq = 0
-            flower_streak = 0 # k streak
+        def feasible(maxWaitDay):
+            streak = 0
+            cnt_bq = 0
             for day in bloomDay:
-                if day <= max_days:
-                    flower_streak+=1
+                if day <= maxWaitDay:
+                    streak+=1
                 else:
-                    flower_streak = 0
-
-                if flower_streak == k:
-                    cnt_boq +=1
-                    flower_streak = 0
-            return cnt_boq >= m
-            # you want to make atleast m bouquets
+                    streak = 0
                 
-        l = 1
+                if streak == k:
+                    cnt_bq+=1
+                    streak = 0
+            return cnt_bq >= m
+
+
+        l = 1 
         r = max(bloomDay)
-        
+
         while l < r:
-            mid = (l + r) // 2
+            mid = (l+r)//2
             if feasible(mid):
                 r = mid
             else:
                 l = mid + 1
         
         if feasible(l):
-            return l
+            return l 
         return -1

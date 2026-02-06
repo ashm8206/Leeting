@@ -9,7 +9,10 @@ class Solution:
         def isPossible(cand, ribbons, k):
             count_cuts = 0
             for val in ribbons:
-                count_cuts += (val // cand)
+              
+                count_cuts += math.ceil(val // cand)
+                # You can discard any leftover ribbon from the cuts.
+                # hence floor
             
             return count_cuts >=k
 
@@ -21,6 +24,8 @@ class Solution:
 
         while left < right:
             mid = (left + right + 1) // 2
+            # left = mid --> infinite loop
+            # add 1
 
             if isPossible(mid, ribbons, k):
                 left = mid

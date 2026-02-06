@@ -6,7 +6,7 @@ class Solution:
         :rtype: int
         """
 
-        left = 1 #Allcate atleast 1 product, some stores can get 0
+        left = 1 #Allcate atleast 1 product, to avoid div by 0, some stores get 0 prducts
         right = max(quantities)
 
         # Left Most Binary Search

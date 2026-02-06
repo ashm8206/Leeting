@@ -19,8 +19,8 @@ class Solution:
         while left < right:
             mid = (left+right) // 2
         
-            if self.is_possible(mid, piles,h):
-                right = mid
+            if self.is_possible(mid, piles, h):
+                right = mid # Try to find an even smaller number
             else:
                 left = mid + 1
 

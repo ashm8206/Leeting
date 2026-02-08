@@ -2,8 +2,8 @@ class Solution:
     def findUnsortedSubarray(self, nums: List[int]) -> int:
 
 
-        # [2,6,4,8,10,9,15]
-        # [2,4,6,8,9,10,15]
+        # [2,6,4,8,9,10,15]
+          
 
         sorted_arr = sorted(nums)
         start = -1
@@ -14,7 +14,7 @@ class Solution:
                     start = i
                 else:
                     end = i + 1
-                print(x, y)
+                # print(x, y)
         # print(start, end)
         return end - start
             

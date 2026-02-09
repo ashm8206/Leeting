@@ -30,19 +30,18 @@ class Solution:
         for i in range(n - 2, -1, -1):
             right_max[i] = max(right_max[i + 1], nums[i])
     
-        left = 0
-        right = 0
+        i = 0
+        j = 0
         max_width = 0
 
-        # Traverse the array using left and right pointers
-        while right < n:
-            # Move left pointer forward if current left exceeds right_max
-            while nums[left] > right_max[right]:
-                left += 1
-
-            if left < right:
-                max_width = max(max_width, right - left)
-            right += 1
+        # Fast and slow
+        while j < n:
+    
+            if i < n and nums[i] <= right_max[j]:
+                max_width = max(max_width, j - i)
+            else:
+                i+=1 # move slow
+            j += 1
 
         return max_width
         

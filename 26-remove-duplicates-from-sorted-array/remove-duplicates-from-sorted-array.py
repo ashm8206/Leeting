@@ -30,7 +30,7 @@ class Solution:
         insertIndex = 0  #inserTinDex may or may Not be 1 less than J
         n = len(nums)
         for reader in range(n):
-            if reader > 0 and nums[reader]!= nums[insertIndex]:
+            if nums[reader]!= nums[insertIndex]:
                 insertIndex+=1
                 nums[insertIndex] = nums[reader]
                 

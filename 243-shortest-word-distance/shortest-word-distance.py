@@ -14,6 +14,10 @@ class Solution:
         #             if wordsDict[j]==word2:
         #                 minDist = min(minDist, abs(i-j))
 
+# We don’t need to look at every pair.
+
+# Why?
+# Because we only care about the closest pair of positions — and the closest pair will always be two consecutive occurrences of the two words in the order they appear in the list.
         w1 = -1
         w2 = -1
 

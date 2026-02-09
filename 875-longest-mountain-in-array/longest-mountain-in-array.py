@@ -37,6 +37,7 @@ class Solution:
                 # if not uphill:
                 uphill = True  
             
+            # didnt go uphill, end early but inc counter
             if not uphill:
                 i+=1
                 continue

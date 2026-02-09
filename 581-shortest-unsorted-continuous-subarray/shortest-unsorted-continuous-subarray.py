@@ -3,20 +3,22 @@ class Solution:
 
 
         # [2,6,4,8,9,10,15]
-          
+        # [2,6,8,9,10,4,15]
+        
+        # Sorted Method 
 
-        sorted_arr = sorted(nums)
-        start = -1
-        end = -1
-        for i, (x, y) in enumerate(zip(nums,sorted_arr)):
-            if x!=y:
-                if start==-1:
-                    start = i
-                else:
-                    end = i + 1
-                # print(x, y)
-        # print(start, end)
-        return end - start
+        # sorted_arr = sorted(nums)
+        # start = -1
+        # end = -1
+        # for i, (x, y) in enumerate(zip(nums,sorted_arr)):
+        #     if x!=y:
+        #         if start==-1:
+        #             start = i
+        #         else:
+        #             end = i + 1
+        #         # print(x, y)
+        # # print(start, end)
+        # return end - start
             
         n = len(nums)
 
@@ -31,12 +33,23 @@ class Solution:
             big = max(nums[i], big)
             if nums[i] < big:
                 right = i
+            
     
+        # L - R --> you are tracking for Left ptr
+        # find the biggest number, 
+        # if nums[i]  < big num
+        #       ptr1 = i 
+
+        # R - L --> tracking for left ptrs
+        # find the smallest number, 
+        # if nums[j]  >  small
+        #       ptr2 = j
 
         for j in range(n-1, -1, -1):
             small = min(nums[j], small)
             if nums[j] > small:
                 left = j
+                # print(left)
         
         return right - left + 1
         

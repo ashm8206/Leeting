@@ -27,9 +27,9 @@ class Solution:
             if start[i]!=target[j]:
                 return False
             
-            if start[i]=='L' and i < j:
+            if start[i]=='L' and j > i: # taregtL <= startL 
                 return False
-            elif start[i]=='R' and j < i: # start[i]=='R', and 
+            elif start[i]=='R' and i > j: # startR <= taregtR 
                 return False
             
             i+=1 # They can move

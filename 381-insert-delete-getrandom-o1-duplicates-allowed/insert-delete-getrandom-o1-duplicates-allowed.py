@@ -9,6 +9,7 @@ class RandomizedCollection:
         """
         self.list = []
         self.dict = defaultdict(set)
+        #key: set of indexes
 
 
     def insert(self, val: int) -> bool:
@@ -30,7 +31,7 @@ class RandomizedCollection:
         
         self.list[val_idx] = last_element
         self.dict[last_element].add(val_idx)
-        # ?
+      
         last_element_idx = len(self.list) - 1
         # discard is safer than remove
         self.dict[last_element].discard(last_element_idx)

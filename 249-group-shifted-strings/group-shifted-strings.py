@@ -3,7 +3,9 @@ class Solution:
 
         mp = defaultdict(list)
         for s in strings:
+            # + 26 incase answer is -ve incase of left shift
             key = tuple((ord(c)-ord(s[0])+26)%26 for c in s)
+    
             mp[key].append(s)
     
         return list(mp.values())

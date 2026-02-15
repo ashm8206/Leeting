@@ -37,6 +37,8 @@ class Solution:
         # target = random.randint(0, self.total-1)
         # Generate a number between 0 .. W[n-1]
 
+        # The intervals are half-open: [start, end)
+        # This is the standard way to partition a continuous range without overlap or gaps.
         target = self.total * random.random()
         # what index is is found for this number? give the leftmost
         

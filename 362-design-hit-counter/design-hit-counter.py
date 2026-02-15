@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+import bisect
 class HitCounter:
     """
     A counter that tracks the number of hits within a 5-minute window.
@@ -9,30 +9,38 @@ class HitCounter:
     """
 
     def __init__(self):
-        self.timestamps = []
-        self.l = 0
+        self.timestamps = deque()
+        
 
     def hit(self, timestamp: int) -> None:
         self.timestamps.append(timestamp)
-        self.l += 1
+        
         
     def getHits(self, timestamp: int) -> int:
+        if not self.timestamps:
+            return 0
 
-        # You have to find number of hits in range:
-        # [timestamp-300 + 1, timestamp]
+        # target = timestamp - 299
+        # left = bisect.bisect_left(self.timestamps, target)
 
-        left = 0
-        right = self.l-1
-        target = timestamp - 300
-        # right most binary search
-        while left <= right:
-            m = (left + right) // 2
-            if self.timestamps[m] <= target:
-                left = m + 1
+        left, right = 0, len(self.timestamps)
+        target = timestamp - 300 + 1
+    
+        while left < right:
+            mid = (left + right) // 2
+
+            if self.timestamps[mid] >= target:
+                right = mid
             else:
-                right = m - 1
+                left = mid + 1
 
-        return self.l - left        
+            
+        return len(self.timestamps) - left
+
+        #Method II
+        while self.timestamps and  self.timestamps[0] <= timestamp - 300:
+            self.timestamps.popleft()
+        return len(self.timestamps)
         
 # Your HitCounter object will be instantiated and called as such:
 # obj = HitCounter()

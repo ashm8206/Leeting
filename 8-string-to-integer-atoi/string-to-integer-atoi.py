@@ -8,9 +8,10 @@ class Solution:
                 if ch in {"+","-"} and not sign_seen and len(res)==0:
                     sign_seen = True
                     sign = int(ch+"1") 
-                elif ch==" " and len(res)==0 and not sign_seen:
+                elif ch==" " and not sign_seen and len(res)==0:
                     continue
                 else:
+                    # another chars
                     break
             else:
                 res.append(ch)

@@ -11,10 +11,11 @@ class Solution:
         for char in s:
             lists[row_idx].append(char)
 
-            if row_idx == 0:
-                direction = 1
-            elif row_idx == numRows - 1:
+            
+            if row_idx == numRows - 1:
                 direction = -1
+            elif row_idx == 0:
+                direction = 1
 
             row_idx += direction
         

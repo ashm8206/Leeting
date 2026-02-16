@@ -8,9 +8,14 @@ class Solution:
         b = abs(divisor)
         res = 0
         for x in range(31, -1, -1):    # Loop from 31 down to 0
-            if (a >> x) - b >= 0:    # Check if divisor*2^x fits into current remainder
+            if (a >> x) - b >= 0:    
+                # Check if b*2^x fits into current remainder     
+
+                # a >> x = a// 2^x
                 res += 1 << x        # Add 2^x to result
-                a -= b << x    
+                a -= b << x   
+                # b << x = 2^x . b 
+                # Moving bits left by x positions = multiply by 2^x
         return res if (dividend > 0) == (divisor > 0) else -res
 
 

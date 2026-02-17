@@ -16,12 +16,13 @@ class Solution:
 
             # Monotonically decreasing queue
             while dq and nums[dq[-1]] < nums[i]:
-                # Largest, then next largest
+                # Largest, then 2nd largest
                 dq.pop()
 
             dq.append(i)
-            res.append(nums[dq[0]]) # will be the max element
-             # add next smaller 
+            res.append(nums[dq[0]]) 
+            # will be the max element
+            # add next smaller 
         
         # Number of windows
         # N-K: idx of last valid window

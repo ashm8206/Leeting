@@ -7,31 +7,36 @@ class Solution:
             - Atleast 1 digit should be present.
         2. Signs:
             -It must be first char in decimal/integer number.
-            -It must be right after the exponent. 
+            -It must be right after the exponent.
+
         3. Exponents:
             - Just one e or E should be there
-            - Appear only after decimal / int number
+            - Appear only after a number to its left
         4. Dots:
             - No more than one dot.
             - should not occur after exponent. """
 
         seen_digit = seen_exponent = seen_dot = False
+
         for i, c in enumerate(s):
             if c.isdigit():
                 seen_digit = True
             elif c in ["+", "-"]:
-                if i > 0 and s[i - 1] != "e" and s[i - 1] != "E":
+                # if signs in middle dont follow an exponent return false
+                if (i > 0 and s[i - 1] != "e" and s[i - 1] != "E"):
                     return False
             elif c in ["e", "E"]:
                 if seen_exponent or not seen_digit:
                     return False
                 seen_exponent = True
-                seen_digit = False
+                seen_digit = False 
+                # if you see exponent, set seen_digit to None
             elif c == ".":
                 if seen_dot or seen_exponent:
                     return False
                 seen_dot = True
             else:
+                # any other number
                 return False
 
         return seen_digit

@@ -27,23 +27,24 @@ class Solution:
                 dx = x2-x1
                 dy = y2-y1
 
-
+                # Gcd to requried to treat 2/4, same as  5/10
                 g = math.gcd(abs(dx), abs(dy))
                 dx //= g
                 dy //= g
                 if dx < 0 or (dx == 0 and dy < 0):
                     dx = -dx
                     dy = -dy
+                    # if dx -ve,  
+                    # flip both signs to preserve slope
+                    # (-4,2) --> (4,-2)
+                    # (-4,-2) --> (4,2)
+                    # This condition handles horizontal lines as well.
 
-                # gcd = math.gcd(dx, dy)
-                # dx = dx//gcd
-                # dy = dy//gcd
+                    # No vertical lines need to be handled seperately..
+                    # dx==0 and dy < 0 : then count it as same slope
 
-                # if (dx < 0 and dy < 0) or (dx > 0 or dy < 0):
-                #     dx *= -1
-                #     dy *= -1
                 
-                key = str(dx) + " - " + str(dy)
+                key = (dx,dy)
                 slope[key]+= 1
                 maxpoints = max(maxpoints, slope[key])
             count = max(count, (maxpoints + repeated))

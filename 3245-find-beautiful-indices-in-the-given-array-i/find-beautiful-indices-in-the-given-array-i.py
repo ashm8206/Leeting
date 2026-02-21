@@ -21,7 +21,7 @@ class Solution:
             if curr_b==b:
                 bIndexList.append(j)
 
-        print(aIndexList, bIndexList)
+        # print(aIndexList, bIndexList)
         for i in aIndexList:
             for j in bIndexList:
                 if abs(j-i)<= k:

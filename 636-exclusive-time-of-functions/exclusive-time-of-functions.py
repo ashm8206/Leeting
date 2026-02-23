@@ -1,6 +1,6 @@
 class Solution:
     def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
-
+        
         stack = []
         ans = [0]*n
 

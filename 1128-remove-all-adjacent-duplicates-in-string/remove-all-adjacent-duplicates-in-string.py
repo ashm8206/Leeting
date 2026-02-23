@@ -3,13 +3,20 @@ class Solution:
 
         output = []
         for ch in s:
+            # TWO adjacent
+            # abbb == ab not a
             if output and ch == output[-1]: 
                 output.pop()
             else: 
                 output.append(ch)
         return ''.join(output)
 
+        # https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
+        # below question is looks similar to II but ISNT, but we dont know how many 
+        #  K ocurrences we will get, and additional, we arent ling at a K lookback
+        # we want to delete all duplicates and recursive remove duplicates from the resultant string
 
+        # variant:
         # def remove_all_adjacent_duplicates_variant_1047(s):
         #     letters = []
         #      input: azxxxzy

@@ -17,10 +17,10 @@ class Solution:
         # 112 --> 11, not 12
         #  9 --> 0
 
-        if k: # not fully spent as in case of 112
-           
+        if k: 
+            # not fully spent as in case of 112
+            # remove K from end
             numStack = numStack[:-k]
-        
         return "".join(numStack).lstrip('0') or "0"
      
 

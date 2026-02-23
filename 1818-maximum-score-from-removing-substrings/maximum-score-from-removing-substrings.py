@@ -1,5 +1,10 @@
 class Solution:
     def maximumGain(self, s: str, x: int, y: int) -> int:
+        # WHY IS THIS NOT RECURSIVE?
+        # - One clear optimal strategy: remove higher-value pattern first
+        # - No overlapping subproblems: once you choose order, just execute
+        # - No dependencies: removing "ab" doesnt affect ability to remove "ba"
+
         total_score = 0
         high_priority_pair = "ab" if x > y else "ba"
         low_priority_pair = "ba" if high_priority_pair == "ab" else "ab"

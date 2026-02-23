@@ -18,6 +18,7 @@ class Solution:
         #  9 --> 0
 
         if k: # not fully spent as in case of 112
+           
             numStack = numStack[:-k]
         
         return "".join(numStack).lstrip('0') or "0"

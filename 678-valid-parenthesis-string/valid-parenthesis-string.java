@@ -26,8 +26,7 @@ class Solution {
             }     
         }
 
-        // System.out.print(open_index);
-        // System.out.println(star_idx);
+        
         
         while(!open_index.isEmpty() && !star_idx.isEmpty()) {
             if(open_index.pop() > star_idx.pop()) {

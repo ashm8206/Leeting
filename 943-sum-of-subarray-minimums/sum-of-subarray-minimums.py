@@ -5,18 +5,6 @@ class Solution:
         MOD = 10 ** 9 + 7
         stack = []
         sum_of_minimums = 0
-        # A = arr
-        # A = A + [0]
-        # result = [0]*len(A)
-        # stack = []
-        # for i in range(len(A)):
-        #     while stack and A[stack[-1]] > A[i]:
-        #         stack.pop() 
-        #     j = stack[-1]
-        #     result[i] = result[j] + (i-j)*A[i]
-        #     stack.append(i)
-        # return sum(result) % (10**9+7)
-        
         for i in range(len(arr)+1):  
             # for last number count n as nextSmallest
             
@@ -28,7 +16,7 @@ class Solution:
                 # strictly smaller elements into account
 
                 mid = stack.pop()
-                # for mid, nextSmaller is at -i
+                # for mid, nextSmaller is at i
                 # previousSamller is at stack[-1]
 
                 right_boundary = i 
@@ -38,9 +26,9 @@ class Solution:
                 # count of subarrays where mid is the minimum element
                 # Don't count the left or right boundary element
                 
+                # Product so not pairs
                 count = (mid - left_boundary) * (right_boundary - mid)
                 sum_of_minimums += (count * arr[mid])
 
             stack.append(i)
         return sum_of_minimums % MOD
-

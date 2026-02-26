@@ -4,6 +4,8 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         
+        
+        
         #  Bucket Sort for Small range number [0,2]
         # Time Complexity O(n), Space : O(1) --> hmap is constant space, doesnt grow with input
         #  It will be in-place, cuz yo over write the Array based on Hmap
@@ -27,6 +29,7 @@ class Solution:
 
         zeroPtr = 0
         twoPtr = n-1
+
         runner = 0
 
         while runner <= twoPtr:
@@ -35,7 +38,7 @@ class Solution:
                 nums[zeroPtr],nums[runner] = nums[runner], nums[zeroPtr]
                 zeroPtr+=1
 
-                # zeroPtr will not be 0, and not 2 as 2 is swapped, so it will point to starting of 1
+                # zeroPtr will the next position where a zero Goes
                 # twoPtr could be pointing at anything
 
                 runner+=1
@@ -44,15 +47,9 @@ class Solution:
                 
                 nums[twoPtr],nums[runner] = nums[runner], nums[twoPtr]
                 twoPtr -=1
-                # runner+=1
-
-                # Dont move runner by 1 
-                # As what is swapped might be zero,
-                # which has to keep our invariant
-                # 
-                #  # <-- zeroPtr : 0
-                # twoPtr ---> : 2
-
+                # zeroPtr is always behind or at runner
+                # After swap, nums[runner] is guaranteed to be 0 or 1 (already processed)
+# We can safely move forward!
                 
 
             else:

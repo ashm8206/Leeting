@@ -10,7 +10,7 @@ class Solution:
         else:
             result.append(intervals[0])
 
-        for start, end in intervals:
+        for start, end in intervals[1:]:
             if result and start <= result[-1][1]:
                 # keep processing the stack
                 new_start = min(result[-1][0], start)
@@ -35,7 +35,7 @@ class Solution:
         n = len(events)
         start = -1
 
-        print(events)
+        # print(events)
         for i in range(n):
             if count == 0:
                 start = events[i][0]

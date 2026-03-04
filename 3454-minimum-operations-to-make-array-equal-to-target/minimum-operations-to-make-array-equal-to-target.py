@@ -16,6 +16,7 @@ class Solution:
                 min_ops += max(abs(diff[i]) - abs(diff[i - 1]), 0)
             else:
                 # 1 pos, 1 neg
+                # The "brick of confusion" is just:
+                # opposite signs mean zero reuse, pay in full.
                 min_ops += abs(diff[i])
-        
         return min_ops

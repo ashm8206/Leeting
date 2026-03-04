@@ -36,12 +36,15 @@ class Solution:
             if num == 0:
                 continue
             
+            # if stack and stack[-1] < num
+            # Case 1: something smaller survived the popping
+    # The new segment of `num` is "nested inside" an existing segment
+    # That parent is still alive — count++ is for `num`'s NEW segment
+            
             if stack and stack[-1] < num or not stack:
-                # if what remains < num
-                # add count to  nullify it
-
-                # if we removed all when new num came in
-                # we should inc count for 
+                # Case 2: everything was popped (or stack was empty)
+                # No parent context remains — `num` starts a completely fresh segment
+                # count++ is also for `num`, but as a fully independent segment
                 count+=1
 
             stack.append(num)

@@ -15,17 +15,19 @@ class Solution:
         """
         # for the last 
         for i, h in enumerate(heights+[0]):
+            # print(stack)
+            while stack and heights[stack[-1]] >= h:
+                idx = stack.pop()
+                H = heights[idx]
+                # rectangle doesnt start at idx,
+                # its start at stack[-1] + 1
+                
+                W =  i if not stack else (i-1) - (stack[-1]+1) + 1
 
-            while stack and heights[stack[-1]] > h:
-                H = heights[stack.pop()]
-                W = i if not stack else i - stack[-1]-1
-                # width calculation
-                # right bound where next smaller is found 
-                # - left bound --> (previous smaller) 
-                # - 1 (don't imclude either)
                 max_area = max(max_area, H*W)
             stack.append(i)
-        return max_area 
+        
+        return max_area
 
         #  1. we add h[0] to flush out the stack
         # Without that [0] to flush out the stack, we would need to basically repeat what we do in the inner while loop once at the very end of the program in case there are bars left in the stack,

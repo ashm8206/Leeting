@@ -1,6 +1,8 @@
 class Solution:
     def find132pattern(self, nums: List[int]) -> bool:
-
+        
+        # nums[i] < nums[k] < nums[j] l .. r
+        # nums[j] > nums[k]
         k = float("-inf")
         n = len(nums)
         stack = []
@@ -15,7 +17,6 @@ class Solution:
                 # maximize changes of getting  j between i .. k
                 # so we keep popping
 
-            
             stack.append(nums[i])
         return False
 

@@ -13,19 +13,27 @@ class Solution:
 
         if not node:
             return node
-        
-        visited = {}
-        queue = deque([node])
+
+        q = deque()
+        visited = dict()
+        # Append you add
+        q.append(node)
         visited[node] = Node(node.val)
 
-        while queue:
-            curr = queue.popleft()
+        while q:
+            curr = q.popleft()
 
             for nei in curr.neighbors:
                 if nei not in visited:
-                    # add to visited
+                    # same state maintained here
                     visited[nei] = Node(nei.val)
-                    queue.append(nei)
-
+                    q.append(nei)
+                # happens wether or not it is visited
                 visited[curr].neighbors.append(visited[nei])
         return visited[node]
+
+
+
+
+
+

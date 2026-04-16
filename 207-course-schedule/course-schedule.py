@@ -27,8 +27,6 @@ class Solution:
         while q:
             curr = q.popleft()
 
-            # if curr not in visited:
-                # visited.add(curr)
             for nei in graph.edges[curr]:
                 graph.indegree[nei] -= 1
                 if graph.indegree[nei] == 0:

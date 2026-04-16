@@ -1,13 +1,57 @@
 class Solution:
     def compress(self, chars: List[str]) -> int:
 
+        n = len(chars)
+        left = 0
+        if n == 1:
+            return n
+
+        # ["a","a","b","b","c","c","c"]
+        #  .........r,l
+
+        count = 1
+        for right in range(1, n+1):
+            if right < n and chars[right-1] == chars[right]:
+                count+=1
+            else:
+                # step is imp. a....10 b a, 10 yakes 3 values
+                chars[left] = chars[right-1] 
+                left+=1 
+                if count > 1:
+                    for c in str(count):
+                        chars[left] = c
+                        left+=1
+                count = 1 # next run
+        return left
+             
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         count = 1
         left = 0
+        N = len(chars)
+        # when we are going to the nextcahr to check in the previous char
+        # we need to do the Operation for Last Char..
 
-        for right in range(1,len(chars)+1):
-            if right < len(chars) and chars[right-1] == chars[right]:
+        # Hence N+1
+        for right in range(1,N+1):
+            if right < N and chars[right-1] == chars[right]:
                 count += 1
             else:
+                # ["a","a","a","b","b","a","a"]
                 chars[left] = chars[right-1]
                 left += 1
                 if count > 1:
@@ -15,7 +59,7 @@ class Solution:
                         chars[left] = c
                         left += 1
                 count = 1
-
+       
         return left # +1 the index, which is what they asked for
 
 

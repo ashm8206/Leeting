@@ -4,11 +4,12 @@ class Solution:
         # this is not about full string being valid..
         # this is about substring!
 
+        n = len(s)
         max_len = 0
         stack = [-1]   # base index for calculating length - Invalid idex
         
-        for i, char in enumerate(s):
-            if char == '(':
+        for i in range(n):
+            if s[i] == '(':
                 stack.append(i)
             else:
                 stack.pop()
@@ -18,10 +19,10 @@ class Solution:
                     # valid substring ends at i, starts after the previous unmatched
                     max_len = max(max_len, i - stack[-1])
         
-        n = len(s)
+        
         stack = [n]
         for i in range(n-1, -1, -1):
-            if char == ')':
+            if s[i] == ')':
                 stack.append(i)
             else:
                 stack.pop()

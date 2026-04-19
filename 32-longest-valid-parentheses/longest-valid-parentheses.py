@@ -1,51 +1,81 @@
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
 
+        # this is not about full string being valid..
+        # this is about substring!
 
-
-        curr_count = 0
-        max_count = 0
-        stack = []
-        last_invalid = -1  
+        max_len = 0
+        stack = [-1]   # base index for calculating length - Invalid idex
+        
+        for i, char in enumerate(s):
+            if char == '(':
+                stack.append(i)
+            else:
+                stack.pop()
+                if not stack:
+                    stack.append(i)        # new starting point after invalid )
+                else:
+                    # valid substring ends at i, starts after the previous unmatched
+                    max_len = max(max_len, i - stack[-1])
+        
         n = len(s)
-
-
-        for i in range(n):
-            if s[i] == "(":
-                stack.append(i)          # store index, not character
-            else:
-                if not stack:
-                    last_invalid = i
-                    curr_count = 0
-                    continue
-                stack.pop()
-                if stack:
-                    curr_count = i - stack[-1]   # distance to last unmatched '('
-                else:
-                     
-                    curr_count = i - last_invalid  # ← was curr_count += 2
-                max_count = max(max_count, curr_count)
-
-
-        stack = []
-        curr_count = 0
-        last_invalid = n
+        stack = [n]
         for i in range(n-1, -1, -1):
-            if s[i] == ")":
-                stack.append(i)          # store index, not character
+            if char == ')':
+                stack.append(i)
             else:
-                if not stack:
-                    last_invalid = i
-                    curr_count = 0
-                    continue
                 stack.pop()
-                if stack:
-                    curr_count = stack[-1] - i   # distance to last unmatched '('
+                if not stack:
+                    stack.append(i)        # new starting point after invalid )
                 else:
-                    curr_count = last_invalid - i             
-                    # stack empty = still in same valid run
-                max_count = max(max_count, curr_count)
-        return max_count
+                    # valid substring ends at i, starts after the previous unmatched
+                    max_len = max(max_len, stack[-1] - i)
+        
+        return max_len
+
+        # curr_count = 0
+        # max_count = 0
+        # stack = []
+        # last_invalid = -1  
+        # n = len(s)
+
+
+        # for i in range(n):
+        #     if s[i] == "(":
+        #         stack.append(i)          # store index, not character
+        #     else:
+        #         if not stack:
+        #             last_invalid = i
+        #             curr_count = 0
+        #             continue
+        #         stack.pop()
+        #         if stack:
+        #             curr_count = i - stack[-1]   # distance to last unmatched '('
+        #         else:
+                     
+        #             curr_count = i - last_invalid  # ← was curr_count += 2
+        #         max_count = max(max_count, curr_count)
+
+
+        # stack = []
+        # curr_count = 0
+        # last_invalid = n
+        # for i in range(n-1, -1, -1):
+        #     if s[i] == ")":
+        #         stack.append(i)          # store index, not character
+        #     else:
+        #         if not stack:
+        #             last_invalid = i
+        #             curr_count = 0
+        #             continue
+        #         stack.pop()
+        #         if stack:
+        #             curr_count = stack[-1] - i   # distance to last unmatched '('
+        #         else:
+        #             curr_count = last_invalid - i             
+        #             # stack empty = still in same valid run
+        #         max_count = max(max_count, curr_count)
+        # return max_count
 
         
         # left, right, maxLen = 0, 0 ,0

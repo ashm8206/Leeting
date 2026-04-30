@@ -5,35 +5,68 @@ class Solution:
         up, left = 0, 0
         down, right = n-1, n-1
 
-        val = 0
-        row, col = 0, 0 
-        # while i < n**2:
-
-        while left<=right and up <= down:
-
+        i = 1
+         
+        while left <= right and up <= down:
             for col in range(left, right+1):
-                result[up][col] = val+1
-                val+=1
+                result[up][col] = i
+                i+=1
             up+=1
 
             for row in range(up, down+1):
-                result[row][right] = val+1
-                val+=1
+                result[row][right] = i
+                i+=1
             right-=1
-         
-            
-            if up<=down:
-                # rowStart <= rowEnd
-                for col in range(right, left-1, -1):
-                    result[down][col] = val+1
-                    val+=1
-                down-=1
 
+            if up<=down:
+                for col in range(right, left-1, -1):
+                    result[down][col] = i
+                    i+=1
+                down-=1
+            
+            
             if left<=right:
-                
-                for row in range(down, up - 1, -1):
-                    result[row][left] = val+1
-                    val+=1
+                for row in range(down, up-1, -1):
+                    result[row][left] = i
+                    i+=1
                 left+=1
         return result
+
+
+
+
+        # up, left = 0, 0
+        # down, right = n-1, n-1
+
+        # val = 0
+        # row, col = 0, 0 
+        # # while i < n**2:
+
+        # while left<=right and up <= down:
+
+        #     for col in range(left, right+1):
+        #         result[up][col] = val+1
+        #         val+=1
+        #     up+=1
+
+        #     for row in range(up, down+1):
+        #         result[row][right] = val+1
+        #         val+=1
+        #     right-=1
+         
+            
+        #     if up<=down:
+        #         # rowStart <= rowEnd
+        #         for col in range(right, left-1, -1):
+        #             result[down][col] = val+1
+        #             val+=1
+        #         down-=1
+
+        #     if left<=right:
+                
+        #         for row in range(down, up - 1, -1):
+        #             result[row][left] = val+1
+        #             val+=1
+        #         left+=1
+        # return result
             

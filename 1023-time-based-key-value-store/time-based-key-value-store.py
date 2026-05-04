@@ -18,9 +18,9 @@ class TimeMap:
             return "" 
             # key not found
 
-        # the smallest timestamp is greater than the one queried
-        if self.keyMap[key][0][0] > timestamp:
-            return "" 
+        # # the smallest timestamp is greater than the one queried
+        # if self.keyMap[key][0][0] > timestamp:
+        #     return "" 
 
 
         idx = bisect.bisect_right(self.keyMap[key], [timestamp])
@@ -38,7 +38,6 @@ class TimeMap:
         
 
         if idx < len(self.keyMap[key]) and self.keyMap[key][idx][0] == timestamp:
-            
             return self.keyMap[key][idx][1] 
         # if [idx][0] > timestamp, then return idx-1
         # if idx-1 < 0 , return empty

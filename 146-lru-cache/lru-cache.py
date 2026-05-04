@@ -1,63 +1,64 @@
 class Node:
-    def __init__(self, key, val):
+    def __init__(self, key: int, val: int):
+        self.key = key
+        self.val = val
         self.prev = None
         self.next = None
-        self.val = val
-        self.key = key
+
 class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.dic = {}
-        self.tail = Node(-1, -1)
+        self.map = dict()
         self.head = Node(-1, -1)
+        self.tail = Node(-1, -1)
         self.head.next = self.tail
         self.tail.prev = self.head
-        
-
+    
     def get(self, key: int) -> int:
-        if key not in self.dic:
-            return -1
-        node = self.dic[key]
-        self.remove(node) # in LRU
-        self.add(node) # # in LRU
-        return node.val
-        
+        if key in self.map.keys():
+            node_remove = self.map[key]
+            self._remove(node_remove)
+            self._add(node_remove)
+            # remove node
+            # add node at end
+           
+            return node_remove.val
+        return -1
 
     def put(self, key: int, value: int) -> None:
-
-        # Remove old Node : Key
-        if key in self.dic:
-            old_node = self.dic[key]
-            self.remove(old_node)
+        if key in self.map.keys():
+            node_remove = self.map[key]
+            node_remove.val = value
+            self._remove(node_remove) # dangling now
+            
+        else:
+            self.map[key] = Node(key, value) 
         
-        # ["LRUCache","put","put","put","put","get","get"]
-        # [[2],[2,1],[1,1],[2,3],[4,1],[1],[2]]
+        node = self.map[key]
+        # add the node at tail with updated value 
+        self._add(node)
 
-    
-        node =  Node(key, value)
-        self.dic[key] = node
-        self.add(node)
+        if len(self.map) > self.capacity:
+            node_remove = self.head.next
+            self._remove(node_remove)
+            del self.map[node_remove.key]
         
-        if len(self.dic) > self.capacity:
-            lru_node = self.head.next
-            lru_key = lru_node.key
-            self.remove(lru_node)
-            del self.dic[lru_key]
-        # print([(v.key, v.val)for k, v in self.dic.items()])
-
-    def remove(self, node):
-        node.next.prev = node.prev
-        node.prev.next = node.next
+    def _remove(self, node):
+        next_node = node.next
+        prev_node = node.prev
+        prev_node.next = next_node
+        next_node.prev = prev_node
         node.next = None
         node.prev = None
     
-    def add(self, node):
-       last_node = self.tail.prev
-       last_node.next = node
-       node.prev = last_node
-       node.next = self.tail
-       self.tail.prev = node
+    def _add(self, node):
+        prev_node = self.tail.prev
+        prev_node.next = node
+        node.prev = prev_node
+        node.next = self.tail
+        self.tail.prev = node
+
         
 
 
